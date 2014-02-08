@@ -16,22 +16,7 @@
 		943B132E18A5B15F0055D5BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 943B132C18A5B15F0055D5BA /* Main.storyboard */; };
 		943B133118A5B15F0055D5BA /* BulletinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 943B133018A5B15F0055D5BA /* BulletinViewController.m */; };
 		943B133318A5B15F0055D5BA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 943B133218A5B15F0055D5BA /* Images.xcassets */; };
-		943B133A18A5B15F0055D5BA /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 943B133918A5B15F0055D5BA /* XCTest.framework */; };
-		943B133B18A5B15F0055D5BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 943B131A18A5B15F0055D5BA /* Foundation.framework */; };
-		943B133C18A5B15F0055D5BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 943B131E18A5B15F0055D5BA /* UIKit.framework */; };
-		943B134418A5B15F0055D5BA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 943B134218A5B15F0055D5BA /* InfoPlist.strings */; };
-		943B134618A5B15F0055D5BA /* BulletinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 943B134518A5B15F0055D5BA /* BulletinTests.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		943B133D18A5B15F0055D5BA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 943B130F18A5B15E0055D5BA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 943B131618A5B15E0055D5BA;
-			remoteInfo = Bulletin;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		943B131718A5B15E0055D5BA /* Bulletin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bulletin.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,11 +33,7 @@
 		943B132F18A5B15F0055D5BA /* BulletinViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BulletinViewController.h; sourceTree = "<group>"; };
 		943B133018A5B15F0055D5BA /* BulletinViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BulletinViewController.m; sourceTree = "<group>"; };
 		943B133218A5B15F0055D5BA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		943B133818A5B15F0055D5BA /* BulletinTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BulletinTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		943B133918A5B15F0055D5BA /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		943B134118A5B15F0055D5BA /* BulletinTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BulletinTests-Info.plist"; sourceTree = "<group>"; };
-		943B134318A5B15F0055D5BA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		943B134518A5B15F0055D5BA /* BulletinTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BulletinTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,16 +47,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		943B133518A5B15F0055D5BA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				943B133A18A5B15F0055D5BA /* XCTest.framework in Frameworks */,
-				943B133C18A5B15F0055D5BA /* UIKit.framework in Frameworks */,
-				943B133B18A5B15F0055D5BA /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -83,7 +54,6 @@
 			isa = PBXGroup;
 			children = (
 				943B132018A5B15F0055D5BA /* Bulletin */,
-				943B133F18A5B15F0055D5BA /* BulletinTests */,
 				943B131918A5B15F0055D5BA /* Frameworks */,
 				943B131818A5B15F0055D5BA /* Products */,
 			);
@@ -93,7 +63,6 @@
 			isa = PBXGroup;
 			children = (
 				943B131718A5B15E0055D5BA /* Bulletin.app */,
-				943B133818A5B15F0055D5BA /* BulletinTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -112,6 +81,7 @@
 		943B132018A5B15F0055D5BA /* Bulletin */ = {
 			isa = PBXGroup;
 			children = (
+				943B134F18A5E7980055D5BA /* Other Sources */,
 				943B132918A5B15F0055D5BA /* BulletinAppDelegate.h */,
 				943B132A18A5B15F0055D5BA /* BulletinAppDelegate.m */,
 				943B132C18A5B15F0055D5BA /* Main.storyboard */,
@@ -128,28 +98,17 @@
 			children = (
 				943B132218A5B15F0055D5BA /* Bulletin-Info.plist */,
 				943B132318A5B15F0055D5BA /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		943B134F18A5E7980055D5BA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
 				943B132618A5B15F0055D5BA /* main.m */,
 				943B132818A5B15F0055D5BA /* Bulletin-Prefix.pch */,
 			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		943B133F18A5B15F0055D5BA /* BulletinTests */ = {
-			isa = PBXGroup;
-			children = (
-				943B134518A5B15F0055D5BA /* BulletinTests.m */,
-				943B134018A5B15F0055D5BA /* Supporting Files */,
-			);
-			path = BulletinTests;
-			sourceTree = "<group>";
-		};
-		943B134018A5B15F0055D5BA /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				943B134118A5B15F0055D5BA /* BulletinTests-Info.plist */,
-				943B134218A5B15F0055D5BA /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
+			path = "Other Sources";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,24 +131,6 @@
 			productReference = 943B131718A5B15E0055D5BA /* Bulletin.app */;
 			productType = "com.apple.product-type.application";
 		};
-		943B133718A5B15F0055D5BA /* BulletinTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 943B134C18A5B15F0055D5BA /* Build configuration list for PBXNativeTarget "BulletinTests" */;
-			buildPhases = (
-				943B133418A5B15F0055D5BA /* Sources */,
-				943B133518A5B15F0055D5BA /* Frameworks */,
-				943B133618A5B15F0055D5BA /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				943B133E18A5B15F0055D5BA /* PBXTargetDependency */,
-			);
-			name = BulletinTests;
-			productName = BulletinTests;
-			productReference = 943B133818A5B15F0055D5BA /* BulletinTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -199,11 +140,6 @@
 				CLASSPREFIX = Bulletin;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Burlington Code Factory";
-				TargetAttributes = {
-					943B133718A5B15F0055D5BA = {
-						TestTargetID = 943B131618A5B15E0055D5BA;
-					};
-				};
 			};
 			buildConfigurationList = 943B131218A5B15E0055D5BA /* Build configuration list for PBXProject "Bulletin" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -219,7 +155,6 @@
 			projectRoot = "";
 			targets = (
 				943B131618A5B15E0055D5BA /* Bulletin */,
-				943B133718A5B15F0055D5BA /* BulletinTests */,
 			);
 		};
 /* End PBXProject section */
@@ -232,14 +167,6 @@
 				943B133318A5B15F0055D5BA /* Images.xcassets in Resources */,
 				943B132518A5B15F0055D5BA /* InfoPlist.strings in Resources */,
 				943B132E18A5B15F0055D5BA /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		943B133618A5B15F0055D5BA /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				943B134418A5B15F0055D5BA /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,23 +183,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		943B133418A5B15F0055D5BA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				943B134618A5B15F0055D5BA /* BulletinTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		943B133E18A5B15F0055D5BA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 943B131618A5B15E0055D5BA /* Bulletin */;
-			targetProxy = 943B133D18A5B15F0055D5BA /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		943B132318A5B15F0055D5BA /* InfoPlist.strings */ = {
@@ -289,14 +200,6 @@
 				943B132D18A5B15F0055D5BA /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		943B134218A5B15F0055D5BA /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				943B134318A5B15F0055D5BA /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -400,48 +303,6 @@
 			};
 			name = Release;
 		};
-		943B134D18A5B15F0055D5BA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Bulletin.app/Bulletin";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Bulletin/Bulletin-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "BulletinTests/BulletinTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		943B134E18A5B15F0055D5BA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Bulletin.app/Bulletin";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Bulletin/Bulletin-Prefix.pch";
-				INFOPLIST_FILE = "BulletinTests/BulletinTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -459,14 +320,6 @@
 			buildConfigurations = (
 				943B134A18A5B15F0055D5BA /* Debug */,
 				943B134B18A5B15F0055D5BA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
-		943B134C18A5B15F0055D5BA /* Build configuration list for PBXNativeTarget "BulletinTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				943B134D18A5B15F0055D5BA /* Debug */,
-				943B134E18A5B15F0055D5BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
