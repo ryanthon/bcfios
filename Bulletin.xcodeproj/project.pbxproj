@@ -83,20 +83,11 @@
 			children = (
 				943B132C18A5B15F0055D5BA /* Main.storyboard */,
 				943B135018A5E8790055D5BA /* Classes */,
+				943B135318A5E9910055D5BA /* External */,
 				943B134F18A5E7980055D5BA /* Other Sources */,
 				943B135118A5E8910055D5BA /* Resources */,
-				943B132118A5B15F0055D5BA /* Supporting Files */,
 			);
 			path = Bulletin;
-			sourceTree = "<group>";
-		};
-		943B132118A5B15F0055D5BA /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				943B132218A5B15F0055D5BA /* Bulletin-Info.plist */,
-				943B132318A5B15F0055D5BA /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		943B134F18A5E7980055D5BA /* Other Sources */ = {
@@ -122,9 +113,26 @@
 		943B135118A5E8910055D5BA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				943B135218A5E95D0055D5BA /* en.lproj */,
+				943B132218A5B15F0055D5BA /* Bulletin-Info.plist */,
 				943B133218A5B15F0055D5BA /* Images.xcassets */,
 			);
-			name = Resources;
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		943B135218A5E95D0055D5BA /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				943B132318A5B15F0055D5BA /* InfoPlist.strings */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
+		943B135318A5E9910055D5BA /* External */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = External;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,6 +216,7 @@
 				943B132418A5B15F0055D5BA /* en */,
 			);
 			name = InfoPlist.strings;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		943B132C18A5B15F0055D5BA /* Main.storyboard */ = {
