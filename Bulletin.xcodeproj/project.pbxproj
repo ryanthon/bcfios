@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9429054418A9699E0099BCC2 /* WelcomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9429054318A9699E0099BCC2 /* WelcomeVC.m */; };
+		9429054818A96C590099BCC2 /* GoogleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9429054718A96C590099BCC2 /* GoogleManager.m */; };
+		9429054D18A96D4F0099BCC2 /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9429054C18A96D4F0099BCC2 /* EventCell.m */; };
+		9429055118A96D830099BCC2 /* EventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9429055018A96D830099BCC2 /* EventCell.xib */; };
+		9429055418A973D00099BCC2 /* ninjaturtle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9429055318A973D00099BCC2 /* ninjaturtle.png */; };
 		943B131B18A5B15F0055D5BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 943B131A18A5B15F0055D5BA /* Foundation.framework */; };
 		943B131D18A5B15F0055D5BA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 943B131C18A5B15F0055D5BA /* CoreGraphics.framework */; };
 		943B131F18A5B15F0055D5BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 943B131E18A5B15F0055D5BA /* UIKit.framework */; };
@@ -14,11 +19,20 @@
 		943B132718A5B15F0055D5BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 943B132618A5B15F0055D5BA /* main.m */; };
 		943B132B18A5B15F0055D5BA /* BulletinAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 943B132A18A5B15F0055D5BA /* BulletinAppDelegate.m */; };
 		943B132E18A5B15F0055D5BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 943B132C18A5B15F0055D5BA /* Main.storyboard */; };
-		943B133118A5B15F0055D5BA /* BulletinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 943B133018A5B15F0055D5BA /* BulletinViewController.m */; };
 		943B133318A5B15F0055D5BA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 943B133218A5B15F0055D5BA /* Images.xcassets */; };
+		943B135618A5ECDD0055D5BA /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 943B135518A5ECDD0055D5BA /* SWRevealViewController.m */; };
+		943B135A18A67BBC0055D5BA /* EventsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 943B135918A67BBC0055D5BA /* EventsVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9429054218A9699E0099BCC2 /* WelcomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeVC.h; sourceTree = "<group>"; };
+		9429054318A9699E0099BCC2 /* WelcomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeVC.m; sourceTree = "<group>"; };
+		9429054618A96C590099BCC2 /* GoogleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleManager.h; sourceTree = "<group>"; };
+		9429054718A96C590099BCC2 /* GoogleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleManager.m; sourceTree = "<group>"; };
+		9429054B18A96D4F0099BCC2 /* EventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventCell.h; sourceTree = "<group>"; };
+		9429054C18A96D4F0099BCC2 /* EventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventCell.m; sourceTree = "<group>"; };
+		9429055018A96D830099BCC2 /* EventCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventCell.xib; sourceTree = "<group>"; };
+		9429055318A973D00099BCC2 /* ninjaturtle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ninjaturtle.png; sourceTree = "<group>"; };
 		943B131718A5B15E0055D5BA /* Bulletin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bulletin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		943B131A18A5B15F0055D5BA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		943B131C18A5B15F0055D5BA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -30,10 +44,12 @@
 		943B132918A5B15F0055D5BA /* BulletinAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BulletinAppDelegate.h; sourceTree = "<group>"; };
 		943B132A18A5B15F0055D5BA /* BulletinAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BulletinAppDelegate.m; sourceTree = "<group>"; };
 		943B132D18A5B15F0055D5BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		943B132F18A5B15F0055D5BA /* BulletinViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BulletinViewController.h; sourceTree = "<group>"; };
-		943B133018A5B15F0055D5BA /* BulletinViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BulletinViewController.m; sourceTree = "<group>"; };
 		943B133218A5B15F0055D5BA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		943B133918A5B15F0055D5BA /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		943B135418A5ECDD0055D5BA /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		943B135518A5ECDD0055D5BA /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		943B135818A67BBC0055D5BA /* EventsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsVC.h; sourceTree = "<group>"; };
+		943B135918A67BBC0055D5BA /* EventsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +66,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9429054518A96C200099BCC2 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				9429054618A96C590099BCC2 /* GoogleManager.h */,
+				9429054718A96C590099BCC2 /* GoogleManager.m */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		9429054A18A96CFC0099BCC2 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				9429054B18A96D4F0099BCC2 /* EventCell.h */,
+				9429054C18A96D4F0099BCC2 /* EventCell.m */,
+				9429055018A96D830099BCC2 /* EventCell.xib */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		9429055218A973BD0099BCC2 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				9429055318A973D00099BCC2 /* ninjaturtle.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		943B130E18A5B15E0055D5BA = {
 			isa = PBXGroup;
 			children = (
@@ -102,10 +145,11 @@
 		943B135018A5E8790055D5BA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9429054A18A96CFC0099BCC2 /* UIKit */,
+				9429054518A96C200099BCC2 /* Managers */,
+				943B135718A5ED240055D5BA /* View Controllers */,
 				943B132918A5B15F0055D5BA /* BulletinAppDelegate.h */,
 				943B132A18A5B15F0055D5BA /* BulletinAppDelegate.m */,
-				943B132F18A5B15F0055D5BA /* BulletinViewController.h */,
-				943B133018A5B15F0055D5BA /* BulletinViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -113,6 +157,7 @@
 		943B135118A5E8910055D5BA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9429055218A973BD0099BCC2 /* Images */,
 				943B135218A5E95D0055D5BA /* en.lproj */,
 				943B132218A5B15F0055D5BA /* Bulletin-Info.plist */,
 				943B133218A5B15F0055D5BA /* Images.xcassets */,
@@ -131,8 +176,21 @@
 		943B135318A5E9910055D5BA /* External */ = {
 			isa = PBXGroup;
 			children = (
+				943B135418A5ECDD0055D5BA /* SWRevealViewController.h */,
+				943B135518A5ECDD0055D5BA /* SWRevealViewController.m */,
 			);
 			path = External;
+			sourceTree = "<group>";
+		};
+		943B135718A5ED240055D5BA /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				943B135818A67BBC0055D5BA /* EventsVC.h */,
+				943B135918A67BBC0055D5BA /* EventsVC.m */,
+				9429054218A9699E0099BCC2 /* WelcomeVC.h */,
+				9429054318A9699E0099BCC2 /* WelcomeVC.m */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,6 +246,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9429055118A96D830099BCC2 /* EventCell.xib in Resources */,
+				9429055418A973D00099BCC2 /* ninjaturtle.png in Resources */,
 				943B133318A5B15F0055D5BA /* Images.xcassets in Resources */,
 				943B132518A5B15F0055D5BA /* InfoPlist.strings in Resources */,
 				943B132E18A5B15F0055D5BA /* Main.storyboard in Resources */,
@@ -201,9 +261,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				943B133118A5B15F0055D5BA /* BulletinViewController.m in Sources */,
 				943B132718A5B15F0055D5BA /* main.m in Sources */,
+				9429054D18A96D4F0099BCC2 /* EventCell.m in Sources */,
+				943B135A18A67BBC0055D5BA /* EventsVC.m in Sources */,
+				9429054818A96C590099BCC2 /* GoogleManager.m in Sources */,
+				9429054418A9699E0099BCC2 /* WelcomeVC.m in Sources */,
 				943B132B18A5B15F0055D5BA /* BulletinAppDelegate.m in Sources */,
+				943B135618A5ECDD0055D5BA /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,7 +373,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bulletin/Other Sources/Bulletin-Prefix.pch";
-				INFOPLIST_FILE = "Bulletin/Bulletin-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Bulletin/Resources/Bulletin-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -322,7 +386,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bulletin/Other Sources/Bulletin-Prefix.pch";
-				INFOPLIST_FILE = "Bulletin/Bulletin-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Bulletin/Resources/Bulletin-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -347,6 +411,7 @@
 				943B134B18A5B15F0055D5BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
