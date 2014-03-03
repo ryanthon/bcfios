@@ -8,13 +8,12 @@
 
 #import "GoogleManager.h"
 
-@interface GoogleManager()
+static NSString *kAPIKey = @"AIzaSyCItKjiDfeoN71Hn7anlBaUhK2k8RzJtXU";
 
+@interface GoogleManager()
 
 @end
 
 @implementation GoogleManager
-
-
 
 @end
