@@ -13,7 +13,7 @@
 
 static APIManager *manager = nil;
 
-static NSString *const baseAPIURL = @"https://54.186.17.67/api/";
+static NSString *const baseAPIURL = @"http://54.186.17.67/api/";
 
 + (APIManager *)sharedManager
 {
@@ -40,36 +40,17 @@ static NSString *const baseAPIURL = @"https://54.186.17.67/api/";
     }];
 }
 
-- (void)loginWithUsername:(NSString *)username password:(NSString *)password response:(void(^)(BOOL success, NSError *error)) callback
-{
-    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:baseAPIURL]];
-    NSDictionary *loginParams = @{@"username": username, @"password": password};
-    
-    NSLog(@"%@", loginParams);
-    
-    [manager POST:@"login.php" parameters:loginParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        self.isLoggedIn = true;
-        self.token_ID = responseObject[@"token_ID"];
-        
-        [self sendPushToken:[[NSUserDefaults standardUserDefaults]stringForKey:@"device_token"]  userToken:self.token_ID response:nil];
-        
-        NSLog(@"Login Data: \n\t token: %@, \n\t response obj: %@", self.token_ID, responseObject);
-
-        callback(true, nil);
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-        callback(false, error);
-    }];
-}
-
 - (void)authorizeGETrequest:(NSString *)urlPath
         additionalParamters:(NSDictionary *)params
                    response:(void(^)(NSError *error, id response)) callback
 {
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:baseAPIURL]];
     
-    [manager GET:urlPath parameters:[self addAuthTokenToParamters:params] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSURLCredential *credentials = [NSURLCredential credentialWithUser:@"bcf" password:@"cse190" persistence:NSURLCredentialPersistenceNone];
+    
+    [manager setCredential:credentials];
+        
+    [manager GET:urlPath parameters:@{} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         callback(nil, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
@@ -121,12 +102,6 @@ static NSString *const baseAPIURL = @"https://54.186.17.67/api/";
     NSMutableDictionary *combinedDict = [[NSMutableDictionary alloc] initWithDictionary:params];
     [combinedDict addEntriesFromDictionary:@{@"token_ID": self.token_ID}]; // Add token credentials to parameters
     return combinedDict;
-}
-
-- (void)logout
-{
-    self.isLoggedIn = false;
-    self.token_ID = nil;
 }
 
 

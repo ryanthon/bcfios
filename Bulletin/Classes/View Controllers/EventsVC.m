@@ -8,8 +8,11 @@
 
 #import "EventsVC.h"
 #import "EventCell.h"
+#import "APIManager.h"
 
 @interface EventsVC ()
+
+@property (strong, nonatomic) NSArray *events;
 
 @end
 
@@ -31,6 +34,19 @@
     
     UIColor *blueColor = [UIColor colorWithRed:0.45 green:0.67 blue:0.85 alpha:1];
     self.navigationController.navigationBar.barTintColor = blueColor;
+    
+    [[APIManager sharedManager] authorizeGETrequest:@"pkEvt" additionalParamters:@{}
+                                           response:^(NSError *error, id response)
+                                             {
+                                                 self.events = [response objectForKey:@"events"];
+                                                 NSLog(@"%@", self.events);
+                                                 [self.tableView reloadData];
+                                                 
+                                                 if( error != nil )
+                                                 {
+                                                     NSLog(@"%@", error);
+                                                 }
+                                             }];
 }
 
 - (void)presentWelcomeView
@@ -45,7 +61,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 8;
+    return [self.events count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -53,7 +69,8 @@
     static NSString *cellID = @"eventCell";
     EventCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     
-    cell.eventName.text = @"Jayon's Orgy";
+    cell.eventName.text  = [[self.events objectAtIndex:indexPath.row] objectForKey:@"eventName"];
+    cell.placeLabel.text = [[self.events objectAtIndex:indexPath.row] objectForKey:@"location"];
     cell.image.image = [UIImage imageNamed:@"ninjaturtle"];
     
     return cell;

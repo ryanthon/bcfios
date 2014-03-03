@@ -10,7 +10,21 @@
 
 @interface APIManager : NSObject
 
++ (APIManager *)sharedManager;
+
 @property (nonatomic) BOOL isLoggedIn;
 @property (strong, nonatomic) NSString *token_ID;
+
+- (void)authorizeGETrequest:(NSString *)urlPath
+        additionalParamters:(NSDictionary *)params
+                   response:(void(^)(NSError *error, id response)) callback;
+
+- (void)authorizePOSTrequest:(NSString *)urlPath
+         additionalParamters:(NSDictionary *)params
+                    response:(void(^)(NSError *error, id response)) callback;
+
+- (void)authorizePOSTrequest:(NSString *)urlPath
+                    forImage:(UIImage *)image
+                    response:(void(^)(NSError *error, id response)) callback;
 
 @end
