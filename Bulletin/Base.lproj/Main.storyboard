@@ -25,8 +25,8 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Bulletin" id="GRL-Qh-oEG"/>
                     <connections>
-                        <segue destination="k06-1G-kJ1" kind="modal" identifier="welcome" id="4C3-Xt-mgn"/>
                         <segue destination="Fj7-N9-HGl" kind="push" identifier="event_detail" id="6cj-2S-mDO"/>
+                        <segue destination="XK3-8t-flz" kind="modal" identifier="welcome" id="Zu2-Xy-cjB"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zd6-5c-8sG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -129,7 +129,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="grD-9d-mpT"/>
-    </inferredMetricsTieBreakers>
 </document>
