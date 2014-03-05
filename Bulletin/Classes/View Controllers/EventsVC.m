@@ -39,7 +39,6 @@
                                            response:^(NSError *error, id response)
                                              {
                                                  self.events = [response objectForKey:@"events"];
-                                                 NSLog(@"%@", self.events);
                                                  [self.tableView reloadData];
                                                  
                                                  if( error != nil )
@@ -47,6 +46,11 @@
                                                      NSLog(@"%@", error);
                                                  }
                                              }];
+    
+    UIRefreshControl *refresher = [[UIRefreshControl alloc] init];
+    refresher.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+    [refresher addTarget:self action:@selector(updateEvents) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refresher;
 }
 
 - (void)presentWelcomeView
@@ -84,6 +88,26 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self performSegueWithIdentifier:@"event_detail" sender:nil];
+}
+
+- (void)updateEvents
+{
+    [[APIManager sharedManager] authorizeGETrequest:@"pkEvt" additionalParamters:@{}
+                                           response:^(NSError *error, id response)
+     {
+         if( error != nil )
+         {
+             NSLog(@"%@", error);
+         }
+         
+         else
+         {
+             self.events = [response objectForKey:@"events"];
+             [self.tableView reloadData];
+         }
+         
+         [self.refreshControl endRefreshing];
+     }];
 }
 
 @end

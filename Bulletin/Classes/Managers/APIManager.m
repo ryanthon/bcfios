@@ -13,7 +13,7 @@
 
 static APIManager *manager = nil;
 
-static NSString *const baseAPIURL = @"http://54.186.17.67/api/";
+static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
 
 + (APIManager *)sharedManager
 {
@@ -47,7 +47,6 @@ static NSString *const baseAPIURL = @"http://54.186.17.67/api/";
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:baseAPIURL]];
     
     NSURLCredential *credentials = [NSURLCredential credentialWithUser:@"bcf" password:@"cse190" persistence:NSURLCredentialPersistenceNone];
-    
     [manager setCredential:credentials];
         
     [manager GET:urlPath parameters:@{} success:^(AFHTTPRequestOperation *operation, id responseObject) {
