@@ -48,7 +48,6 @@
                                              }];
     
     UIRefreshControl *refresher = [[UIRefreshControl alloc] init];
-    refresher.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
     [refresher addTarget:self action:@selector(updateEvents) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refresher;
     
@@ -80,6 +79,7 @@
     
     cell.eventName.text  = [[self.events objectAtIndex:indexPath.row] objectForKey:@"eventName"];
     cell.placeLabel.text = [[self.events objectAtIndex:indexPath.row] objectForKey:@"location"];
+    cell.timeLabel.text  = [[self.events objectAtIndex:indexPath.row] objectForKey:@"start"];
     cell.image.image = [UIImage imageNamed:@"ninjaturtle"];
     
     return cell;
