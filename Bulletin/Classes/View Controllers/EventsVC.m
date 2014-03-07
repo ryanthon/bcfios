@@ -51,6 +51,11 @@
     refresher.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
     [refresher addTarget:self action:@selector(updateEvents) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refresher;
+    
+    UIBarButtonItem *compose = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:nil action:nil];
+    compose.tintColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem = compose;
+    
 }
 
 - (void)presentWelcomeView
