@@ -39,6 +39,8 @@
 		94CBCF9018C521EE009C3DB1 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CBCF7D18C521EE009C3DB1 /* UIImageView+AFNetworking.m */; };
 		94CBCF9118C521EE009C3DB1 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CBCF8018C521EE009C3DB1 /* UIProgressView+AFNetworking.m */; };
 		94CBCF9218C521EE009C3DB1 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CBCF8218C521EE009C3DB1 /* UIWebView+AFNetworking.m */; };
+		94D9E1C518C9D9D100D58255 /* sidebar.png in Resources */ = {isa = PBXBuildFile; fileRef = 94D9E1C318C9D9D100D58255 /* sidebar.png */; };
+		94D9E1C618C9D9D100D58255 /* sidebar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94D9E1C418C9D9D100D58255 /* sidebar@2x.png */; };
 		94FFD0A718C7C5AD0037FE33 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94FFD0A618C7C5AD0037FE33 /* Security.framework */; };
 		94FFD0A918C7C5B40037FE33 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94FFD0A818C7C5B40037FE33 /* SystemConfiguration.framework */; };
 		94FFD0C718C7C6A90037FE33 /* libGTLTouchStaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94FFD0C618C7C6A90037FE33 /* libGTLTouchStaticLib.a */; };
@@ -134,6 +136,8 @@
 		94CBCF8018C521EE009C3DB1 /* UIProgressView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIProgressView+AFNetworking.m"; sourceTree = "<group>"; };
 		94CBCF8118C521EE009C3DB1 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		94CBCF8218C521EE009C3DB1 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		94D9E1C318C9D9D100D58255 /* sidebar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sidebar.png; sourceTree = "<group>"; };
+		94D9E1C418C9D9D100D58255 /* sidebar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sidebar@2x.png"; sourceTree = "<group>"; };
 		94FFD0A618C7C5AD0037FE33 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		94FFD0A818C7C5B40037FE33 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		94FFD0AB18C7C6A90037FE33 /* GTLBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLBase64.h; sourceTree = "<group>"; };
@@ -267,6 +271,8 @@
 		9429055218A973BD0099BCC2 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				94D9E1C318C9D9D100D58255 /* sidebar.png */,
+				94D9E1C418C9D9D100D58255 /* sidebar@2x.png */,
 				9429055318A973D00099BCC2 /* ninjaturtle.png */,
 			);
 			path = Images;
@@ -574,8 +580,10 @@
 			files = (
 				94FFD0E418C7C7600037FE33 /* GTMOAuth2ViewTouch.xib in Resources */,
 				9429055118A96D830099BCC2 /* EventCell.xib in Resources */,
+				94D9E1C518C9D9D100D58255 /* sidebar.png in Resources */,
 				9429055418A973D00099BCC2 /* ninjaturtle.png in Resources */,
 				943B133318A5B15F0055D5BA /* Images.xcassets in Resources */,
+				94D9E1C618C9D9D100D58255 /* sidebar@2x.png in Resources */,
 				943B132518A5B15F0055D5BA /* InfoPlist.strings in Resources */,
 				943B132E18A5B15F0055D5BA /* Main.storyboard in Resources */,
 			);
@@ -735,10 +743,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bulletin/Other Sources/Bulletin-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Bulletin/Resources/Bulletin-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/Ryan/Documents/Xcode/Bulletin/Bulletin/External,
-				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/Bulletin/External";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -757,10 +762,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bulletin/Other Sources/Bulletin-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Bulletin/Resources/Bulletin-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/Ryan/Documents/Xcode/Bulletin/Bulletin/External,
-				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/Bulletin/External";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",

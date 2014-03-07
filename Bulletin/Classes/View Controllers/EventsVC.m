@@ -55,6 +55,9 @@
     compose.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = compose;
     
+    UIImage *sidebarIconImage = [UIImage imageNamed:@"sidebar"];
+    UIBarButtonItem *sidebarButton = [[UIBarButtonItem alloc] initWithImage:sidebarIconImage style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.leftBarButtonItem = sidebarButton;
 }
 
 - (void)presentWelcomeView
