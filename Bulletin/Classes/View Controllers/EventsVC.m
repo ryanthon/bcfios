@@ -74,6 +74,7 @@
     
     cell.eventName.text  = [[self.events objectAtIndex:indexPath.row] objectForKey:@"eventName"];
     cell.placeLabel.text = [[self.events objectAtIndex:indexPath.row] objectForKey:@"location"];
+    cell.timeLabel.text  = [[self.events objectAtIndex:indexPath.row] objectForKey:@"start"];
     cell.image.image = [UIImage imageNamed:@"ninjaturtle"];
     
     return cell;

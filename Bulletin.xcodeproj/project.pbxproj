@@ -70,6 +70,7 @@
 		94FFD12A18C7C8C20037FE33 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 94FFD12918C7C8C10037FE33 /* libz.dylib */; };
 		94FFD12C18C7C8C90037FE33 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94FFD12B18C7C8C90037FE33 /* OpenGLES.framework */; };
 		94FFD12E18C7C8D20037FE33 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94FFD12D18C7C8D20037FE33 /* QuartzCore.framework */; };
+		94FFD13118C7CA1A0037FE33 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FFD13018C7CA1A0037FE33 /* LocationManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -207,6 +208,8 @@
 		94FFD12918C7C8C10037FE33 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		94FFD12B18C7C8C90037FE33 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		94FFD12D18C7C8D20037FE33 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		94FFD12F18C7CA1A0037FE33 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		94FFD13018C7CA1A0037FE33 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +248,8 @@
 				9429054718A96C590099BCC2 /* GoogleManager.m */,
 				948A854318AEB79600F3ADFC /* APIManager.h */,
 				948A854418AEB79600F3ADFC /* APIManager.m */,
+				94FFD12F18C7CA1A0037FE33 /* LocationManager.h */,
+				94FFD13018C7CA1A0037FE33 /* LocationManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -599,6 +604,7 @@
 				94CBCF8418C521EE009C3DB1 /* AFHTTPRequestOperationManager.m in Sources */,
 				9429054D18A96D4F0099BCC2 /* EventCell.m in Sources */,
 				943B135A18A67BBC0055D5BA /* EventsVC.m in Sources */,
+				94FFD13118C7CA1A0037FE33 /* LocationManager.m in Sources */,
 				94CBCF9018C521EE009C3DB1 /* UIImageView+AFNetworking.m in Sources */,
 				94CBCF8518C521EE009C3DB1 /* AFHTTPSessionManager.m in Sources */,
 				94FFD10718C7C7CE0037FE33 /* GTLPlusAclentryResource.m in Sources */,
