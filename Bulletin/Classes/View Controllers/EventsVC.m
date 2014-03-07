@@ -57,6 +57,7 @@
     
     UIImage *sidebarIconImage = [UIImage imageNamed:@"sidebar"];
     UIBarButtonItem *sidebarButton = [[UIBarButtonItem alloc] initWithImage:sidebarIconImage style:UIBarButtonItemStylePlain target:nil action:nil];
+    sidebarButton.tintColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = sidebarButton;
 }
 
