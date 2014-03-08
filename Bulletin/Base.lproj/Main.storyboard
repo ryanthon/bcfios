@@ -27,6 +27,7 @@
                     <connections>
                         <segue destination="Fj7-N9-HGl" kind="push" identifier="event_detail" id="6cj-2S-mDO"/>
                         <segue destination="XK3-8t-flz" kind="modal" identifier="welcome" id="Zu2-Xy-cjB"/>
+                        <segue destination="2tG-p0-gbO" kind="modal" identifier="add_event" id="FNF-Vt-tkI"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zd6-5c-8sG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -69,6 +70,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nH1-b4-sSd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1589" y="183"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="BVU-x9-nMi">
+            <objects>
+                <viewController id="2tG-p0-gbO" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JXV-qQ-3m6"/>
+                        <viewControllerLayoutGuide type="bottom" id="0TE-0y-LKo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="V5A-Fk-Kuv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m5t-se-sEV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1589" y="934"/>
         </scene>
         <!--Reveal View Controller-->
         <scene sceneID="3MP-g5-Rua">

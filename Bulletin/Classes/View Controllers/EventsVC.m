@@ -52,7 +52,7 @@
     [refresher addTarget:self action:@selector(updateEvents) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refresher;
     
-    UIBarButtonItem *compose = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:nil action:nil];
+    UIBarButtonItem *compose = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(addEvent)];
     compose.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = compose;
     
@@ -62,6 +62,11 @@
     self.navigationItem.leftBarButtonItem = sidebarButton;
     
     [self.navigationItem.rightBarButtonItem.customView addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+}
+
+- (void) addEvent
+{
+    [self performSegueWithIdentifier:@"add_event" sender:self];
 }
 
 - (void)presentWelcomeView
