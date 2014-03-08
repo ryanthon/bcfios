@@ -25,8 +25,41 @@ static NSString *kSegueCell  = @"Cell";
 {
     [super viewDidLoad];
     
-	UIColor *blueColor = [UIColor colorWithRed:0.45 green:0.67 blue:0.85 alpha:1];
+    UIColor *blueColor = [UIColor colorWithRed:0.45 green:0.67 blue:0.85 alpha:1];
     self.navigationController.navigationBar.barTintColor = blueColor;
+    
+    UINib *textCellNib = [UINib nibWithNibName:@"TextCell" bundle:nil];
+    [self.tableView registerNib:textCellNib forCellReuseIdentifier:kTextCellID];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 5;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *cellID = nil;
+    
+    switch( indexPath.row )
+    {
+        case 0: cellID = kTextCellID; break;
+        case 1: cellID = kTimeCellID; break;
+        case 2: cellID = kTimeCellID; break;
+        case 3: cellID = kSegueCell;  break;
+        case 4: cellID = kSegueCell;  break;
+    }
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    
+    cell.textLabel.text = self.titleArray[indexPath.row];
+    
+    return cell;
 }
 
 - (IBAction)cancelButtonTap:(UIBarButtonItem *)sender
