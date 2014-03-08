@@ -9,6 +9,7 @@
 #import "EventsVC.h"
 #import "EventCell.h"
 #import "APIManager.h"
+#import "SWRevealViewController.h"
 
 @interface EventsVC ()
 
@@ -56,9 +57,11 @@
     self.navigationItem.rightBarButtonItem = compose;
     
     UIImage *sidebarIconImage = [UIImage imageNamed:@"sidebar"];
-    UIBarButtonItem *sidebarButton = [[UIBarButtonItem alloc] initWithImage:sidebarIconImage style:UIBarButtonItemStylePlain target:nil action:nil];
+    UIBarButtonItem *sidebarButton = [[UIBarButtonItem alloc] initWithImage:sidebarIconImage style:UIBarButtonItemStylePlain target:self.revealViewController action:@selector(revealToggle:)];
     sidebarButton.tintColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = sidebarButton;
+    
+    [self.navigationItem.rightBarButtonItem.customView addGestureRecognizer:self.revealViewController.panGestureRecognizer];
 }
 
 - (void)presentWelcomeView

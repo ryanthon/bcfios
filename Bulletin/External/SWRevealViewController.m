@@ -1322,7 +1322,7 @@ static NSString * const SWSegueRightIdentifier = @"sw_right";
         
         if ( adjust )
         {
-            [(id)controllerView setContentInset:UIEdgeInsetsMake(statusBarAdjustment(_contentView), 0, 0, 0)];
+            //[(id)controllerView setContentInset:UIEdgeInsetsMake(statusBarAdjustment(_contentView), 0, 0, 0)];
         }
     }
     

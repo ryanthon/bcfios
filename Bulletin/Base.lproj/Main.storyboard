@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="pzR-Sh-F3B">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="sij-aC-Fw7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
@@ -8,7 +8,7 @@
         <scene sceneID="3nB-wT-27M">
             <objects>
                 <tableViewController id="Rc3-0v-PPf" customClass="EventsVC" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="gF0-og-7TR">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="gF0-og-7TR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -17,7 +17,7 @@
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Yto-0f-C7f" id="cFf-0V-TpX">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -31,15 +31,33 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zd6-5c-8sG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="523" y="183"/>
+            <point key="canvasLocation" x="1029" y="182"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="S8U-MP-9Nv">
+            <objects>
+                <viewController id="uei-U9-DW1" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="53r-9F-plf"/>
+                        <viewControllerLayoutGuide type="bottom" id="hcv-xx-rut"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6AM-Dj-8bb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kZg-Wk-qk1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="501" y="934"/>
         </scene>
         <!--View Controller - Event Details-->
         <scene sceneID="bqK-KZ-1Jr">
             <objects>
                 <viewController id="Fj7-N9-HGl" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="THA-RK-Wwq"/>
-                        <viewControllerLayoutGuide type="bottom" id="zB3-34-ltM"/>
+                        <viewControllerLayoutGuide type="top" id="dgf-tQ-8dC"/>
+                        <viewControllerLayoutGuide type="bottom" id="Pez-lz-7b8"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="nEq-GS-Td7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -50,7 +68,21 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nH1-b4-sSd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1057" y="183"/>
+            <point key="canvasLocation" x="1589" y="183"/>
+        </scene>
+        <!--Reveal View Controller-->
+        <scene sceneID="3MP-g5-Rua">
+            <objects>
+                <viewController id="sij-aC-Fw7" customClass="SWRevealViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="pxI-tW-KRg"/>
+                    <connections>
+                        <segue destination="uei-U9-DW1" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegue" id="Sfw-qz-2RW"/>
+                        <segue destination="pzR-Sh-F3B" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegue" id="rmc-b8-raW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hja-83-VgZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-40" y="183"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ak8-iR-Wi4">
@@ -65,15 +97,15 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XWl-aK-SCg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1057" y="-586"/>
+            <point key="canvasLocation" x="1029" y="-587"/>
         </scene>
         <!--View Controller - Welcome-->
         <scene sceneID="6tn-Z3-1NT">
             <objects>
                 <viewController id="k06-1G-kJ1" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="dSC-LF-wru"/>
-                        <viewControllerLayoutGuide type="bottom" id="fHi-R3-scM"/>
+                        <viewControllerLayoutGuide type="top" id="D0B-Tu-Fe1"/>
+                        <viewControllerLayoutGuide type="bottom" id="b8Z-4x-pWY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zl9-7c-vga">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -116,12 +148,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Rc3-0v-PPf" kind="relationship" relationship="rootViewController" id="1xa-wb-9Mj"/>
+                        <segue destination="Rc3-0v-PPf" kind="relationship" relationship="rootViewController" id="yaq-tb-ZaI"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="07N-hQ-UlB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-97" y="183"/>
+            <point key="canvasLocation" x="501" y="182"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
