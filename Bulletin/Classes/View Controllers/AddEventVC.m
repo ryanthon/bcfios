@@ -7,8 +7,15 @@
 //
 
 #import "AddEventVC.h"
+#import "TextCell.h"
+
+static NSString *kTextCellID = @"textCell";
+static NSString *kTimeCellID = @"timeCell";
+static NSString *kSegueCell  = @"Cell";
 
 @interface AddEventVC ()
+
+@property (strong, nonatomic) NSArray *titleArray;
 
 @end
 
@@ -27,4 +34,12 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (NSArray *) titleArray
+{
+    if( !_titleArray )
+    {
+        _titleArray = @[@"Name", @"Start Time", @"End Time", @"Description", @"Location"];
+    }
+    return _titleArray;
+}
 @end

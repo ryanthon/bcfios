@@ -1,5 +1,5 @@
 //
-//  AddEventVCViewController.h
+//  TextCell.h
 //  Bulletin
 //
 //  Created by Wesley Yao on 3/7/14.
@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddEventVC : UITableViewController
+@interface TextCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UITextField *textField;
 
 @end
