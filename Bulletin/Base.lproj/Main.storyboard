@@ -27,12 +27,12 @@
                     <connections>
                         <segue destination="Fj7-N9-HGl" kind="push" identifier="event_detail" id="6cj-2S-mDO"/>
                         <segue destination="XK3-8t-flz" kind="modal" identifier="welcome" id="Zu2-Xy-cjB"/>
-                        <segue destination="2tG-p0-gbO" kind="modal" identifier="add_event" id="FNF-Vt-tkI"/>
+                        <segue destination="HoQ-4W-BKY" kind="modal" identifier="add_event" id="yaz-Jj-s6X"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zd6-5c-8sG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1029" y="182"/>
+            <point key="canvasLocation" x="-723" y="-2714"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="S8U-MP-9Nv">
@@ -50,7 +50,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kZg-Wk-qk1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="501" y="934"/>
+            <point key="canvasLocation" x="-1251" y="-1962"/>
         </scene>
         <!--View Controller - Event Details-->
         <scene sceneID="bqK-KZ-1Jr">
@@ -69,12 +69,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nH1-b4-sSd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1589" y="183"/>
+            <point key="canvasLocation" x="-163" y="-2713"/>
         </scene>
-        <!--View Controller-->
+        <!--Add EventVC - Create Event-->
         <scene sceneID="BVU-x9-nMi">
             <objects>
-                <viewController id="2tG-p0-gbO" sceneMemberID="viewController">
+                <viewController id="2tG-p0-gbO" customClass="AddEventVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JXV-qQ-3m6"/>
                         <viewControllerLayoutGuide type="bottom" id="0TE-0y-LKo"/>
@@ -84,10 +84,32 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Create Event" id="aXV-04-IH5">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="MOw-iP-YpA">
+                            <connections>
+                                <action selector="cancelButtonTap:" destination="2tG-p0-gbO" id="TZb-DB-Vgm"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m5t-se-sEV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1589" y="934"/>
+            <point key="canvasLocation" x="303" y="-1977"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="xUv-pZ-wbV">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="HoQ-4W-BKY" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EvD-QE-S5d">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2tG-p0-gbO" kind="relationship" relationship="rootViewController" id="xG8-39-a4q"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C56-gQ-Hep" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-163" y="-1977"/>
         </scene>
         <!--Reveal View Controller-->
         <scene sceneID="3MP-g5-Rua">
@@ -101,7 +123,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hja-83-VgZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-40" y="183"/>
+            <point key="canvasLocation" x="-1792" y="-2713"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ak8-iR-Wi4">
@@ -116,7 +138,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XWl-aK-SCg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1029" y="-587"/>
+            <point key="canvasLocation" x="-723" y="-3483"/>
         </scene>
         <!--View Controller - Welcome-->
         <scene sceneID="6tn-Z3-1NT">
@@ -157,7 +179,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Tz-Mc-gzD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1589" y="-586"/>
+            <point key="canvasLocation" x="-163" y="-3482"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sYl-wu-lz2">
@@ -172,7 +194,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="07N-hQ-UlB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="501" y="182"/>
+            <point key="canvasLocation" x="-1251" y="-2714"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

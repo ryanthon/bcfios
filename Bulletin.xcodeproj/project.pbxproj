@@ -73,6 +73,7 @@
 		94FFD12C18C7C8C90037FE33 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94FFD12B18C7C8C90037FE33 /* OpenGLES.framework */; };
 		94FFD12E18C7C8D20037FE33 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94FFD12D18C7C8D20037FE33 /* QuartzCore.framework */; };
 		94FFD13118C7CA1A0037FE33 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FFD13018C7CA1A0037FE33 /* LocationManager.m */; };
+		DECB7E9618CAC52E002ED358 /* AddEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DECB7E9518CAC52E002ED358 /* AddEventVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -214,6 +215,8 @@
 		94FFD12D18C7C8D20037FE33 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		94FFD12F18C7CA1A0037FE33 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		94FFD13018C7CA1A0037FE33 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
+		DECB7E9418CAC52E002ED358 /* AddEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventVC.h; sourceTree = "<group>"; };
+		DECB7E9518CAC52E002ED358 /* AddEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -393,6 +396,8 @@
 				943B135918A67BBC0055D5BA /* EventsVC.m */,
 				9429054218A9699E0099BCC2 /* WelcomeVC.h */,
 				9429054318A9699E0099BCC2 /* WelcomeVC.m */,
+				DECB7E9418CAC52E002ED358 /* AddEventVC.h */,
+				DECB7E9518CAC52E002ED358 /* AddEventVC.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -613,6 +618,7 @@
 				9429054D18A96D4F0099BCC2 /* EventCell.m in Sources */,
 				943B135A18A67BBC0055D5BA /* EventsVC.m in Sources */,
 				94FFD13118C7CA1A0037FE33 /* LocationManager.m in Sources */,
+				DECB7E9618CAC52E002ED358 /* AddEventVC.m in Sources */,
 				94CBCF9018C521EE009C3DB1 /* UIImageView+AFNetworking.m in Sources */,
 				94CBCF8518C521EE009C3DB1 /* AFHTTPSessionManager.m in Sources */,
 				94FFD10718C7C7CE0037FE33 /* GTLPlusAclentryResource.m in Sources */,

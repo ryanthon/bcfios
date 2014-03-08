@@ -66,7 +66,7 @@
 
 - (void) addEvent
 {
-    [self performSegueWithIdentifier:@"add_event" sender:self];
+    [self performSegueWithIdentifier:@"add_event" sender:nil];
 }
 
 - (void)presentWelcomeView
