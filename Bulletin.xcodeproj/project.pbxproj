@@ -29,6 +29,7 @@
 		9469DC9018CBF2F000145AED /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 9469DC8F18CBF2F000145AED /* Event.m */; };
 		948A854518AEB79600F3ADFC /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 948A854418AEB79600F3ADFC /* APIManager.m */; };
 		949919C918CC40CB00EBDDC7 /* DatePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 949919C818CC40CB00EBDDC7 /* DatePickerCell.m */; };
+		949919CC18CC7D5700EBDDC7 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 949919CB18CC7D5700EBDDC7 /* MBProgressHUD.m */; };
 		94CBCF8318C521EE009C3DB1 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CBCF6118C521EE009C3DB1 /* AFHTTPRequestOperation.m */; };
 		94CBCF8418C521EE009C3DB1 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CBCF6318C521EE009C3DB1 /* AFHTTPRequestOperationManager.m */; };
 		94CBCF8518C521EE009C3DB1 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CBCF6518C521EE009C3DB1 /* AFHTTPSessionManager.m */; };
@@ -106,6 +107,8 @@
 		948A854418AEB79600F3ADFC /* APIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		949919C718CC40CB00EBDDC7 /* DatePickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerCell.h; sourceTree = "<group>"; };
 		949919C818CC40CB00EBDDC7 /* DatePickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerCell.m; sourceTree = "<group>"; };
+		949919CA18CC7D5700EBDDC7 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		949919CB18CC7D5700EBDDC7 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		94CBCF6018C521EE009C3DB1 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		94CBCF6118C521EE009C3DB1 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		94CBCF6218C521EE009C3DB1 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -366,6 +369,8 @@
 				94CBCF7318C521EE009C3DB1 /* UIKit+AFNetworking */,
 				943B135418A5ECDD0055D5BA /* SWRevealViewController.h */,
 				943B135518A5ECDD0055D5BA /* SWRevealViewController.m */,
+				949919CA18CC7D5700EBDDC7 /* MBProgressHUD.h */,
+				949919CB18CC7D5700EBDDC7 /* MBProgressHUD.m */,
 			);
 			path = External;
 			sourceTree = "<group>";
@@ -554,6 +559,7 @@
 				94CBCF8818C521EE009C3DB1 /* AFURLConnectionOperation.m in Sources */,
 				94CBCF8F18C521EE009C3DB1 /* UIButton+AFNetworking.m in Sources */,
 				94CBCF9118C521EE009C3DB1 /* UIProgressView+AFNetworking.m in Sources */,
+				949919CC18CC7D5700EBDDC7 /* MBProgressHUD.m in Sources */,
 				94CBCF8318C521EE009C3DB1 /* AFHTTPRequestOperation.m in Sources */,
 				943B132718A5B15F0055D5BA /* main.m in Sources */,
 				94CBCF8E18C521EE009C3DB1 /* UIAlertView+AFNetworking.m in Sources */,

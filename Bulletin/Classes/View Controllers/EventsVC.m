@@ -10,10 +10,12 @@
 #import "EventCell.h"
 #import "APIManager.h"
 #import "SWRevealViewController.h"
+#import "MBProgressHUD.h"
 
 @interface EventsVC ()
 
 @property (strong, nonatomic) NSArray *events;
+@property (strong, nonatomic) MBProgressHUD *loadingHUD;
 
 @end
 
@@ -33,18 +35,6 @@
     UINib *pickerCellNib = [UINib nibWithNibName:@"EventCell" bundle:nil];
     [self.tableView registerNib:pickerCellNib forCellReuseIdentifier:@"eventCell"];
     
-    [[APIManager sharedManager] authorizeGETrequest:@"pkEvt" additionalParamters:@{}
-                                           response:^(NSError *error, id response)
-                                             {
-                                                 self.events = [response objectForKey:@"events"];
-                                                 [self.tableView reloadData];
-                                                 
-                                                 if( error != nil )
-                                                 {
-                                                     NSLog(@"%@", error);
-                                                 }
-                                             }];
-    
     UIRefreshControl *refresher = [[UIRefreshControl alloc] init];
     [refresher addTarget:self action:@selector(updateEvents) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refresher;
@@ -59,6 +49,28 @@
     self.navigationItem.leftBarButtonItem = sidebarButton;
     
     [self.navigationItem.rightBarButtonItem.customView addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.loadingHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.loadingHUD.mode = MBProgressHUDModeIndeterminate;
+    [[APIManager sharedManager] authorizeGETrequest:@"pkEvt" additionalParamters:@{}
+                                           response:^(NSError *error, id response)
+     {
+         [self.loadingHUD hide:YES];
+         
+         if( error )
+         {
+             NSLog(@"%@", error);
+         }
+         
+         else
+         {
+             self.events = [response objectForKey:@"events"];
+             [self.tableView reloadData];
+         }
+     }];
 }
 
 - (void) addEvent
