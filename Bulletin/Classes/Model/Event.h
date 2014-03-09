@@ -12,6 +12,9 @@
 
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *description;
+@property (strong, nonatomic) UIImage  *image;
+@property (strong, nonatomic) NSDate   *startDate;
+@property (strong, nonatomic) NSDate   *endDate;
 
 - (void)addCategory:(NSString *)category;
 - (void)removeCategory:(NSString *)category;

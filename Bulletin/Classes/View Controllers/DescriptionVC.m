@@ -19,14 +19,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    UITextView *descriptionField = [[UITextView alloc] initWithFrame:CGRectMake(10, 74, 300, 250)];
-    descriptionField.layer.borderWidth = 1.0f;
-    descriptionField.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    descriptionField.layer.cornerRadius = 8;
-    descriptionField.font = [UIFont systemFontOfSize:17.0f];
-    [self.view addSubview:descriptionField];
-    descriptionField.delegate = self;
-    self.descriptionField = descriptionField;
+    [self.view addSubview:self.descriptionField];
+    self.descriptionField.text = self.event.description;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -34,10 +28,30 @@
     [self.descriptionField becomeFirstResponder];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.descriptionField resignFirstResponder];
+}
+
 - (IBAction)submitDescription:(UIBarButtonItem *)sender
 {
     self.event.description = self.descriptionField.text;
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (UITextView *)descriptionField
+{
+    if( !_descriptionField )
+    {
+        _descriptionField = [[UITextView alloc] initWithFrame:CGRectMake(10, 74, 300, 250)];
+        _descriptionField.layer.borderWidth = 1.0f;
+        _descriptionField.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+        _descriptionField.layer.cornerRadius = 8;
+        _descriptionField.font = [UIFont systemFontOfSize:17.0f];
+        _descriptionField.delegate = self;
+    }
+    
+    return _descriptionField;
 }
 
 @end

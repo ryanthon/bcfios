@@ -42,8 +42,6 @@
     cell.textLabel.text = self.categories[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    NSLog(@"%@", [self.event getCategories] );
-    
     if( [[self.event getCategories] containsObject:self.categories[indexPath.row]] )
     {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;

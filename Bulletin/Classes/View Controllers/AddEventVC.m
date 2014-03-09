@@ -10,17 +10,23 @@
 #import "TextFieldCell.h"
 #import "DescriptionVC.h"
 #import "CategoryChooserVC.h"
+#import "DatePickerCell.h"
 
-static NSString *kTextCellID = @"textCell";
-static NSString *kTimeCellID = @"timeCell";
-static NSString *kSegueCell  = @"Cell";
+static NSString *kTextCellID    = @"textCell";
+static NSString *kDateCellID    = @"timeCell";
+static NSString *kPickerCellID  = @"pickerCell";
+static NSString *kSegueCellID   = @"Cell";
 
 @interface AddEventVC () <TextFieldCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property (strong, nonatomic) NSArray *titleArray;
-@property (strong, nonatomic) UITextField *currentEditingField;
-@property (strong, nonatomic) UIImageView *eventImage;
-@property (strong, nonatomic) UILabel *chooseLabel;
+@property (strong, nonatomic) NSArray           *titleArray;
+@property (strong, nonatomic) UITextField       *currentEditingField;
+@property (strong, nonatomic) UIView            *headerView;
+@property (strong, nonatomic) UIImageView       *eventImage;
+@property (strong, nonatomic) UILabel           *chooseLabel;
+@property (strong, nonatomic) UIImage           *chosenImage;
+@property (strong, nonatomic) NSIndexPath       *datePickerIndexPath;
+@property (strong, nonatomic) NSDateFormatter   *dateFormatter;
 
 @end
 
@@ -46,96 +52,95 @@ static NSString *kSegueCell  = @"Cell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    if ( [self hasInlineDatePicker] )
+    {
+        return self.titleArray.count + 1;
+    }
+    
+    return self.titleArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *cellID = nil;
-    UITableViewCell *cell = nil;
+    NSString *cellID = [self cellIDForIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     
-    switch( indexPath.row )
+    NSInteger row = indexPath.row;
+    if ( [self hasInlineDatePicker] && self.datePickerIndexPath.row < indexPath.row)
     {
-        case 0:
-        {
-            cellID = kTextCellID;
-            cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            TextFieldCell *textCell = (TextFieldCell *)cell;
-            textCell.textField.placeholder = @"Enter Event Name";
-            textCell.delegate = self;
-        }
-        break;
-        
-        case 1:
-        {
-            cellID = kSegueCell;
-            cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-        }
-        break;
-            
-        case 2:
-        {
-            cellID = kTimeCellID;
-            cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-        }
-        break;
-        
-        case 3:
-        {
-            cellID = kTimeCellID;
-            cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-        }
-        break;
-        
-        case 4:
-        {
-            cellID = kSegueCell;
-            cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-        }
-        break;
-        
-            
-        case 5:
-        {
-            cellID = kSegueCell;
-            cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-        }
-        break;
+        row--;
     }
     
-    cell.textLabel.text = self.titleArray[indexPath.row];
+    if( [cellID isEqualToString:kDateCellID] )
+    {
+        cell.textLabel.text = self.titleArray[row];
+        
+        if( row == 2 )
+        {
+            cell.detailTextLabel.text = [self.dateFormatter stringFromDate:self.event.startDate];
+            
+            if( !self.event.startDate )
+            {
+                cell.detailTextLabel.text = @"Select Date";
+            }
+        }
+        else
+        {
+            cell.detailTextLabel.text = [self.dateFormatter stringFromDate:self.event.endDate];
+            
+            if( !self.event.endDate )
+            {
+                cell.detailTextLabel.text = @"Select Date";
+            }
+        }
+    }
+    
+    else if( [cellID isEqualToString:kTextCellID] )
+    {
+        cell.textLabel.text = self.titleArray[row];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        TextFieldCell *textCell = (TextFieldCell *)cell;
+        textCell.textField.placeholder = @"Enter Event Name";
+        textCell.delegate = self;
+    }
+    
+    else if( [cellID isEqualToString:kPickerCellID] )
+    {
+        DatePickerCell *datePickerCell = (DatePickerCell *)cell;
+        [datePickerCell.datePicker addTarget:self action:@selector(dateAction:) forControlEvents:UIControlEventValueChanged];
+    }
+    
+    else if( [cellID isEqualToString:kSegueCellID] )
+    {
+        cell.textLabel.text = self.titleArray[row];
+    }
     
     return cell;
 }
 
+- (NSString *)cellIDForIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *cellID = kSegueCellID;
+    
+    if ( [self indexPathHasPicker:indexPath] )
+    {
+        cellID = kPickerCellID;
+    }
+    else if ( [self indexPathHasDate:indexPath] )
+    {
+        cellID = kDateCellID;
+    }
+    else if( indexPath.row == 0 )
+    {
+        cellID = kTextCellID;
+    }
+    
+    return cellID;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 100)];
-    [view.layer setShadowColor:[UIColor blackColor].CGColor];
-    [view.layer setShadowOpacity:0.8];
-    [view.layer setShadowRadius:2.0];
-    [view.layer setShadowOffset:CGSizeMake(1.0, 1.0)];
-    
-    UIButton *chooseImageButton = [[UIButton alloc] initWithFrame:CGRectMake(120, 10, 80, 80)];
-    chooseImageButton.backgroundColor = [UIColor whiteColor];
-    [chooseImageButton addTarget:self action:@selector(chooseImage) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIImageView *eventImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
-    self.eventImage = eventImage;
-    [chooseImageButton addSubview:eventImage];
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
-    label.numberOfLines = 0;
-    label.text = @"Choose\nan\nImage";
-    label.textColor = [UIColor lightGrayColor];
-    label.textAlignment = NSTextAlignmentCenter;
-    [chooseImageButton addSubview:label];
-    self.chooseLabel = label;
-    
-    [view addSubview:chooseImageButton];
-    
-    return view;
+    return self.headerView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -145,30 +150,172 @@ static NSString *kSegueCell  = @"Cell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch( indexPath.row )
+    //UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    if ( [self indexPathHasDate:indexPath] )
     {
-        case 1:
+        [self displayInlineDatePickerForRowAtIndexPath:indexPath];
+    }
+    
+    else
+    {
+        NSInteger row = indexPath.row;
+        if( [self hasInlineDatePicker] )
         {
-            [self performSegueWithIdentifier:@"categories" sender:nil];
+            row--;
         }
-        break;
-            
-        case 4:
+        
+        switch( row )
         {
-            [self performSegueWithIdentifier:@"description" sender:nil];
+            case 3: [self performSegueWithIdentifier:@"categories" sender:nil];  break;
+            case 4: [self performSegueWithIdentifier:@"description" sender:nil]; break;
+            //case 5: [self performSegueWithIdentifier:@"location" sender:nil];    break;
         }
-        break;
-            
-        case 5:
-        {
-            
-        }
-        break;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return ( [self indexPathHasPicker:indexPath] ? 162 : self.tableView.rowHeight );
+}
+
+- (void)updateDatePicker
+{
+    if ( [self hasInlineDatePicker] )
+    {
+        DatePickerCell *associatedDatePickerCell = (DatePickerCell *)[self.tableView cellForRowAtIndexPath:self.datePickerIndexPath];
+        
+        UIDatePicker *targetedDatePicker = associatedDatePickerCell.datePicker;
+        
+        [targetedDatePicker date];
+        
+        // we found a UIDatePicker in this cell, so update it's date value
+        /*NSDictionary *itemData = self.dataArray[self.datePickerIndexPath.row - 1];
+        [targetedDatePicker setDate:[itemData valueForKey:kDateKey] animated:NO];*/
+    }
+}
+
+- (BOOL)hasPickerForIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger targetedRow = indexPath.row + 1;
+    
+    UITableViewCell *checkDatePickerCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:targetedRow inSection:0]];
+    
+    return ( [checkDatePickerCell isKindOfClass:[DatePickerCell class]] );
+}
+
+- (BOOL)hasInlineDatePicker
+{
+    return ( self.datePickerIndexPath != nil );
+}
+
+- (BOOL)indexPathHasPicker:(NSIndexPath *)indexPath
+{
+    return ( [self hasInlineDatePicker] && self.datePickerIndexPath.row == indexPath.row );
+}
+
+- (BOOL)indexPathHasDate:(NSIndexPath *)indexPath
+{
+    BOOL hasDate = NO;
+    
+    if ( ( indexPath.row == 1 ) ||
+         ( indexPath.row == 2 || ( [self hasInlineDatePicker] && ( indexPath.row == 3 ) ) ) )
+    {
+        hasDate = YES;
+    }
+    
+    return hasDate;
+}
+
+- (void)toggleDatePickerForSelectedIndexPath:(NSIndexPath *)indexPath
+{
+    [self.tableView beginUpdates];
+    
+    NSArray *indexPaths = @[ [NSIndexPath indexPathForRow:indexPath.row + 1 inSection:0] ];
+    
+    // check if 'indexPath' has an attached date picker below it
+    if ( [self hasPickerForIndexPath:indexPath] )
+    {
+        // found a picker below it, so remove it
+        [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+    }
+    else
+    {
+        // didn't find a picker below it, so we should insert it
+        [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+    }
+    
+    [self.tableView endUpdates];
+}
+
+- (void)displayInlineDatePickerForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // display the date picker inline with the table content
+    [self.tableView beginUpdates];
+    
+    BOOL before = NO;   // indicates if the date picker is below "indexPath", help us determine which row to reveal
+    
+    if ( [self hasInlineDatePicker] )
+    {
+        before = self.datePickerIndexPath.row < indexPath.row;
+    }
+    
+    BOOL sameCellClicked = ( self.datePickerIndexPath.row - 1 == indexPath.row );
+    
+    // remove any date picker cell if it exists
+    if ( [self hasInlineDatePicker] )
+    {
+        [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.datePickerIndexPath.row inSection:0]]
+                              withRowAnimation:UITableViewRowAnimationFade];
+        self.datePickerIndexPath = nil;
+    }
+    
+    if ( !sameCellClicked )
+    {
+        // hide the old date picker and display the new one
+        NSInteger rowToReveal = (before ? indexPath.row - 1 : indexPath.row);
+        NSIndexPath *indexPathToReveal = [NSIndexPath indexPathForRow:rowToReveal inSection:0];
+        
+        [self toggleDatePickerForSelectedIndexPath:indexPathToReveal];
+        self.datePickerIndexPath = [NSIndexPath indexPathForRow:indexPathToReveal.row + 1 inSection:0];
+    }
+    
+    // always deselect the row containing the start or end date
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    [self.tableView endUpdates];
+    
+    // inform our date picker of the current date to match the current cell
+    [self updateDatePicker];
+}
+
+- (void)dateAction:(id)sender
+{
+    NSIndexPath *targetedCellIndexPath = [NSIndexPath indexPathForRow:self.datePickerIndexPath.row - 1 inSection:0];
+    
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:targetedCellIndexPath];
+    UIDatePicker *targetedDatePicker = sender;
+    
+    // update our data model
+    if( targetedCellIndexPath.row == 2 )
+    {
+        self.event.startDate = targetedDatePicker.date;
+        cell.detailTextLabel.text = [self.dateFormatter stringFromDate:targetedDatePicker.date];
+    }
+    else
+    {
+        self.event.endDate = targetedDatePicker.date;
+        cell.detailTextLabel.text = [self.dateFormatter stringFromDate:targetedDatePicker.date];
     }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    if( [self hasInlineDatePicker] )
+    {
+        [self displayInlineDatePickerForRowAtIndexPath:[NSIndexPath indexPathForRow:self.datePickerIndexPath.row - 1 inSection:0]];
+    }
+    
     if( [segue.identifier isEqualToString:@"description"] )
     {
         DescriptionVC *dest = segue.destinationViewController;
@@ -196,20 +343,8 @@ static NSString *kSegueCell  = @"Cell";
 {
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     self.eventImage.image = chosenImage;
+    self.chosenImage = chosenImage;
     [self.chooseLabel removeFromSuperview];
-    
-    [[APIManager sharedManager] authorizePOSTrequest:@"addImg" forImage:chosenImage response:^(NSError *error, id response)
-     {
-         if( error )
-         {
-             NSLog(@"%@", [error localizedDescription]);
-         }
-         
-         else
-         {
-             NSLog(@"success!");
-         }
-     }];
     
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
@@ -222,6 +357,11 @@ static NSString *kSegueCell  = @"Cell";
 - (void)textField:(UITextField *)textField didBeginEditingInCell:(UITableViewCell *)cell
 {
     self.currentEditingField = textField;
+    
+    if( [self hasInlineDatePicker] )
+    {
+        [self displayInlineDatePickerForRowAtIndexPath:[NSIndexPath indexPathForRow:self.datePickerIndexPath.row - 1 inSection:0]];
+    }
 }
 
 - (void)textField:(UITextField *)textField didEndEditingInCell:(UITableViewCell *)cell
@@ -245,10 +385,68 @@ static NSString *kSegueCell  = @"Cell";
 {
     if( !_titleArray )
     {
-        _titleArray = @[@"Name", @"Categories", @"Start Time", @"End Time", @"Description", @"Location"];
+        _titleArray = @[@"Name", @"Start Date", @"End Date", @"Categories", @"Description", @"Location"];
     }
     
     return _titleArray;
+}
+
+- (NSDateFormatter *)dateFormatter
+{
+    if( !_dateFormatter )
+    {
+        _dateFormatter = [[NSDateFormatter alloc] init];
+        _dateFormatter.dateFormat = @"M/d/yy hh:mm a";
+    }
+    
+    return _dateFormatter;
+}
+
+- (UIView *)headerView
+{
+    if( !_headerView )
+    {
+        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 100)];
+        _headerView.backgroundColor = [UIColor clearColor];
+        [_headerView.layer setShadowColor:[UIColor darkGrayColor].CGColor];
+        [_headerView.layer setShadowOpacity:0.8];
+        [_headerView.layer setShadowRadius:2.0];
+        [_headerView.layer setShadowOffset:CGSizeMake(1.0, 1.0)];
+        
+        UIButton *chooseImageButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 80, 80)];
+        chooseImageButton.backgroundColor = [UIColor whiteColor];
+        [chooseImageButton addTarget:self action:@selector(chooseImage) forControlEvents:UIControlEventTouchUpInside];
+        [chooseImageButton addSubview:self.eventImage];
+        [chooseImageButton addSubview:self.chooseLabel];
+        
+        [_headerView addSubview:chooseImageButton];
+    }
+    
+    return _headerView;
+}
+
+- (UIImageView *)eventImage
+{
+    if( !_eventImage )
+    {
+        _eventImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
+    }
+    
+    return _eventImage;
+}
+
+- (UILabel *)chooseLabel
+{
+    if( !_chooseLabel )
+    {
+        _chooseLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
+        _chooseLabel.numberOfLines = 0;
+        _chooseLabel.text = @"Choose\nan\nImage";
+        _chooseLabel.textColor = [UIColor lightGrayColor];
+        _chooseLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    
+    return _chooseLabel;
 }
 
 - (Event *)event
