@@ -33,9 +33,6 @@
     UINib *pickerCellNib = [UINib nibWithNibName:@"EventCell" bundle:nil];
     [self.tableView registerNib:pickerCellNib forCellReuseIdentifier:@"eventCell"];
     
-    UIColor *blueColor = [UIColor colorWithRed:0.45 green:0.67 blue:0.85 alpha:1];
-    self.navigationController.navigationBar.barTintColor = blueColor;
-    
     [[APIManager sharedManager] authorizeGETrequest:@"pkEvt" additionalParamters:@{}
                                            response:^(NSError *error, id response)
                                              {

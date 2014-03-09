@@ -22,6 +22,11 @@
 		943B133318A5B15F0055D5BA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 943B133218A5B15F0055D5BA /* Images.xcassets */; };
 		943B135618A5ECDD0055D5BA /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 943B135518A5ECDD0055D5BA /* SWRevealViewController.m */; };
 		943B135A18A67BBC0055D5BA /* EventsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 943B135918A67BBC0055D5BA /* EventsVC.m */; };
+		9469DC7F18CBD3F800145AED /* TouchUITableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9469DC7E18CBD3F800145AED /* TouchUITableView.m */; };
+		9469DC8318CBDC2D00145AED /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9469DC8218CBDC2D00145AED /* TextFieldCell.xib */; };
+		9469DC8618CBE8B700145AED /* CategoryChooserVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9469DC8518CBE8B700145AED /* CategoryChooserVC.m */; };
+		9469DC8918CBE92B00145AED /* DescriptionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9469DC8818CBE92B00145AED /* DescriptionVC.m */; };
+		9469DC9018CBF2F000145AED /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 9469DC8F18CBF2F000145AED /* Event.m */; };
 		948A854518AEB79600F3ADFC /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 948A854418AEB79600F3ADFC /* APIManager.m */; };
 		94CBCF8318C521EE009C3DB1 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CBCF6118C521EE009C3DB1 /* AFHTTPRequestOperation.m */; };
 		94CBCF8418C521EE009C3DB1 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CBCF6318C521EE009C3DB1 /* AFHTTPRequestOperationManager.m */; };
@@ -59,8 +64,7 @@
 		94FFD12E18C7C8D20037FE33 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94FFD12D18C7C8D20037FE33 /* QuartzCore.framework */; };
 		94FFD13118C7CA1A0037FE33 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FFD13018C7CA1A0037FE33 /* LocationManager.m */; };
 		DECB7E9618CAC52E002ED358 /* AddEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DECB7E9518CAC52E002ED358 /* AddEventVC.m */; };
-		DECB7E9818CAD276002ED358 /* TextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DECB7E9718CAD276002ED358 /* TextCell.xib */; };
-		DECB7E9B18CAD30F002ED358 /* TextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DECB7E9A18CAD30F002ED358 /* TextCell.m */; };
+		DECB7E9B18CAD30F002ED358 /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DECB7E9A18CAD30F002ED358 /* TextFieldCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +92,15 @@
 		943B135518A5ECDD0055D5BA /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		943B135818A67BBC0055D5BA /* EventsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsVC.h; sourceTree = "<group>"; };
 		943B135918A67BBC0055D5BA /* EventsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsVC.m; sourceTree = "<group>"; };
+		9469DC7D18CBD3F800145AED /* TouchUITableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchUITableView.h; sourceTree = "<group>"; };
+		9469DC7E18CBD3F800145AED /* TouchUITableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchUITableView.m; sourceTree = "<group>"; };
+		9469DC8218CBDC2D00145AED /* TextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
+		9469DC8418CBE8B700145AED /* CategoryChooserVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryChooserVC.h; sourceTree = "<group>"; };
+		9469DC8518CBE8B700145AED /* CategoryChooserVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryChooserVC.m; sourceTree = "<group>"; };
+		9469DC8718CBE92B00145AED /* DescriptionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescriptionVC.h; sourceTree = "<group>"; };
+		9469DC8818CBE92B00145AED /* DescriptionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescriptionVC.m; sourceTree = "<group>"; };
+		9469DC8E18CBF2F000145AED /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		9469DC8F18CBF2F000145AED /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		948A854318AEB79600F3ADFC /* APIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
 		948A854418AEB79600F3ADFC /* APIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		94CBCF6018C521EE009C3DB1 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -172,10 +185,9 @@
 		94FFD12F18C7CA1A0037FE33 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		94FFD13018C7CA1A0037FE33 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		DECB7E9418CAC52E002ED358 /* AddEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventVC.h; sourceTree = "<group>"; };
-		DECB7E9518CAC52E002ED358 /* AddEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventVC.m; sourceTree = "<group>"; };
-		DECB7E9718CAD276002ED358 /* TextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextCell.xib; sourceTree = "<group>"; };
-		DECB7E9918CAD30F002ED358 /* TextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextCell.h; sourceTree = "<group>"; };
-		DECB7E9A18CAD30F002ED358 /* TextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextCell.m; sourceTree = "<group>"; };
+		DECB7E9518CAC52E002ED358 /* AddEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventVC.m; sourceTree = "<group>"; usesTabs = 0; };
+		DECB7E9918CAD30F002ED358 /* TextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
+		DECB7E9A18CAD30F002ED358 /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,12 +235,14 @@
 		9429054A18A96CFC0099BCC2 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				9469DC7D18CBD3F800145AED /* TouchUITableView.h */,
+				9469DC7E18CBD3F800145AED /* TouchUITableView.m */,
 				9429054B18A96D4F0099BCC2 /* EventCell.h */,
 				9429054C18A96D4F0099BCC2 /* EventCell.m */,
 				9429055018A96D830099BCC2 /* EventCell.xib */,
-				DECB7E9718CAD276002ED358 /* TextCell.xib */,
-				DECB7E9918CAD30F002ED358 /* TextCell.h */,
-				DECB7E9A18CAD30F002ED358 /* TextCell.m */,
+				DECB7E9918CAD30F002ED358 /* TextFieldCell.h */,
+				DECB7E9A18CAD30F002ED358 /* TextFieldCell.m */,
+				9469DC8218CBDC2D00145AED /* TextFieldCell.xib */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -308,6 +322,7 @@
 		943B135018A5E8790055D5BA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9469DC8A18CBF2BD00145AED /* Model */,
 				9429054A18A96CFC0099BCC2 /* UIKit */,
 				9429054518A96C200099BCC2 /* Managers */,
 				943B135718A5ED240055D5BA /* View Controllers */,
@@ -359,8 +374,21 @@
 				9429054318A9699E0099BCC2 /* WelcomeVC.m */,
 				DECB7E9418CAC52E002ED358 /* AddEventVC.h */,
 				DECB7E9518CAC52E002ED358 /* AddEventVC.m */,
+				9469DC8418CBE8B700145AED /* CategoryChooserVC.h */,
+				9469DC8518CBE8B700145AED /* CategoryChooserVC.m */,
+				9469DC8718CBE92B00145AED /* DescriptionVC.h */,
+				9469DC8818CBE92B00145AED /* DescriptionVC.m */,
 			);
 			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		9469DC8A18CBF2BD00145AED /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9469DC8E18CBF2F000145AED /* Event.h */,
+				9469DC8F18CBF2F000145AED /* Event.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		94CBCF5F18C521EE009C3DB1 /* AFNetworking */ = {
@@ -500,11 +528,11 @@
 			files = (
 				94FFD0E418C7C7600037FE33 /* GTMOAuth2ViewTouch.xib in Resources */,
 				9429055118A96D830099BCC2 /* EventCell.xib in Resources */,
+				9469DC8318CBDC2D00145AED /* TextFieldCell.xib in Resources */,
 				94D9E1C518C9D9D100D58255 /* sidebar.png in Resources */,
 				9429055418A973D00099BCC2 /* ninjaturtle.png in Resources */,
 				943B133318A5B15F0055D5BA /* Images.xcassets in Resources */,
 				94D9E1C618C9D9D100D58255 /* sidebar@2x.png in Resources */,
-				DECB7E9818CAD276002ED358 /* TextCell.xib in Resources */,
 				943B132518A5B15F0055D5BA /* InfoPlist.strings in Resources */,
 				943B132E18A5B15F0055D5BA /* Main.storyboard in Resources */,
 			);
@@ -529,17 +557,21 @@
 				943B135A18A67BBC0055D5BA /* EventsVC.m in Sources */,
 				94FFD13118C7CA1A0037FE33 /* LocationManager.m in Sources */,
 				DECB7E9618CAC52E002ED358 /* AddEventVC.m in Sources */,
+				9469DC9018CBF2F000145AED /* Event.m in Sources */,
 				94CBCF9018C521EE009C3DB1 /* UIImageView+AFNetworking.m in Sources */,
 				94CBCF8518C521EE009C3DB1 /* AFHTTPSessionManager.m in Sources */,
 				94CBCF8D18C521EE009C3DB1 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				9469DC8618CBE8B700145AED /* CategoryChooserVC.m in Sources */,
 				94CBCF8C18C521EE009C3DB1 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				9429054818A96C590099BCC2 /* GoogleManager.m in Sources */,
 				948A854518AEB79600F3ADFC /* APIManager.m in Sources */,
-				DECB7E9B18CAD30F002ED358 /* TextCell.m in Sources */,
+				DECB7E9B18CAD30F002ED358 /* TextFieldCell.m in Sources */,
 				9429054418A9699E0099BCC2 /* WelcomeVC.m in Sources */,
 				94CBCF8718C521EE009C3DB1 /* AFSecurityPolicy.m in Sources */,
+				9469DC7F18CBD3F800145AED /* TouchUITableView.m in Sources */,
 				943B132B18A5B15F0055D5BA /* BulletinAppDelegate.m in Sources */,
 				94CBCF8918C521EE009C3DB1 /* AFURLRequestSerialization.m in Sources */,
+				9469DC8918CBE92B00145AED /* DescriptionVC.m in Sources */,
 				94CBCF9218C521EE009C3DB1 /* UIWebView+AFNetworking.m in Sources */,
 				94CBCF8618C521EE009C3DB1 /* AFNetworkReachabilityManager.m in Sources */,
 				94CBCF8A18C521EE009C3DB1 /* AFURLResponseSerialization.m in Sources */,
