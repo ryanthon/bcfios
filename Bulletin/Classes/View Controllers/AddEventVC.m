@@ -8,7 +8,6 @@
 
 #import "AddEventVC.h"
 #import "TextFieldCell.h"
-#import "Event.h"
 #import "DescriptionVC.h"
 #import "CategoryChooserVC.h"
 
@@ -20,7 +19,6 @@ static NSString *kSegueCell  = @"Cell";
 
 @property (strong, nonatomic) NSArray *titleArray;
 @property (strong, nonatomic) UITextField *currentEditingField;
-@property (strong, nonatomic) Event *event;
 @property (strong, nonatomic) UIImageView *eventImage;
 @property (strong, nonatomic) UILabel *chooseLabel;
 
@@ -200,6 +198,19 @@ static NSString *kSegueCell  = @"Cell";
     self.eventImage.image = chosenImage;
     [self.chooseLabel removeFromSuperview];
     
+    [[APIManager sharedManager] authorizePOSTrequest:@"addImg" forImage:chosenImage response:^(NSError *error, id response)
+     {
+         if( error )
+         {
+             NSLog(@"%@", [error localizedDescription]);
+         }
+         
+         else
+         {
+             NSLog(@"success!");
+         }
+     }];
+    
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -238,5 +249,15 @@ static NSString *kSegueCell  = @"Cell";
     }
     
     return _titleArray;
+}
+
+- (Event *)event
+{
+    if( !_event )
+    {
+        _event = [[Event alloc] init];
+    }
+    
+    return _event;
 }
 @end

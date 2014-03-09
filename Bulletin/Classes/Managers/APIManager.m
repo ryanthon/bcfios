@@ -62,19 +62,40 @@ static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
                     response:(void(^)(NSError *error, id response)) callback
 
 {
-    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@"https://www.titanhst.com/modules/"]];
+    /*AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:baseAPIURL]];
+    
+    NSURLCredential *credentials = [NSURLCredential credentialWithUser:@"bcf" password:@"cse190" persistence:NSURLCredentialPersistenceNone];
+    [manager setCredential:credentials];
     
     NSDictionary *params = @{@"enctype" : @"multipart/form-data"};
     NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
     
     [manager POST:urlPath parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFileData:imageData name:@"secret" fileName:@"name" mimeType:@"image/jpeg"];
+        [formData appendPartWithFileData:imageData name:@"image" fileName:@"name" mimeType:@"image/jpeg"];
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
         callback(nil, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         callback(error, nil);
+    }];*/
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@", baseAPIURL, urlPath];
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    NSDictionary *params = @{@"enctype" : @"multipart/form-data", @"eid" : @"4" };
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
+    
+    [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:@"bcf" password:@"cse190"];
+    
+    [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:imageData name:@"image" fileName:@"image.jpeg" mimeType:@"image/jpeg"];
+    } success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSLog(@"screenshot operation success!  %@", responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Operation Error: %@", error);
     }];
 }
 
