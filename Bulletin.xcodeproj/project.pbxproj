@@ -28,6 +28,11 @@
 		9469DC8918CBE92B00145AED /* DescriptionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9469DC8818CBE92B00145AED /* DescriptionVC.m */; };
 		9469DC9018CBF2F000145AED /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 9469DC8F18CBF2F000145AED /* Event.m */; };
 		948A854518AEB79600F3ADFC /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 948A854418AEB79600F3ADFC /* APIManager.m */; };
+		949919C918CC40CB00EBDDC7 /* DatePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 949919C818CC40CB00EBDDC7 /* DatePickerCell.m */; };
+		949919CC18CC7D5700EBDDC7 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 949919CB18CC7D5700EBDDC7 /* MBProgressHUD.m */; };
+		949919D718CC877200EBDDC7 /* Icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 949919D118CC877200EBDDC7 /* Icon-40@2x.png */; };
+		949919D918CC877200EBDDC7 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 949919D318CC877200EBDDC7 /* Icon-60@2x.png */; };
+		949919DB18CC877200EBDDC7 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 949919D518CC877200EBDDC7 /* Icon-Small@2x.png */; };
 		94CBCF8318C521EE009C3DB1 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CBCF6118C521EE009C3DB1 /* AFHTTPRequestOperation.m */; };
 		94CBCF8418C521EE009C3DB1 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CBCF6318C521EE009C3DB1 /* AFHTTPRequestOperationManager.m */; };
 		94CBCF8518C521EE009C3DB1 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CBCF6518C521EE009C3DB1 /* AFHTTPSessionManager.m */; };
@@ -103,6 +108,13 @@
 		9469DC8F18CBF2F000145AED /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		948A854318AEB79600F3ADFC /* APIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
 		948A854418AEB79600F3ADFC /* APIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
+		949919C718CC40CB00EBDDC7 /* DatePickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerCell.h; sourceTree = "<group>"; };
+		949919C818CC40CB00EBDDC7 /* DatePickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerCell.m; sourceTree = "<group>"; };
+		949919CA18CC7D5700EBDDC7 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		949919CB18CC7D5700EBDDC7 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		949919D118CC877200EBDDC7 /* Icon-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40@2x.png"; sourceTree = "<group>"; };
+		949919D318CC877200EBDDC7 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
+		949919D518CC877200EBDDC7 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		94CBCF6018C521EE009C3DB1 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		94CBCF6118C521EE009C3DB1 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		94CBCF6218C521EE009C3DB1 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -243,6 +255,8 @@
 				DECB7E9918CAD30F002ED358 /* TextFieldCell.h */,
 				DECB7E9A18CAD30F002ED358 /* TextFieldCell.m */,
 				9469DC8218CBDC2D00145AED /* TextFieldCell.xib */,
+				949919C718CC40CB00EBDDC7 /* DatePickerCell.h */,
+				949919C818CC40CB00EBDDC7 /* DatePickerCell.m */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -335,6 +349,7 @@
 		943B135118A5E8910055D5BA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				949919CF18CC872300EBDDC7 /* Icons */,
 				9429055218A973BD0099BCC2 /* Images */,
 				943B135218A5E95D0055D5BA /* en.lproj */,
 				943B132218A5B15F0055D5BA /* Bulletin-Info.plist */,
@@ -361,6 +376,8 @@
 				94CBCF7318C521EE009C3DB1 /* UIKit+AFNetworking */,
 				943B135418A5ECDD0055D5BA /* SWRevealViewController.h */,
 				943B135518A5ECDD0055D5BA /* SWRevealViewController.m */,
+				949919CA18CC7D5700EBDDC7 /* MBProgressHUD.h */,
+				949919CB18CC7D5700EBDDC7 /* MBProgressHUD.m */,
 			);
 			path = External;
 			sourceTree = "<group>";
@@ -389,6 +406,16 @@
 				9469DC8F18CBF2F000145AED /* Event.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		949919CF18CC872300EBDDC7 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				949919D118CC877200EBDDC7 /* Icon-40@2x.png */,
+				949919D318CC877200EBDDC7 /* Icon-60@2x.png */,
+				949919D518CC877200EBDDC7 /* Icon-Small@2x.png */,
+			);
+			path = Icons;
 			sourceTree = "<group>";
 		};
 		94CBCF5F18C521EE009C3DB1 /* AFNetworking */ = {
@@ -528,8 +555,11 @@
 			files = (
 				94FFD0E418C7C7600037FE33 /* GTMOAuth2ViewTouch.xib in Resources */,
 				9429055118A96D830099BCC2 /* EventCell.xib in Resources */,
+				949919D918CC877200EBDDC7 /* Icon-60@2x.png in Resources */,
+				949919DB18CC877200EBDDC7 /* Icon-Small@2x.png in Resources */,
 				9469DC8318CBDC2D00145AED /* TextFieldCell.xib in Resources */,
 				94D9E1C518C9D9D100D58255 /* sidebar.png in Resources */,
+				949919D718CC877200EBDDC7 /* Icon-40@2x.png in Resources */,
 				9429055418A973D00099BCC2 /* ninjaturtle.png in Resources */,
 				943B133318A5B15F0055D5BA /* Images.xcassets in Resources */,
 				94D9E1C618C9D9D100D58255 /* sidebar@2x.png in Resources */,
@@ -549,9 +579,11 @@
 				94CBCF8818C521EE009C3DB1 /* AFURLConnectionOperation.m in Sources */,
 				94CBCF8F18C521EE009C3DB1 /* UIButton+AFNetworking.m in Sources */,
 				94CBCF9118C521EE009C3DB1 /* UIProgressView+AFNetworking.m in Sources */,
+				949919CC18CC7D5700EBDDC7 /* MBProgressHUD.m in Sources */,
 				94CBCF8318C521EE009C3DB1 /* AFHTTPRequestOperation.m in Sources */,
 				943B132718A5B15F0055D5BA /* main.m in Sources */,
 				94CBCF8E18C521EE009C3DB1 /* UIAlertView+AFNetworking.m in Sources */,
+				949919C918CC40CB00EBDDC7 /* DatePickerCell.m in Sources */,
 				94CBCF8418C521EE009C3DB1 /* AFHTTPRequestOperationManager.m in Sources */,
 				9429054D18A96D4F0099BCC2 /* EventCell.m in Sources */,
 				943B135A18A67BBC0055D5BA /* EventsVC.m in Sources */,

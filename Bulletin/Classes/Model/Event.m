@@ -23,7 +23,6 @@
 
 - (void)addCategory:(NSString *)category
 {
-    NSLog(@"%@", category);
     [self.categories addObject:category];
 }
 
@@ -34,7 +33,6 @@
 
 - (NSMutableArray *)categories
 {
-    NSLog(@"IN GETTER" );
     if( !_categories )
     {
         _categories = [[NSMutableArray alloc] init];
