@@ -7,6 +7,7 @@
 //
 
 #import "BulletinAppDelegate.h"
+#import <GoogleMaps/GoogleMaps.h>
 
 @implementation BulletinAppDelegate
 
@@ -27,6 +28,8 @@
     
     UIColor *blueColor = [UIColor colorWithRed:0.45 green:0.67 blue:0.85 alpha:1];
     [[UINavigationBar appearance] setBarTintColor:blueColor];
+    
+    [GMSServices provideAPIKey:@"AIzaSyCItKjiDfeoN71Hn7anlBaUhK2k8RzJtXU"];
     
     return YES;
 }

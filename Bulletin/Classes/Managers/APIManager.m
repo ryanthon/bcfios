@@ -26,6 +26,11 @@ static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
     return manager;
 }
 
++ (NSString *)serverURL
+{
+    return @"http://54.186.50.209/";
+}
+
 - (void)sendPushToken: (NSString*) pushToken
             userToken: (NSString*) userToken
              response:(void(^)(BOOL success, NSError *error)) callback
@@ -57,6 +62,24 @@ static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
     }];
 }
 
+- (void)authorizeImageGETRequest:(NSString *)urlPath response:(void (^)(NSError *, id))callback
+{
+    NSURLRequest *url = [NSURLRequest requestWithURL:[NSURL URLWithString:urlPath]];
+    AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:url];
+    
+    NSURLCredential *credentials = [NSURLCredential credentialWithUser:@"bcf" password:@"cse190" persistence:NSURLCredentialPersistenceNone];
+    [requestOperation setCredential:credentials];
+    
+    requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
+    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        callback(nil, responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Image error: %@", error);
+        callback(error, nil);
+    }];
+    [requestOperation start];
+}
+
 - (void)authorizePOSTrequest:(NSString *)urlPath
                     forImage:(UIImage *)image
                     response:(void(^)(NSError *error, id response)) callback
@@ -85,7 +108,7 @@ static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:configuration];
     
-    NSDictionary *params = @{@"enctype" : @"multipart/form-data", @"eid" : @"4" };
+    NSDictionary *params = @{@"enctype" : @"multipart/form-data", @"eid" : @"7" };
     NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
     
     [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:@"bcf" password:@"cse190"];

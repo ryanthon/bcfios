@@ -146,6 +146,7 @@
                     <connections>
                         <segue destination="sgc-S1-hT1" kind="push" identifier="description" id="AO8-df-yQo"/>
                         <segue destination="Trb-e1-dxO" kind="push" identifier="categories" id="lIp-na-PEH"/>
+                        <segue destination="eF6-rk-cjr" kind="push" identifier="location" id="YQQ-VO-Gy5"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KKA-z5-4Vd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -180,6 +181,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ICz-vU-ect" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="833" y="-1977"/>
+        </scene>
+        <!--LocationVC - Event Location-->
+        <scene sceneID="rQY-bn-26j">
+            <objects>
+                <viewController id="eF6-rk-cjr" customClass="LocationVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8ji-HC-AhC"/>
+                        <viewControllerLayoutGuide type="bottom" id="XWX-Xk-CKB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zVg-B1-D0e">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Event Location" id="EWx-at-ahM"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1kw-Lk-UOx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="833" y="-1214"/>
         </scene>
         <!--DescriptionVC - Event Description-->
         <scene sceneID="2Zi-9A-XHF">

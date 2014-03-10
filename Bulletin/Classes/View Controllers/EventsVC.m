@@ -11,6 +11,7 @@
 #import "APIManager.h"
 #import "SWRevealViewController.h"
 #import "MBProgressHUD.h"
+#import "UIImageView+WebCache.h"
 
 @interface EventsVC ()
 
@@ -101,7 +102,22 @@
     cell.eventName.text  = [[self.events objectAtIndex:indexPath.row] objectForKey:@"eventName"];
     cell.placeLabel.text = [[self.events objectAtIndex:indexPath.row] objectForKey:@"location"];
     cell.timeLabel.text  = [[self.events objectAtIndex:indexPath.row] objectForKey:@"start"];
-    cell.image.image = [UIImage imageNamed:@"ninjaturtle"];
+    
+    NSString *imageFile = [[self.events objectAtIndex:indexPath.row] objectForKey:@"path"];
+    NSString *imageURL  = [NSString stringWithFormat:@"%@evtImg/%@", [APIManager serverURL], imageFile];
+    
+    [[APIManager sharedManager] authorizeImageGETRequest:imageURL response:^(NSError *error, id response)
+     {
+         if( !error )
+         {
+             NSLog(@"%@", response);
+             cell.image.image = (UIImage *)response;
+         }
+     }];
+    
+    //[cell.image setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:@"ninjaturtle"]];
+    
+    //cell.image.image = [UIImage imageNamed:@"ninjaturtle"];
     
     return cell;
 }

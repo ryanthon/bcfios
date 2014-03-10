@@ -150,8 +150,6 @@ static NSString *kSegueCellID   = @"Cell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    
     if ( [self indexPathHasDate:indexPath] )
     {
         [self displayInlineDatePickerForRowAtIndexPath:indexPath];
@@ -169,7 +167,7 @@ static NSString *kSegueCellID   = @"Cell";
         {
             case 3: [self performSegueWithIdentifier:@"categories" sender:nil];  break;
             case 4: [self performSegueWithIdentifier:@"description" sender:nil]; break;
-            //case 5: [self performSegueWithIdentifier:@"location" sender:nil];    break;
+            case 5: [self performSegueWithIdentifier:@"location" sender:nil];    break;
         }
     }
 }
@@ -345,6 +343,18 @@ static NSString *kSegueCellID   = @"Cell";
     self.eventImage.image = chosenImage;
     self.chosenImage = chosenImage;
     [self.chooseLabel removeFromSuperview];
+    
+    /*[[APIManager sharedManager] authorizePOSTrequest:@"addImg" forImage:chosenImage response:^( NSError *error, id response )
+     {
+         if( error )
+         {
+             NSLog(@"ERROR");
+         }
+         else
+         {
+             NSLog(@"SUCCESS");
+         }
+     }];*/
     
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
