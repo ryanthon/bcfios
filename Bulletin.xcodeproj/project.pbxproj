@@ -420,6 +420,8 @@
 				DE402F0318CC9BE500F1304F /* SideRevealVC.m */,
 				94991A1518CD612300EBDDC7 /* EventDetailVC.h */,
 				94991A1618CD612300EBDDC7 /* EventDetailVC.m */,
+				DE402F0518CDAC2C00F1304F /* MyEventsVC.h */,
+				DE402F0618CDAC2C00F1304F /* MyEventsVC.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";

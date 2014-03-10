@@ -23,6 +23,9 @@ static NSString *sideSegueLogoutID = @"CellLogout";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1];
+    self.sideTableView.backgroundColor = [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1];
+    self.sideTableView.separatorColor = [UIColor colorWithRed:0.2 green:0.23 blue:0.26 alpha:1];
     
     self.view.backgroundColor = [UIColor darkGrayColor];
     self.sideTableView.backgroundColor = [UIColor darkGrayColor];
