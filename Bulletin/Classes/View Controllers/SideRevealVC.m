@@ -6,9 +6,13 @@
 //  Copyright (c) 2014 Burlington Code Factory. All rights reserved.
 //
 
+#import "SWRevealViewController.h"
 #import "SideRevealVC.h"
 
-static NSString *sideSegueCellID = @"Cell";
+static NSString *sideSegueHomeID = @"CellHome";
+static NSString *sideSegueEventID = @"CellEvents";
+static NSString *sideSegueSettingID = @"CellSetting";
+static NSString *sideSegueLogoutID = @"CellLogout";
 
 @interface SideRevealVC ()
 @property (strong, nonatomic) NSArray *titleArray;
@@ -42,16 +46,16 @@ static NSString *sideSegueCellID = @"Cell";
     
     switch (indexPath.row) {
         case 0:
-            cellID = sideSegueCellID;
+            cellID = sideSegueHomeID;
             break;
         case 1:
-            cellID = sideSegueCellID;
+            cellID = sideSegueEventID;
             break;
         case 2:
-            cellID = sideSegueCellID;
+            cellID = sideSegueSettingID;
             break;
         case 3:
-            cellID = sideSegueCellID;
+            cellID = sideSegueLogoutID;
             break;
     }
     
@@ -64,9 +68,24 @@ static NSString *sideSegueCellID = @"Cell";
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    
+    // configure the segue.
+    if ( [segue isKindOfClass: [SWRevealViewControllerSegue class]] )
+    {
+        SWRevealViewControllerSegue* rvcs = (SWRevealViewControllerSegue*) segue;
+        
+        SWRevealViewController* rvc = self.revealViewController;
+        NSAssert( rvc != nil, @"oops! must have a revealViewController" );
+        
+        NSAssert( [rvc.frontViewController isKindOfClass: [UINavigationController class]], @"oops!  for this segue we want a permanent navigation controller in the front!" );
+        
+        rvcs.performBlock = ^(SWRevealViewControllerSegue* rvc_segue, UIViewController* svc, UIViewController* dvc)
+        {
+            UINavigationController* nc = [[UINavigationController alloc] initWithRootViewController:dvc];
+            [rvc setFrontViewController:nc animated:YES];
+        };
+    }
 }
 
 - (NSArray *) titleArray
