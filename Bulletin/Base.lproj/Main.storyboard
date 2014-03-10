@@ -34,10 +34,10 @@
             </objects>
             <point key="canvasLocation" x="-723" y="-2714"/>
         </scene>
-        <!--View Controller-->
+        <!--Side RevealVC-->
         <scene sceneID="S8U-MP-9Nv">
             <objects>
-                <viewController id="uei-U9-DW1" sceneMemberID="viewController">
+                <viewController id="uei-U9-DW1" customClass="SideRevealVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="53r-9F-plf"/>
                         <viewControllerLayoutGuide type="bottom" id="hcv-xx-rut"/>
@@ -46,14 +46,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="vV6-sg-8cp">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="286"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="vV6-sg-8cp">
+                                <rect key="frame" x="0.0" y="28" width="320" height="286"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="8qt-fK-CTA">
+                                        <rect key="frame" x="0.0" y="55" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8qt-fK-CTA" id="IQH-Ve-obW">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="uei-U9-DW1" id="7n1-u1-ovc"/>
+                                    <outlet property="delegate" destination="uei-U9-DW1" id="Np5-gH-yv2"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="sideTableView" destination="vV6-sg-8cp" id="kKr-kb-HGD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kZg-Wk-qk1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
