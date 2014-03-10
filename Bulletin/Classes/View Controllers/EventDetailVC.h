@@ -1,5 +1,5 @@
 //
-//  LocationVC.h
+//  EventDetailVC.h
 //  Bulletin
 //
 //  Created by Ryan Khalili on 3/9/14.
@@ -7,10 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Event.h"
 
-@interface LocationVC : UIViewController
-
-@property (strong, nonatomic) Event *event;
+@interface EventDetailVC : UIViewController
 
 @end

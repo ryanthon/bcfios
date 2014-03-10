@@ -113,6 +113,10 @@ static NSString *kSegueCellID   = @"Cell";
     else if( [cellID isEqualToString:kSegueCellID] )
     {
         cell.textLabel.text = self.titleArray[row];
+        if( self.event.description )
+        {
+            cell.detailTextLabel.text = self.event.description;
+        }
     }
     
     return cell;
@@ -175,22 +179,6 @@ static NSString *kSegueCellID   = @"Cell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return ( [self indexPathHasPicker:indexPath] ? 162 : self.tableView.rowHeight );
-}
-
-- (void)updateDatePicker
-{
-    if ( [self hasInlineDatePicker] )
-    {
-        DatePickerCell *associatedDatePickerCell = (DatePickerCell *)[self.tableView cellForRowAtIndexPath:self.datePickerIndexPath];
-        
-        UIDatePicker *targetedDatePicker = associatedDatePickerCell.datePicker;
-        
-        [targetedDatePicker date];
-        
-        // we found a UIDatePicker in this cell, so update it's date value
-        /*NSDictionary *itemData = self.dataArray[self.datePickerIndexPath.row - 1];
-        [targetedDatePicker setDate:[itemData valueForKey:kDateKey] animated:NO];*/
-    }
 }
 
 - (BOOL)hasPickerForIndexPath:(NSIndexPath *)indexPath
@@ -282,9 +270,6 @@ static NSString *kSegueCellID   = @"Cell";
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     [self.tableView endUpdates];
-    
-    // inform our date picker of the current date to match the current cell
-    [self updateDatePicker];
 }
 
 - (void)dateAction:(id)sender

@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SideRevealVC : UIViewController < UITableViewDataSource, UITableViewDelegate>
+@interface SideRevealVC : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UITableView *sideTableView;
 
 @end

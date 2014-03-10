@@ -7,11 +7,12 @@
 //
 
 #import "EventsVC.h"
-#import "EventCell.h"
+//#import "EventCell.h"
+#import "BulletinCell.h"
 #import "APIManager.h"
 #import "SWRevealViewController.h"
 #import "MBProgressHUD.h"
-#import "UIImageView+WebCache.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface EventsVC ()
 
@@ -33,7 +34,7 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
-    UINib *pickerCellNib = [UINib nibWithNibName:@"EventCell" bundle:nil];
+    UINib *pickerCellNib = [UINib nibWithNibName:@"BulletinCell" bundle:nil];
     [self.tableView registerNib:pickerCellNib forCellReuseIdentifier:@"eventCell"];
     
     UIRefreshControl *refresher = [[UIRefreshControl alloc] init];
@@ -49,11 +50,12 @@
     sidebarButton.tintColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = sidebarButton;
     
+    self.revealViewController.rearViewRevealWidth = 230;
+    
     [self.navigationItem.rightBarButtonItem.customView addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
+    
+    self.tableView.backgroundColor = [UIColor colorWithRed:0.82 green:0.69 blue:0.45 alpha:1];
+    
     self.loadingHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     self.loadingHUD.mode = MBProgressHUDModeIndeterminate;
     [[APIManager sharedManager] authorizeGETrequest:@"pkEvt" additionalParamters:@{}
@@ -72,6 +74,12 @@
              [self.tableView reloadData];
          }
      }];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSIndexPath *tableSelection = [self.tableView indexPathForSelectedRow];
+    [self.tableView deselectRowAtIndexPath:tableSelection animated:NO];
 }
 
 - (void) addEvent
@@ -94,30 +102,66 @@
     return [self.events count];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 4;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 100)];
+    headerView.backgroundColor = self.tableView.backgroundColor;
+    return headerView;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellID = @"eventCell";
-    EventCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    BulletinCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     
-    cell.eventName.text  = [[self.events objectAtIndex:indexPath.row] objectForKey:@"eventName"];
-    cell.placeLabel.text = [[self.events objectAtIndex:indexPath.row] objectForKey:@"location"];
-    cell.timeLabel.text  = [[self.events objectAtIndex:indexPath.row] objectForKey:@"start"];
+    cell.eventNameLabel.text  = [[self.events objectAtIndex:indexPath.row] objectForKey:@"eventName"];
+    cell.eventPlaceLabel.text = [[self.events objectAtIndex:indexPath.row] objectForKey:@"location"];
+    cell.eventDateLabel.text  = [[self.events objectAtIndex:indexPath.row] objectForKey:@"start"];
     
     NSString *imageFile = [[self.events objectAtIndex:indexPath.row] objectForKey:@"path"];
+    NSLog(@"%@", imageFile);
+    
+    /*if( [imageFile isEqualToString:@"none"] )
+    {
+        cell.image.image = [UIImage imageNamed:@"ninjaturtle"];
+    }
+    
+    else
+    {
+        NSString *imageURL  = [NSString stringWithFormat:@"%@evtImg/%@", [APIManager serverURL], imageFile];
+        
+        [cell.image setImageWithURL:[NSURL URLWithString:imageURL]];
+    }*/
+    
+    UIView *selectionView = [[UIView alloc] initWithFrame:cell.cardView.frame];
+    selectionView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+    selectionView.layer.cornerRadius = 10;
+    cell.selectedBackgroundView = selectionView;
+    
     NSString *imageURL  = [NSString stringWithFormat:@"%@evtImg/%@", [APIManager serverURL], imageFile];
+
+    if( [imageFile isEqualToString:@"none"] )
+    {
+        cell.eventImageView.image = [UIImage imageNamed:@"ninjaturtle"];
+    }
     
-    [[APIManager sharedManager] authorizeImageGETRequest:imageURL response:^(NSError *error, id response)
-     {
-         if( !error )
+    else
+    {
+        [[APIManager sharedManager] authorizeImageGETRequest:imageURL response:^(NSError *error, id response)
          {
-             NSLog(@"%@", response);
-             cell.image.image = (UIImage *)response;
-         }
-     }];
-    
-    //[cell.image setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:@"ninjaturtle"]];
-    
-    //cell.image.image = [UIImage imageNamed:@"ninjaturtle"];
+             if( !error )
+             {
+                 NSLog(@"%@", response);
+                 
+                 cell.eventImageView.image = (UIImage *)response;
+             }
+         }];
+    }
     
     return cell;
 }
