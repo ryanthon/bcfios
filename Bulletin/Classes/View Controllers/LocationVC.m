@@ -14,6 +14,8 @@
 @property (strong, nonatomic) GMSMapView *mapView;
 @property (strong, nonatomic) UITextView *detailsField;
 @property (nonatomic) BOOL keyboardIsShown;
+@property (strong, nonatomic) UIView *instructionsView;
+@property (strong, nonatomic) GMSMarker  *currentMarker;
 
 @end
 
@@ -33,13 +35,20 @@
     self.mapView.myLocationEnabled = YES;
     self.mapView.delegate = self;
     
+    if( self.event.longitude != 0 || self.event.latitude != 0 )
+    {
+        CLLocationCoordinate2D currentLocation = CLLocationCoordinate2DMake(self.event.latitude, self.event.longitude);
+        self.currentMarker = [GMSMarker markerWithPosition:currentLocation];
+        self.currentMarker.appearAnimation = kGMSMarkerAnimationPop;
+        self.currentMarker.map = self.mapView;
+    }
+    
     [self.view addSubview:self.mapView];
+    
     [self.view addSubview:self.detailsField];
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [self.detailsField resignFirstResponder];
+    self.detailsField.text = self.event.locationDetails;
+    
+    [self.view addSubview:self.instructionsView];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -54,9 +63,33 @@
 
 - (void)mapView:(GMSMapView *)mapView didLongPressAtCoordinate:(CLLocationCoordinate2D)coordinate
 {
+    [self.instructionsView removeFromSuperview];
+    
+    self.currentMarker.map = nil;
+    
     GMSMarker *marker = [GMSMarker markerWithPosition:coordinate];
     marker.appearAnimation = kGMSMarkerAnimationPop;
     marker.map = mapView;
+    self.currentMarker = marker;
+    
+    self.event.longitude = coordinate.longitude;
+    self.event.latitude  = coordinate.latitude;
+}
+
+- (void)mapView:(GMSMapView *)mapView didChangeCameraPosition:(GMSCameraPosition *)position
+{
+    [self.instructionsView removeFromSuperview];
+}
+
+- (void)mapView:(GMSMapView *)mapView didTapAtCoordinate:(CLLocationCoordinate2D)coordinate
+{
+    [self.instructionsView removeFromSuperview];
+}
+
+- (IBAction)submit:(UIBarButtonItem *)sender
+{
+    self.event.locationDetails = self.detailsField.text;
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (UITextView *)detailsField
@@ -72,6 +105,27 @@
     }
     
     return _detailsField;
+}
+
+- (UIView *)instructionsView
+{
+    if( !_instructionsView )
+    {
+        _instructionsView = [[UIView alloc] initWithFrame:CGRectMake(5, 70, 200, 40)];
+        _instructionsView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
+        _instructionsView.layer.cornerRadius = 10;
+        
+        UILabel *instructionsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+        instructionsLabel.numberOfLines = 2;
+        instructionsLabel.textColor = [UIColor whiteColor];
+        instructionsLabel.text = @"Tap and hold a spot on the\n map to select a location.";
+        instructionsLabel.textAlignment = NSTextAlignmentCenter;
+        instructionsLabel.font = [UIFont systemFontOfSize:14.0f];
+        
+        [_instructionsView addSubview:instructionsLabel];
+    }
+    
+    return _instructionsView;
 }
 
 @end

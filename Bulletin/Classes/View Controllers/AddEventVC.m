@@ -11,11 +11,13 @@
 #import "DescriptionVC.h"
 #import "CategoryChooserVC.h"
 #import "DatePickerCell.h"
+#import "LocationVC.h"
 
 static NSString *kTextCellID    = @"textCell";
 static NSString *kDateCellID    = @"timeCell";
 static NSString *kPickerCellID  = @"pickerCell";
 static NSString *kSegueCellID   = @"Cell";
+static NSString *kSubmitCellID  = @"submitCell";
 
 @interface AddEventVC () <TextFieldCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -27,6 +29,7 @@ static NSString *kSegueCellID   = @"Cell";
 @property (strong, nonatomic) UIImage           *chosenImage;
 @property (strong, nonatomic) NSIndexPath       *datePickerIndexPath;
 @property (strong, nonatomic) NSDateFormatter   *dateFormatter;
+@property (strong, nonatomic) UILabel           *submitLabel;
 
 @end
 
@@ -40,6 +43,11 @@ static NSString *kSegueCellID   = @"Cell";
     [self.tableView registerNib:textCellNib forCellReuseIdentifier:kTextCellID];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.tableView reloadData];
+}
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.currentEditingField resignFirstResponder];
@@ -47,11 +55,16 @@ static NSString *kSegueCellID   = @"Cell";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if( section == 1 )
+    {
+        return 1;
+    }
+    
     if ( [self hasInlineDatePicker] )
     {
         return self.titleArray.count + 1;
@@ -69,6 +82,12 @@ static NSString *kSegueCellID   = @"Cell";
     if ( [self hasInlineDatePicker] && self.datePickerIndexPath.row < indexPath.row)
     {
         row--;
+    }
+    
+    if( [cellID isEqualToString:kSubmitCellID] )
+    {
+        cell.backgroundColor = [UIColor blueColor];
+        [cell.contentView addSubview:self.submitLabel];
     }
     
     if( [cellID isEqualToString:kDateCellID] )
@@ -113,9 +132,37 @@ static NSString *kSegueCellID   = @"Cell";
     else if( [cellID isEqualToString:kSegueCellID] )
     {
         cell.textLabel.text = self.titleArray[row];
-        if( self.event.description )
+        cell.detailTextLabel.text = @"";
+    
+        if( [cell.textLabel.text isEqualToString:self.titleArray[3]] )
+        {
+            NSArray  *categories  = [self.event getCategories];
+            NSString *categoryOne = @"";
+            NSString *categoryTwo = @"";
+            
+            if( [categories count] > 0 )
+            {
+                categoryOne = categories[0];
+                
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", categoryOne];
+                
+                if( [categories count] > 1 )
+                {
+                    categoryTwo = categories[1];
+                    
+                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@...", categoryOne];
+                }
+            }
+        }
+        
+        else if( [cell.textLabel.text isEqualToString:self.titleArray[4]] )
         {
             cell.detailTextLabel.text = self.event.description;
+        }
+        
+        else
+        {
+            cell.detailTextLabel.text = self.event.locationDetails;
         }
     }
     
@@ -124,6 +171,11 @@ static NSString *kSegueCellID   = @"Cell";
 
 - (NSString *)cellIDForIndexPath:(NSIndexPath *)indexPath
 {
+    if( indexPath.section == 1 )
+    {
+        return kSubmitCellID;
+    }
+    
     NSString *cellID = kSegueCellID;
     
     if ( [self indexPathHasPicker:indexPath] )
@@ -144,12 +196,22 @@ static NSString *kSegueCellID   = @"Cell";
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return self.headerView;
+    if( section == 0 )
+    {
+        return self.headerView;
+    }
+    
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 100;
+    if( section == 0 )
+    {
+        return 100;
+    }
+    
+    return -1;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -157,6 +219,11 @@ static NSString *kSegueCellID   = @"Cell";
     if ( [self indexPathHasDate:indexPath] )
     {
         [self displayInlineDatePickerForRowAtIndexPath:indexPath];
+    }
+    
+    else if( indexPath.section == 1 )
+    {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
     
     else
@@ -183,6 +250,11 @@ static NSString *kSegueCellID   = @"Cell";
 
 - (BOOL)hasPickerForIndexPath:(NSIndexPath *)indexPath
 {
+    if( indexPath.section == 1 )
+    {
+        return NO;
+    }
+    
     NSInteger targetedRow = indexPath.row + 1;
     
     UITableViewCell *checkDatePickerCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:targetedRow inSection:0]];
@@ -202,6 +274,11 @@ static NSString *kSegueCellID   = @"Cell";
 
 - (BOOL)indexPathHasDate:(NSIndexPath *)indexPath
 {
+    if( indexPath.section == 1 )
+    {
+        return NO;
+    }
+    
     BOOL hasDate = NO;
     
     if ( ( indexPath.row == 1 ) ||
@@ -310,6 +387,11 @@ static NSString *kSegueCellID   = @"Cell";
         CategoryChooserVC *dest = segue.destinationViewController;
         dest.event = self.event;
     }
+    if( [segue.identifier isEqualToString:@"location"] )
+    {
+        LocationVC *dest = segue.destinationViewController;
+        dest.event = self.event;
+    }
 }
 
 - (void)chooseImage
@@ -395,6 +477,19 @@ static NSString *kSegueCellID   = @"Cell";
     }
     
     return _dateFormatter;
+}
+
+- (UILabel *)submitLabel
+{
+    if( !_submitLabel )
+    {
+        _submitLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 10, 80, 20)];
+        _submitLabel.text = @"Submit";
+        _submitLabel.textAlignment = NSTextAlignmentCenter;
+        _submitLabel.textColor = [UIColor whiteColor];
+    }
+    
+    return _submitLabel;
 }
 
 - (UIView *)headerView

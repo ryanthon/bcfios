@@ -54,7 +54,7 @@
     
     [self.navigationItem.rightBarButtonItem.customView addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     
-    self.tableView.backgroundColor = [UIColor colorWithRed:0.82 green:0.69 blue:0.45 alpha:1];
+    self.tableView.backgroundColor = [UIColor darkGrayColor];
     
     self.loadingHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     self.loadingHUD.mode = MBProgressHUDModeIndeterminate;
@@ -140,7 +140,6 @@
     
     UIView *selectionView = [[UIView alloc] initWithFrame:cell.cardView.frame];
     selectionView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
-    selectionView.layer.cornerRadius = 10;
     cell.selectedBackgroundView = selectionView;
     
     NSString *imageURL  = [NSString stringWithFormat:@"%@evtImg/%@", [APIManager serverURL], imageFile];

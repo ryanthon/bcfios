@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface Event : NSObject
 
@@ -15,6 +16,10 @@
 @property (strong, nonatomic) UIImage  *image;
 @property (strong, nonatomic) NSDate   *startDate;
 @property (strong, nonatomic) NSDate   *endDate;
+@property (strong, nonatomic) NSString *locationDetails;
+
+@property (nonatomic) double longitude;
+@property (nonatomic) double latitude;
 
 - (void)addCategory:(NSString *)category;
 - (void)removeCategory:(NSString *)category;

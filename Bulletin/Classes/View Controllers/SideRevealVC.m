@@ -91,6 +91,11 @@ static NSString *sideSegueLogoutID = @"CellLogout";
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.sideTableView deselectRowAtIndexPath:[self.sideTableView indexPathForSelectedRow] animated:YES];
+}
+
 - (NSArray *) titleArray
 {
     if( !_titleArray )

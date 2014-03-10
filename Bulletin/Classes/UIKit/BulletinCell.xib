@@ -51,7 +51,7 @@
                     </view>
                 </subviews>
             </tableViewCellContentView>
-            <color key="backgroundColor" red="0.82352941176470584" green="0.69411764705882351" blue="0.44705882352941173" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="cardView" destination="uzd-Os-Jpt" id="hOt-GY-GrJ"/>
                 <outlet property="eventDateLabel" destination="Gng-wa-0Kc" id="Fcg-sz-WU9"/>

@@ -21,7 +21,6 @@
 
 - (void)layoutSubviews
 {
-    self.cardView.layer.cornerRadius = 10;
     [self.cardView.layer setShadowColor:[UIColor darkGrayColor].CGColor];
     [self.cardView.layer setShadowOpacity:0.8];
     [self.cardView.layer setShadowRadius:2.0];
