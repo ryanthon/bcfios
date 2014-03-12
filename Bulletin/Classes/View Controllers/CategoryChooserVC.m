@@ -58,7 +58,7 @@
 {
     if( !_categories )
     {
-        _categories = @[ @"Fundraiser", @"Party", @"Free Food", @"Tech Talk" ];
+        _categories = @[ @"Fundraiser", @"Free Food", @"Party", @"Tech Talk" ];
     }
     
     return _categories;

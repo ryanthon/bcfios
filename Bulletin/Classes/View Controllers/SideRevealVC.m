@@ -12,7 +12,7 @@
 static NSString *sideSegueHomeID = @"CellHome";
 static NSString *sideSegueEventID = @"CellEvents";
 static NSString *sideSegueSettingID = @"CellSetting";
-static NSString *sideSegueLogoutID = @"CellLogout";
+static NSString *sideSegueCatagoriesID = @"CellCatagories";
 
 @interface SideRevealVC ()
 @property (strong, nonatomic) NSArray *titleArray;
@@ -55,10 +55,10 @@ static NSString *sideSegueLogoutID = @"CellLogout";
             cellID = sideSegueEventID;
             break;
         case 2:
-            cellID = sideSegueSettingID;
+            cellID = sideSegueCatagoriesID;
             break;
         case 3:
-            cellID = sideSegueLogoutID;
+            cellID = sideSegueSettingID;
             break;
     }
     
@@ -95,7 +95,7 @@ static NSString *sideSegueLogoutID = @"CellLogout";
 {
     if( !_titleArray )
     {
-        _titleArray = @[ @"Home", @"My Events", @"Settings", @"Logout" ];
+        _titleArray = @[ @"Home", @"My Events", @"Catagories", @"Settings" ];
     }
     return _titleArray;
 }

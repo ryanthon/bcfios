@@ -26,7 +26,7 @@
     
     UIImage *sideBarImg = [UIImage imageNamed:@"sidebar.png"];
     
-    UIBarButtonItem *icon = [[UIBarButtonItem alloc] initWithImage:sideBarImg landscapeImagePhone:sideBarImg style:UIBarButtonItemStylePlain target:self.revealViewController action:nil];
+    UIBarButtonItem *icon = [[UIBarButtonItem alloc] initWithImage:sideBarImg style:UIBarButtonItemStylePlain target:self.revealViewController action:@selector(revealToggle:)];
     self.navigationItem.leftBarButtonItem = icon;
 }
 
