@@ -7,13 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AFHTTPSessionManager.h"
 
-@interface APIManager : NSObject
+@interface APIManager : AFHTTPSessionManager
 
 + (APIManager *)sharedManager;
-
-@property (nonatomic) BOOL isLoggedIn;
-@property (strong, nonatomic) NSString *token_ID;
 
 + (NSString *)serverURL;
 
@@ -31,5 +29,8 @@
 
 - (void)authorizeImageGETRequest:(NSString *)urlPath
                         response:(void(^)(NSError *error, id response)) callback;
+
+- (void)postEventWithParams:(NSDictionary *)params withImage:(UIImage *)image
+                   response:(void(^)(NSError *error, id response)) callback;
 
 @end

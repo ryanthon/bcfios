@@ -17,12 +17,17 @@
 @property (strong, nonatomic) NSDate   *startDate;
 @property (strong, nonatomic) NSDate   *endDate;
 @property (strong, nonatomic) NSString *locationDetails;
+@property (strong, nonatomic) UIImage  *eventImage;
 
 @property (nonatomic) double longitude;
 @property (nonatomic) double latitude;
 
++ (Event *)eventFromDictionary:(NSDictionary *)dictionary;
+
 - (void)addCategory:(NSString *)category;
 - (void)removeCategory:(NSString *)category;
 - (NSArray *)getCategories;
+
+- (NSDictionary *)getEventAsDictionary;
 
 @end

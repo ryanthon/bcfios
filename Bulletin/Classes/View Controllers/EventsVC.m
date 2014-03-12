@@ -13,6 +13,7 @@
 #import "SWRevealViewController.h"
 #import "MBProgressHUD.h"
 #import "UIImageView+AFNetworking.h"
+#import "Event.h"
 
 @interface EventsVC ()
 
@@ -143,6 +144,8 @@
     cell.selectedBackgroundView = selectionView;
     
     NSString *imageURL  = [NSString stringWithFormat:@"%@evtImg/%@", [APIManager serverURL], imageFile];
+    
+    __weak BulletinCell *weakCell = cell;
 
     if( [imageFile isEqualToString:@"none"] )
     {
@@ -157,7 +160,8 @@
              {
                  NSLog(@"%@", response);
                  
-                 cell.eventImageView.image = (UIImage *)response;
+                 weakCell.eventImageView.image = (UIImage *)response;
+                 [weakCell setNeedsLayout];
              }
          }];
     }
@@ -172,7 +176,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"event_detail" sender:nil];
+    [self performSegueWithIdentifier:@"event_detail" sender:@(indexPath.row)];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSNumber *rowNum = (NSNumber *)sender;
+    NSInteger row = [rowNum integerValue];
+    NSDictionary *eventDict = self.events[row];
+    Event *event = [Event eventFromDictionary:eventDict];
 }
 
 - (void)updateEvents

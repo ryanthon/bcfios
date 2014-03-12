@@ -26,7 +26,6 @@ static NSString *kSubmitCellID  = @"submitCell";
 @property (strong, nonatomic) UIView            *headerView;
 @property (strong, nonatomic) UIImageView       *eventImage;
 @property (strong, nonatomic) UILabel           *chooseLabel;
-@property (strong, nonatomic) UIImage           *chosenImage;
 @property (strong, nonatomic) NSIndexPath       *datePickerIndexPath;
 @property (strong, nonatomic) NSDateFormatter   *dateFormatter;
 @property (strong, nonatomic) UILabel           *submitLabel;
@@ -224,7 +223,20 @@ static NSString *kSubmitCellID  = @"submitCell";
     else if( indexPath.section == 1 )
     {
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    }
+        [[APIManager sharedManager] postEventWithParams:[self.event getEventAsDictionary] withImage:self.event.eventImage
+          response:^(NSError *error, id response)
+          {
+              if( error )
+              {
+                  NSLog(@"ERROR");
+              }
+              else
+              {
+                  //NSLog(@"SUCCESS");
+                  NSLog(@"%@", response);
+              }
+          }];
+    } 
     
     else
     {
@@ -408,7 +420,7 @@ static NSString *kSubmitCellID  = @"submitCell";
 {
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     self.eventImage.image = chosenImage;
-    self.chosenImage = chosenImage;
+    self.event.eventImage = chosenImage;
     [self.chooseLabel removeFromSuperview];
     
     /*[[APIManager sharedManager] authorizePOSTrequest:@"addImg" forImage:chosenImage response:^( NSError *error, id response )

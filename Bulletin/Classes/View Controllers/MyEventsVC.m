@@ -24,10 +24,12 @@
 	UINib *myEventNib = [UINib nibWithNibName:@"EventCell" bundle:nil];
     [self.tableView registerNib:myEventNib forCellReuseIdentifier:@"MyEventCell"];
     
-    UIImage *sideBarImg = [UIImage imageNamed:@"sidebar.png"];
+    UIImage *sidebarIconImage = [UIImage imageNamed:@"sidebar"];
+    UIBarButtonItem *sidebarButton = [[UIBarButtonItem alloc] initWithImage:sidebarIconImage style:UIBarButtonItemStylePlain target:self.revealViewController action:@selector(revealToggle:)];
+    sidebarButton.tintColor = [UIColor whiteColor];
+    self.navigationItem.leftBarButtonItem = sidebarButton;
     
-    UIBarButtonItem *icon = [[UIBarButtonItem alloc] initWithImage:sideBarImg landscapeImagePhone:sideBarImg style:UIBarButtonItemStylePlain target:self.revealViewController action:nil];
-    self.navigationItem.leftBarButtonItem = icon;
+    
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
