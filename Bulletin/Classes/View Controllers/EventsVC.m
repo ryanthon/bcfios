@@ -7,18 +7,18 @@
 //
 
 #import "EventsVC.h"
-//#import "EventCell.h"
 #import "BulletinCell.h"
-#import "APIManager.h"
 #import "SWRevealViewController.h"
 #import "MBProgressHUD.h"
 #import "UIImageView+AFNetworking.h"
 #import "Event.h"
+#import "EventDetailVC.h"
 
 @interface EventsVC ()
 
 @property (strong, nonatomic) NSArray *events;
 @property (strong, nonatomic) MBProgressHUD *loadingHUD;
+@property (strong, nonatomic) UIImage *chosenEventImage;
 
 @end
 
@@ -53,18 +53,16 @@
     
     self.revealViewController.rearViewRevealWidth = 230;
     
-    [self.navigationItem.rightBarButtonItem.customView addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-    
-    self.tableView.backgroundColor = [UIColor darkGrayColor];
-    
+    [self.view.window addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+        
     self.loadingHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     self.loadingHUD.mode = MBProgressHUDModeIndeterminate;
-    [[APIManager sharedManager] authorizeGETrequest:@"pkEvt" additionalParamters:@{}
-                                           response:^(NSError *error, id response)
+    
+    [[APIManager sharedManager] getAllEventsWithResponse:^(NSError *error, id response)
      {
          [self.loadingHUD hide:YES];
          
-         if( error )
+         if( error != nil )
          {
              NSLog(@"%@", error);
          }
@@ -108,13 +106,6 @@
     return 4;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 100)];
-    headerView.backgroundColor = self.tableView.backgroundColor;
-    return headerView;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellID = @"eventCell";
@@ -125,19 +116,6 @@
     cell.eventDateLabel.text  = [[self.events objectAtIndex:indexPath.row] objectForKey:@"start"];
     
     NSString *imageFile = [[self.events objectAtIndex:indexPath.row] objectForKey:@"path"];
-    NSLog(@"%@", imageFile);
-    
-    /*if( [imageFile isEqualToString:@"none"] )
-    {
-        cell.image.image = [UIImage imageNamed:@"ninjaturtle"];
-    }
-    
-    else
-    {
-        NSString *imageURL  = [NSString stringWithFormat:@"%@evtImg/%@", [APIManager serverURL], imageFile];
-        
-        [cell.image setImageWithURL:[NSURL URLWithString:imageURL]];
-    }*/
     
     UIView *selectionView = [[UIView alloc] initWithFrame:cell.cardView.frame];
     selectionView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
@@ -158,8 +136,6 @@
          {
              if( !error )
              {
-                 NSLog(@"%@", response);
-                 
                  weakCell.eventImageView.image = (UIImage *)response;
                  [weakCell setNeedsLayout];
              }
@@ -176,35 +152,43 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    BulletinCell *chosenCell = (BulletinCell *)[tableView cellForRowAtIndexPath:indexPath];
+    self.chosenEventImage = chosenCell.eventImageView.image;
     [self performSegueWithIdentifier:@"event_detail" sender:@(indexPath.row)];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSNumber *rowNum = (NSNumber *)sender;
-    NSInteger row = [rowNum integerValue];
-    NSDictionary *eventDict = self.events[row];
-    Event *event = [Event eventFromDictionary:eventDict];
+    if( [segue.identifier isEqualToString:@"event_detail"] )
+    {
+        NSNumber *rowNum = (NSNumber *)sender;
+        NSInteger row = [rowNum integerValue];
+        NSDictionary *eventDict = self.events[row];
+        Event *event = [Event eventFromDictionary:eventDict];
+        event.image = self.chosenEventImage;
+        
+        EventDetailVC *dest = segue.destinationViewController;
+        dest.event = event;
+    }
 }
 
 - (void)updateEvents
 {
-    [[APIManager sharedManager] authorizeGETrequest:@"pkEvt" additionalParamters:@{}
-                                           response:^(NSError *error, id response)
-     {
-         if( error != nil )
-         {
-             NSLog(@"%@", error);
-         }
-         
-         else
-         {
-             self.events = [response objectForKey:@"events"];
-             [self.tableView reloadData];
-         }
-         
-         [self.refreshControl endRefreshing];
-     }];
+    [[APIManager sharedManager] getAllEventsWithResponse:^(NSError *error, id response)
+    {
+        if( error != nil )
+        {
+            NSLog(@"%@", error);
+        }
+
+        else
+        {
+            self.events = [response objectForKey:@"events"];
+            [self.tableView reloadData];
+        }
+
+        [self.refreshControl endRefreshing];
+    }];
 }
 
 @end

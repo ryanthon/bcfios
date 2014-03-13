@@ -43,7 +43,7 @@
 
 - (void)setupDatePicker
 {
-    self.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 0, 320, 162)];
+    self.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, -25, 320, 162)];
     self.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
     self.datePicker.minuteInterval = 5;
     

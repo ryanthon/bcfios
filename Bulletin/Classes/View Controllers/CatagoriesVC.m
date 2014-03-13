@@ -7,6 +7,7 @@
 //
 
 #import "CatagoriesVC.h"
+#import "SWRevealViewController.h"
 
 static NSString *catagoryID = @"CatagoryCell";
 
@@ -35,7 +36,12 @@ static NSString *catagoryID = @"CatagoryCell";
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    self.navigationItem.title = @"Categories";
     
+    UIImage *sidebarIconImage = [UIImage imageNamed:@"sidebar"];
+    UIBarButtonItem *sidebarButton = [[UIBarButtonItem alloc] initWithImage:sidebarIconImage style:UIBarButtonItemStylePlain target:self.revealViewController action:@selector(revealToggle:)];
+    sidebarButton.tintColor = [UIColor whiteColor];
+    self.navigationItem.leftBarButtonItem = sidebarButton;
 }
 
 - (void)didReceiveMemoryWarning

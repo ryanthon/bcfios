@@ -12,6 +12,7 @@
 #import "CategoryChooserVC.h"
 #import "DatePickerCell.h"
 #import "LocationVC.h"
+#import "MBProgressHUD.h"
 
 static NSString *kTextCellID    = @"textCell";
 static NSString *kDateCellID    = @"timeCell";
@@ -29,6 +30,8 @@ static NSString *kSubmitCellID  = @"submitCell";
 @property (strong, nonatomic) NSIndexPath       *datePickerIndexPath;
 @property (strong, nonatomic) NSDateFormatter   *dateFormatter;
 @property (strong, nonatomic) UILabel           *submitLabel;
+@property (strong, nonatomic) UIImageView       *cameraImage;
+@property (strong, nonatomic) MBProgressHUD     *progressHUD;
 
 @end
 
@@ -54,16 +57,11 @@ static NSString *kSubmitCellID  = @"submitCell";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if( section == 1 )
-    {
-        return 1;
-    }
-    
     if ( [self hasInlineDatePicker] )
     {
         return self.titleArray.count + 1;
@@ -170,11 +168,6 @@ static NSString *kSubmitCellID  = @"submitCell";
 
 - (NSString *)cellIDForIndexPath:(NSIndexPath *)indexPath
 {
-    if( indexPath.section == 1 )
-    {
-        return kSubmitCellID;
-    }
-    
     NSString *cellID = kSegueCellID;
     
     if ( [self indexPathHasPicker:indexPath] )
@@ -195,22 +188,12 @@ static NSString *kSubmitCellID  = @"submitCell";
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if( section == 0 )
-    {
-        return self.headerView;
-    }
-    
-    return nil;
+    return self.headerView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if( section == 0 )
-    {
-        return 100;
-    }
-    
-    return -1;
+    return 140;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -219,24 +202,6 @@ static NSString *kSubmitCellID  = @"submitCell";
     {
         [self displayInlineDatePickerForRowAtIndexPath:indexPath];
     }
-    
-    else if( indexPath.section == 1 )
-    {
-        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-        [[APIManager sharedManager] postEventWithParams:[self.event getEventAsDictionary] withImage:self.event.eventImage
-          response:^(NSError *error, id response)
-          {
-              if( error )
-              {
-                  NSLog(@"ERROR");
-              }
-              else
-              {
-                  //NSLog(@"SUCCESS");
-                  NSLog(@"%@", response);
-              }
-          }];
-    } 
     
     else
     {
@@ -262,11 +227,6 @@ static NSString *kSubmitCellID  = @"submitCell";
 
 - (BOOL)hasPickerForIndexPath:(NSIndexPath *)indexPath
 {
-    if( indexPath.section == 1 )
-    {
-        return NO;
-    }
-    
     NSInteger targetedRow = indexPath.row + 1;
     
     UITableViewCell *checkDatePickerCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:targetedRow inSection:0]];
@@ -286,11 +246,6 @@ static NSString *kSubmitCellID  = @"submitCell";
 
 - (BOOL)indexPathHasDate:(NSIndexPath *)indexPath
 {
-    if( indexPath.section == 1 )
-    {
-        return NO;
-    }
-    
     BOOL hasDate = NO;
     
     if ( ( indexPath.row == 1 ) ||
@@ -301,6 +256,23 @@ static NSString *kSubmitCellID  = @"submitCell";
     
     return hasDate;
 }
+
+/*- (void)updateDatePicker
+{
+    if (self.datePickerIndexPath != nil)
+    {
+        DatePickerCell *associatedDatePickerCell = (DatePickerCell *)[self.tableView cellForRowAtIndexPath:self.datePickerIndexPath];
+        
+        UIDatePicker *targetedDatePicker = associatedDatePickerCell.datePicker;
+        
+        if (targetedDatePicker != nil)
+        {
+            // we found a UIDatePicker in this cell, so update it's date value
+            //NSDictionary *itemData = self.dataArray[self.datePickerIndexPath.row - 1];
+            [targetedDatePicker setDate:self.event.startDate];
+        }
+    }
+}*/
 
 - (void)toggleDatePickerForSelectedIndexPath:(NSIndexPath *)indexPath
 {
@@ -413,27 +385,15 @@ static NSString *kSubmitCellID  = @"submitCell";
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
-    [self presentViewController:picker animated:YES completion:NULL];
+    [self presentViewController:picker animated:YES completion:nil];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     self.eventImage.image = chosenImage;
-    self.event.eventImage = chosenImage;
+    self.event.image = chosenImage;
     [self.chooseLabel removeFromSuperview];
-    
-    /*[[APIManager sharedManager] authorizePOSTrequest:@"addImg" forImage:chosenImage response:^( NSError *error, id response )
-     {
-         if( error )
-         {
-             NSLog(@"ERROR");
-         }
-         else
-         {
-             NSLog(@"SUCCESS");
-         }
-     }];*/
     
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
@@ -468,6 +428,27 @@ static NSString *kSubmitCellID  = @"submitCell";
 - (IBAction)cancelButtonTap:(UIBarButtonItem *)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)createEvent:(UIBarButtonItem *)sender
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [[APIManager sharedManager] postEventWithParams:[self.event getEventAsDictionary] withImage:self.event.image
+                                           response:^(NSError *error, id response)
+     {
+         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+         
+         if( error )
+         {
+             NSLog(@"ERROR");
+         }
+         else
+         {
+             NSLog(@"%@", response);
+             [self dismissViewControllerAnimated:YES completion:nil];
+         }
+     }];
 }
 
 - (NSArray *) titleArray
@@ -508,20 +489,17 @@ static NSString *kSubmitCellID  = @"submitCell";
 {
     if( !_headerView )
     {
-        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 100)];
+        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 140)];
         _headerView.backgroundColor = [UIColor clearColor];
-        [_headerView.layer setShadowColor:[UIColor darkGrayColor].CGColor];
-        [_headerView.layer setShadowOpacity:0.8];
-        [_headerView.layer setShadowRadius:2.0];
-        [_headerView.layer setShadowOffset:CGSizeMake(1.0, 1.0)];
         
-        UIButton *chooseImageButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 80, 80)];
-        chooseImageButton.backgroundColor = [UIColor whiteColor];
+        UIButton *chooseImageButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 140)];
+        chooseImageButton.backgroundColor = [UIColor clearColor];
         [chooseImageButton addTarget:self action:@selector(chooseImage) forControlEvents:UIControlEventTouchUpInside];
-        [chooseImageButton addSubview:self.eventImage];
-        [chooseImageButton addSubview:self.chooseLabel];
-        
         [_headerView addSubview:chooseImageButton];
+        
+        [_headerView addSubview:self.eventImage];
+        [_headerView addSubview:self.chooseLabel];
+        [_headerView addSubview:self.cameraImage];
     }
     
     return _headerView;
@@ -531,7 +509,7 @@ static NSString *kSubmitCellID  = @"submitCell";
 {
     if( !_eventImage )
     {
-        _eventImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
+        _eventImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 140)];
     }
     
     return _eventImage;
@@ -541,14 +519,26 @@ static NSString *kSubmitCellID  = @"submitCell";
 {
     if( !_chooseLabel )
     {
-        _chooseLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
-        _chooseLabel.numberOfLines = 0;
-        _chooseLabel.text = @"Choose\nan\nImage";
+        _chooseLabel = [[UILabel alloc] initWithFrame:CGRectMake(90, 90, 140, 20)];
+        NSDictionary *textAttributes = @{ NSTextEffectAttributeName : NSTextEffectLetterpressStyle };
+        _chooseLabel.attributedText = [[NSAttributedString alloc] initWithString:@"Tap to choose image." attributes:textAttributes];
         _chooseLabel.textColor = [UIColor lightGrayColor];
         _chooseLabel.textAlignment = NSTextAlignmentCenter;
+        _chooseLabel.font = [UIFont systemFontOfSize:14.0f];
     }
     
     return _chooseLabel;
+}
+
+- (UIImageView *)cameraImage
+{
+    if( !_cameraImage )
+    {
+        _cameraImage = [[UIImageView alloc] initWithFrame:CGRectMake(135, 30, 50, 50)];
+        _cameraImage.image = [UIImage imageNamed:@"camera"];
+    }
+    
+    return _cameraImage;
 }
 
 - (Event *)event
@@ -560,4 +550,5 @@ static NSString *kSubmitCellID  = @"submitCell";
     
     return _event;
 }
+
 @end

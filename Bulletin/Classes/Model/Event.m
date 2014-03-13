@@ -22,9 +22,15 @@
     Event *event = [[Event alloc] init];
     
     event.name = [dictionary objectForKey:@"eventName"];
-    event.description = [dictionary objectForKey:@"description"];
-    event.latitude = [[dictionary objectForKey:@"latitude"] doubleValue];
-    event.longitude = [[dictionary objectForKey:@"longitude"] doubleValue];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy-MM-dd hh:mm:ss";
+    
+    event.startDate = [dateFormatter dateFromString:[dictionary objectForKey:@"start"]];
+    event.endDate   = [dateFormatter dateFromString:[dictionary objectForKey:@"end"]];
+    
+    event.locationDetails = [dictionary objectForKey:@"location"];
+    event.imageFile = [dictionary objectForKey:@"path"];
     
     return event;
 }
@@ -70,10 +76,14 @@
     NSString *latString  = [NSString stringWithFormat:@"%f", self.latitude];
     NSString *longString = [NSString stringWithFormat:@"%f", self.longitude];
     
+    NSString *category1  = self.categories[0] ? self.categories[0] : @"";
+    NSString *category2  = self.categories[1] ? self.categories[1] : @"";
+    
     return @{ @"eventName" : self.name,            @"location" : self.locationDetails,
               @"desc"      : self.description,     @"start"    : [self.dateFormatter stringFromDate:self.startDate],
               @"end"       : [self.dateFormatter stringFromDate:self.endDate],
-              @"lat"       : latString,            @"long"     : longString };
+              @"lat"       : latString,            @"long"     : longString,
+              @"cat1"      : category1,            @"cat2"     : category2 };
 }
 
 @end

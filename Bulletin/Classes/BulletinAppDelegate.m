@@ -8,6 +8,7 @@
 
 #import "BulletinAppDelegate.h"
 #import <GoogleMaps/GoogleMaps.h>
+#import "AFNetworkActivityIndicatorManager.h"
 
 @implementation BulletinAppDelegate
 
@@ -21,13 +22,16 @@
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                            [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
                                                            shadow, NSShadowAttributeName,
-                                                           [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:21.0], NSFontAttributeName, nil]];
+                                                           [UIFont fontWithName:@"TrebuchetMS-Bold" size:21.0], NSFontAttributeName, nil]];
     
     [[UIBarButtonItem appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     
-    UIColor *blueColor = [UIColor colorWithRed:0.45 green:0.67 blue:0.85 alpha:1];
-    [[UINavigationBar appearance] setBarTintColor:blueColor];
+    //UIColor *blueColor = [UIColor colorWithRed:0.45 green:0.67 blue:0.85 alpha:1];
+    UIColor *navBarColor = [UIColor colorWithRed:211.0/255.0 green:136.0/255.0 blue:63.0/255.0 alpha:1];
+    [[UINavigationBar appearance] setBarTintColor:navBarColor];
+    
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
     [GMSServices provideAPIKey:@"AIzaSyCItKjiDfeoN71Hn7anlBaUhK2k8RzJtXU"];
     

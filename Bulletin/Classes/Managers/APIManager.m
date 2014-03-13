@@ -34,7 +34,6 @@ static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
     {
         self.responseSerializer = [AFJSONResponseSerializer serializer];
         [self.requestSerializer setAuthorizationHeaderFieldWithUsername:@"bcf" password:@"cse190"];
-
     }
     
     return self;
@@ -46,43 +45,52 @@ static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
 }
 
 - (void)postEventWithParams:(NSDictionary *)params withImage:(UIImage *)image
-                   response:(void(^)(NSError *error, id response)) callback
+                   response:(void(^)(NSError *error, id response))callback
 {
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:params];
     [parameters setObject:@"4" forKey:@"uid"];
-    NSLog(@"%@", parameters);
+    
     [self POST:@"addEvent" parameters:parameters
-       success:^(NSURLSessionDataTask *task, id responseObject)
-        {
-            //callback( nil, responseObject );
-            NSLog(@"%@", responseObject);
-            NSString *eid = [[[responseObject objectForKey:@"success"] objectAtIndex:0] objectForKey:@"success"];
-            [self postImage:image forEvent:eid response:callback];
-        }
-       failure:^(NSURLSessionDataTask *task, NSError *error)
-        {
-            callback( error, nil);
-        }];
+    success:^(NSURLSessionDataTask *task, id responseObject)
+    {
+        NSString *eid = [[[responseObject objectForKey:@"success"] objectAtIndex:0] objectForKey:@"success"];
+        [self postImage:image forEvent:eid response:callback];
+    }
+    failure:^(NSURLSessionDataTask *task, NSError *error )
+    {
+        callback( error, nil);
+    }];
 }
 
-- (void)postImage:(UIImage *)image forEvent:(NSString *)eid response:(void(^)(NSError *error, id response)) callback
+- (void)postImage:(UIImage *)image forEvent:(NSString *)eid response:(void(^)(NSError *error, id response))callback
 {
-    NSString *url = [NSString stringWithFormat:@"%@%@", baseAPIURL, @"addImg"];
-    
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:configuration];
-    
     NSDictionary *params = @{@"enctype" : @"multipart/form-data", @"eid" : eid };
     NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
     
-    [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:@"bcf" password:@"cse190"];
-    
-    [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [self POST:@"addImg" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
+    {
         [formData appendPartWithFileData:imageData name:@"image" fileName:@"image.jpeg" mimeType:@"image/jpeg"];
-    } success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSLog(@"screenshot operation success!  %@", responseObject);
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"Operation Error: %@", error);
+    }
+    success:^(NSURLSessionDataTask *task, id responseObject)
+    {
+        callback( nil, responseObject );
+    }
+    failure:^(NSURLSessionDataTask *task, NSError *error)
+    {
+        callback( error, nil );
+    }];
+}
+
+- (void)getAllEventsWithResponse:(void (^)(NSError *, id response))callback
+{
+    [self GET:@"pkEvt" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject)
+    {
+        NSLog(@"%@", responseObject);
+        callback( nil, responseObject );
+    }
+    failure:^(NSURLSessionDataTask *task, NSError *error)
+    {
+        callback( error, nil );
     }];
 }
 

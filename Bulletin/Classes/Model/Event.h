@@ -17,7 +17,7 @@
 @property (strong, nonatomic) NSDate   *startDate;
 @property (strong, nonatomic) NSDate   *endDate;
 @property (strong, nonatomic) NSString *locationDetails;
-@property (strong, nonatomic) UIImage  *eventImage;
+@property (strong, nonatomic) NSString *imageFile;
 
 @property (nonatomic) double longitude;
 @property (nonatomic) double latitude;

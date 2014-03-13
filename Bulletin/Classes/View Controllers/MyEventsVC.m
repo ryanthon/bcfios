@@ -24,6 +24,8 @@
 	UINib *myEventNib = [UINib nibWithNibName:@"EventCell" bundle:nil];
     [self.tableView registerNib:myEventNib forCellReuseIdentifier:@"MyEventCell"];
     
+    self.navigationItem.title = @"My Events";
+    
     UIImage *sidebarIconImage = [UIImage imageNamed:@"sidebar"];
     UIBarButtonItem *sidebarButton = [[UIBarButtonItem alloc] initWithImage:sidebarIconImage style:UIBarButtonItemStylePlain target:self.revealViewController action:@selector(revealToggle:)];
     sidebarButton.tintColor = [UIColor whiteColor];

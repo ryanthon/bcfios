@@ -30,6 +30,8 @@
 - (void)authorizeImageGETRequest:(NSString *)urlPath
                         response:(void(^)(NSError *error, id response)) callback;
 
+- (void)getAllEventsWithResponse:(void(^)(NSError *error, id response)) callback;
+
 - (void)postEventWithParams:(NSDictionary *)params withImage:(UIImage *)image
                    response:(void(^)(NSError *error, id response)) callback;
 
