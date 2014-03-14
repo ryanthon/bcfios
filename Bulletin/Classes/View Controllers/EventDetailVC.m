@@ -26,7 +26,7 @@
     self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     self.imageView.clipsToBounds = YES;
 
-    [self.scrollView addSubview:self.mapView];
+    [self.scrollView addSubview:self.detailView];
     
     self.imageView.alpha = 0;
     
@@ -66,6 +66,8 @@
     if( !_detailView )
     {
         _detailView = [[UIView alloc] initWithFrame:CGRectMake(10, 200, 300, 500)];
+        _detailView.layer.cornerRadius = 10;
+        [_detailView addSubview:self.mapView];
     }
     
     return _detailView;
@@ -79,10 +81,15 @@
                                                                 longitude:self.event.longitude
                                                                      zoom:15];
         
-        CGRect mapRect = CGRectMake(10, 200, 300, 160);
+        CGRect mapRect = CGRectMake(0, 0, 300, 140);
         _mapView = [GMSMapView mapWithFrame:mapRect camera:camera];
         _mapView.myLocationEnabled = YES;
         _mapView.delegate = self;
+        
+        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(self.event.latitude, self.event.longitude);
+        GMSMarker *marker = [GMSMarker markerWithPosition:coordinate];
+        marker.appearAnimation = kGMSMarkerAnimationPop;
+        marker.map = _mapView;
     }
     
     return _mapView;

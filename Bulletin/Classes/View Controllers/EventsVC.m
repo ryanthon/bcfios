@@ -101,11 +101,6 @@
     return [self.events count];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 4;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellID = @"eventCell";
@@ -117,17 +112,13 @@
     
     NSString *imageFile = [[self.events objectAtIndex:indexPath.row] objectForKey:@"path"];
     
-    //UIView *selectionView = [[UIView alloc] initWithFrame:cell.cardView.frame];
-    //selectionView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
-    //cell.selectedBackgroundView = selectionView;
-    
     NSString *imageURL  = [NSString stringWithFormat:@"%@evtImg/%@", [APIManager serverURL], imageFile];
     
     __weak BulletinCell *weakCell = cell;
 
     if( [imageFile isEqualToString:@"none"] )
     {
-        cell.eventImageView.image = [UIImage imageNamed:@"ninjaturtle"];
+        cell.eventImageView.image = [UIImage imageNamed:@"placeholder"];
     }
     
     else
@@ -153,22 +144,33 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BulletinCell *chosenCell = (BulletinCell *)[tableView cellForRowAtIndexPath:indexPath];
-    self.chosenEventImage = chosenCell.eventImageView.image;
-    [self performSegueWithIdentifier:@"event_detail" sender:@(indexPath.row)];
+    
+    Event *chosenEvent = [Event eventFromDictionary:self.events[indexPath.row]];
+    chosenEvent.image  = chosenCell.eventImageView.image;
+    
+    [[APIManager sharedManager] getEventInfoForEventID:chosenEvent.eventID response:^(NSError *error, id response)
+    {
+        if( !error )
+        {
+            NSDictionary *details = [response objectForKey:@"details"][0];
+            chosenEvent.latitude  = [[details objectForKey:@"latitude"] doubleValue];
+            chosenEvent.longitude = [[details objectForKey:@"longitude"] doubleValue];
+            chosenEvent.description = [details objectForKey:@"description"];
+            [chosenEvent addCategory:[details objectForKey:@"catagory1"]];
+            [chosenEvent addCategory:[details objectForKey:@"catagory2"]];
+            [self performSegueWithIdentifier:@"event_detail" sender:chosenEvent];
+        }
+    }];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if( [segue.identifier isEqualToString:@"event_detail"] )
     {
-        NSNumber *rowNum = (NSNumber *)sender;
-        NSInteger row = [rowNum integerValue];
-        NSDictionary *eventDict = self.events[row];
-        Event *event = [Event eventFromDictionary:eventDict];
-        event.image = self.chosenEventImage;
+        Event *chosenEvent = (Event *)sender;
         
         EventDetailVC *dest = segue.destinationViewController;
-        dest.event = event;
+        dest.event = chosenEvent;
     }
 }
 

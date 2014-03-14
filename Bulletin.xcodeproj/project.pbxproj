@@ -11,6 +11,7 @@
 		9429054818A96C590099BCC2 /* GoogleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9429054718A96C590099BCC2 /* GoogleManager.m */; };
 		9429055418A973D00099BCC2 /* ninjaturtle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9429055318A973D00099BCC2 /* ninjaturtle.png */; };
 		9435AB6F18D1BF13000C93FC /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 9435AB6E18D1BF13000C93FC /* camera.png */; };
+		9435AB7118D28302000C93FC /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 9435AB7018D28302000C93FC /* placeholder.png */; };
 		943B131B18A5B15F0055D5BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 943B131A18A5B15F0055D5BA /* Foundation.framework */; };
 		943B131D18A5B15F0055D5BA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 943B131C18A5B15F0055D5BA /* CoreGraphics.framework */; };
 		943B131F18A5B15F0055D5BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 943B131E18A5B15F0055D5BA /* UIKit.framework */; };
@@ -87,6 +88,7 @@
 		9429054718A96C590099BCC2 /* GoogleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleManager.m; sourceTree = "<group>"; };
 		9429055318A973D00099BCC2 /* ninjaturtle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ninjaturtle.png; sourceTree = "<group>"; };
 		9435AB6E18D1BF13000C93FC /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		9435AB7018D28302000C93FC /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		943B131718A5B15E0055D5BA /* Bulletin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bulletin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		943B131A18A5B15F0055D5BA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		943B131C18A5B15F0055D5BA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -287,6 +289,7 @@
 		9429055218A973BD0099BCC2 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9435AB7018D28302000C93FC /* placeholder.png */,
 				9435AB6E18D1BF13000C93FC /* camera.png */,
 				94D9E1C318C9D9D100D58255 /* sidebar.png */,
 				94D9E1C418C9D9D100D58255 /* sidebar@2x.png */,
@@ -413,6 +416,8 @@
 			children = (
 				943B135818A67BBC0055D5BA /* EventsVC.h */,
 				943B135918A67BBC0055D5BA /* EventsVC.m */,
+				94991A1518CD612300EBDDC7 /* EventDetailVC.h */,
+				94991A1618CD612300EBDDC7 /* EventDetailVC.m */,
 				9429054218A9699E0099BCC2 /* WelcomeVC.h */,
 				9429054318A9699E0099BCC2 /* WelcomeVC.m */,
 				DECB7E9418CAC52E002ED358 /* AddEventVC.h */,
@@ -425,8 +430,6 @@
 				949919DD18CD355000EBDDC7 /* LocationVC.m */,
 				DE402F0218CC9BE500F1304F /* SideRevealVC.h */,
 				DE402F0318CC9BE500F1304F /* SideRevealVC.m */,
-				94991A1518CD612300EBDDC7 /* EventDetailVC.h */,
-				94991A1618CD612300EBDDC7 /* EventDetailVC.m */,
 				DE402F0518CDAC2C00F1304F /* MyEventsVC.h */,
 				DE402F0618CDAC2C00F1304F /* MyEventsVC.m */,
 				DE402F0B18CFAD6C00F1304F /* CatagoriesVC.h */,
@@ -613,6 +616,7 @@
 				94D9E1C618C9D9D100D58255 /* sidebar@2x.png in Resources */,
 				943B132518A5B15F0055D5BA /* InfoPlist.strings in Resources */,
 				94991A2218CDA80400EBDDC7 /* BulletinCell.xib in Resources */,
+				9435AB7118D28302000C93FC /* placeholder.png in Resources */,
 				943B132E18A5B15F0055D5BA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
