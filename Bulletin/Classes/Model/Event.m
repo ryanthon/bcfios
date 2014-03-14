@@ -32,6 +32,8 @@
     event.locationDetails = [dictionary objectForKey:@"location"];
     event.imageFile = [dictionary objectForKey:@"path"];
     
+    event.eventID = [dictionary objectForKey:@"eid"];
+    
     return event;
 }
 

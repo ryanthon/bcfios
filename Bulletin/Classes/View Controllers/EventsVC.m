@@ -19,6 +19,7 @@
 @property (strong, nonatomic) NSArray *events;
 @property (strong, nonatomic) MBProgressHUD *loadingHUD;
 @property (strong, nonatomic) UIImage *chosenEventImage;
+@property (strong, nonatomic) UIGestureRecognizer *panGesture;
 
 @end
 
@@ -52,9 +53,7 @@
     self.navigationItem.leftBarButtonItem = sidebarButton;
     
     self.revealViewController.rearViewRevealWidth = 230;
-        
-    [self.view.window addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-        
+    
     self.loadingHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     self.loadingHUD.mode = MBProgressHUDModeIndeterminate;
     
@@ -79,6 +78,12 @@
 {
     NSIndexPath *tableSelection = [self.tableView indexPathForSelectedRow];
     [self.tableView deselectRowAtIndexPath:tableSelection animated:NO];
+    [self.navigationController.view addGestureRecognizer:self.panGesture];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.navigationController.view removeGestureRecognizer:self.panGesture];
 }
 
 - (void) addEvent
@@ -99,11 +104,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [self.events count];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -149,22 +149,33 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BulletinCell *chosenCell = (BulletinCell *)[tableView cellForRowAtIndexPath:indexPath];
-    self.chosenEventImage = chosenCell.eventImageView.image;
-    [self performSegueWithIdentifier:@"event_detail" sender:@(indexPath.row)];
+    
+    Event *chosenEvent = [Event eventFromDictionary:self.events[indexPath.row]];
+    chosenEvent.image  = chosenCell.eventImageView.image;
+    
+    [[APIManager sharedManager] getEventInfoForEventID:chosenEvent.eventID response:^(NSError *error, id response)
+    {
+        if( !error )
+        {
+            NSDictionary *details = [response objectForKey:@"details"][0];
+            chosenEvent.latitude  = [[details objectForKey:@"latitude"] doubleValue];
+            chosenEvent.longitude = [[details objectForKey:@"longitude"] doubleValue];
+            chosenEvent.description = [details objectForKey:@"description"];
+            [chosenEvent addCategory:[details objectForKey:@"catagory1"]];
+            [chosenEvent addCategory:[details objectForKey:@"catagory2"]];
+            [self performSegueWithIdentifier:@"event_detail" sender:chosenEvent];
+        }
+    }];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if( [segue.identifier isEqualToString:@"event_detail"] )
     {
-        NSNumber *rowNum = (NSNumber *)sender;
-        NSInteger row = [rowNum integerValue];
-        NSDictionary *eventDict = self.events[row];
-        Event *event = [Event eventFromDictionary:eventDict];
-        event.image = self.chosenEventImage;
+        Event *chosenEvent = (Event *)sender;
         
         EventDetailVC *dest = segue.destinationViewController;
-        dest.event = event;
+        dest.event = chosenEvent;
     }
 }
 
@@ -185,6 +196,16 @@
 
         [self.refreshControl endRefreshing];
     }];
+}
+
+- (UIGestureRecognizer *)panGesture
+{
+    if( !_panGesture )
+    {
+        _panGesture = self.revealViewController.panGestureRecognizer;
+    }
+    
+    return _panGesture;
 }
 
 @end

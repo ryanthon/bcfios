@@ -12,7 +12,7 @@
 @interface EventDetailVC : UIViewController
 
 @property (strong, nonatomic) Event *event;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) UIImageView *imageView;
 
 @end
