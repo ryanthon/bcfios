@@ -24,6 +24,14 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    NSDateFormatter *startFormatter = [[NSDateFormatter alloc] init];
+    startFormatter.dateFormat = @"EEE MMM d, hh:mm";
+    
+    NSString *startDateString = [startFormatter stringFromDate:self.event.startDate];
+    self.detailsLabel.text = [NSString stringWithFormat:@"%@\n\n\n%@\n\n\n%@", startDateString,
+                              self.event.locationDetails, self.event.description];
+    [self.detailsLabel sizeToFit];
+    
     self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     self.imageView.clipsToBounds = YES;
     self.imageView.alpha = 0;
@@ -36,20 +44,8 @@
     
     [self.scrollView addSubview:containerView];
     
-    self.scrollView.contentSize = CGSizeMake(320, 800);
-    
-    NSDateFormatter *startFormatter = [[NSDateFormatter alloc] init];
-    startFormatter.dateFormat = @"EEE MMM d, hh:mm";
-    
-    //NSDateFormatter *endFormatter = [[NSDateFormatter alloc] init];
-    //endFormatter.dateFormat   = @"EEE MMM d, hh:mm";
-
-    NSString *startDateString = [startFormatter stringFromDate:self.event.startDate];
-    //NSString *endDateString   = [endFormatter stringFromDate:self.event.endDate];
-    self.detailsLabel.text = [NSString stringWithFormat:@"%@\n\n\n%@\n\n\n%@", startDateString,
-                                  self.event.locationDetails, self.event.description];
-    [self.detailsLabel sizeToFit];
-    //[self.descriptionLabel sizeToFit];
+    int height = self.detailView.frame.origin.y + self.detailView.frame.size.height + 10;
+    self.scrollView.contentSize = CGSizeMake(320, height);
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -80,7 +76,8 @@
 {
     if( !_detailView )
     {
-        _detailView = [[UIView alloc] initWithFrame:CGRectMake(10, 200, 300, 500)];
+        int height = 160 + self.detailsLabel.frame.size.height;
+        _detailView = [[UIView alloc] initWithFrame:CGRectMake(10, 200, 300, height)];
         _detailView.backgroundColor = [UIColor whiteColor];
         _detailView.layer.borderWidth  = 1;
         _detailView.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -117,8 +114,6 @@
         _mapView.delegate = self;
         _mapView.layer.borderWidth = 1;
         _mapView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        _mapView.settings.scrollGestures = NO;
-        _mapView.settings.zoomGestures = NO;
         
         CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(self.event.latitude, self.event.longitude);
         GMSMarker *marker = [GMSMarker markerWithPosition:coordinate];
