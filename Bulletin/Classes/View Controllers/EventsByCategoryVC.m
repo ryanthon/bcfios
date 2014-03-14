@@ -45,14 +45,17 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    return 0;
+    return self.events.count;;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 90;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -70,7 +73,7 @@
     
     if( [imageFile isEqualToString:@"none"] )
     {
-        cell.eventImageView.image = [UIImage imageNamed:@"pin.jpg"];
+        cell.eventImageView.image = [UIImage imageNamed:@"placeholder"];
     }
     
     else
