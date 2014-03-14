@@ -31,7 +31,21 @@
     sidebarButton.tintColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = sidebarButton;
     
-    
+    [[APIManager sharedManager] getMyEventsWithResponse:^(NSError *error, id response )
+     {
+         //[self.loadingHUD hide:YES];
+         
+         if( error != nil )
+         {
+             NSLog(@"%@", error);
+         }
+         
+         else
+         {
+             self.events = [response objectForKey:@"events"];
+             [self.tableView reloadData];
+         }
+     }];
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -46,14 +60,8 @@
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tempCell"];
-   // cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"tempCell"];
-    /*static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EventCell"];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }*/
     return cell;
 }
 
