@@ -23,6 +23,8 @@
 - (void)postEventWithParams:(NSDictionary *)params withImage:(UIImage *)image
                    response:(void(^)(NSError *error, id response)) callback;
 
+- (void)getEventInfoForEventID:(NSString *)eventID
+                      response:(void(^)(NSError *error, id response)) callback;
 - (void)getMyEventsWithResponse:(void(^)(NSError *error, id response)) callback;
 
 @end

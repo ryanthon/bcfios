@@ -102,7 +102,20 @@ static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
     }];
 }
 
-- (void) getMyEventsWithResponse:(void (^)(NSError *, id response))callback
+- (void)getEventInfoForEventID:(NSString *)eventID response:(void (^)(NSError *, id))callback
+{
+    [self GET:@"moarDetails" parameters:@{ @"eid" : eventID } success:^(NSURLSessionDataTask *task, id responseObject)
+    {
+        NSLog(@"%@", responseObject);
+        callback( nil, responseObject );
+    }
+    failure:^(NSURLSessionDataTask *task, NSError *error)
+    {
+        callback( error, nil );
+    }];
+}
+
+- (void) getMyEventsWithResponse:(void (^)(NSError *, id))callback
 {
     [self GET:@"myEvents" parameters:@{@"uid": @"1"} success: ^(NSURLSessionDataTask *task, id responseObject)
      {
@@ -132,4 +145,5 @@ static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
     }];
     [requestOperation start];
 }
+
 @end
