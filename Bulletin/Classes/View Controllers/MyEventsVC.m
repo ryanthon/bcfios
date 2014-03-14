@@ -93,7 +93,7 @@
     
     if( [imageFile isEqualToString:@"none"] )
     {
-        cell.eventImageView.image = [UIImage imageNamed:@"pin.jpg"];
+        cell.eventImageView.image = [UIImage imageNamed:@"placeholder"];
     }
     
     else

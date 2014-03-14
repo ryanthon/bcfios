@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="sij-aC-Fw7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="sij-aC-Fw7">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -29,7 +29,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="eventCell" id="hsc-sh-vBz" customClass="BulletinCell">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hsc-sh-vBz" id="k4F-25-NV5">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -42,7 +42,9 @@
                             <outlet property="delegate" destination="kWP-w1-5f8" id="fIM-Ra-BCm"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Bulletin" id="tjB-CN-4B6"/>
+                    <navigationItem key="navigationItem" title="Bulletin" id="tjB-CN-4B6">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="W2I-NT-W0L"/>
+                    </navigationItem>
                     <connections>
                         <segue destination="XK3-8t-flz" kind="modal" identifier="welcome" id="fse-16-NUB"/>
                         <segue destination="Fj7-N9-HGl" kind="push" identifier="event_detail" id="vly-Fa-gcm"/>
@@ -513,6 +515,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="TeJ-2O-JkB"/>
+        <segue reference="vQK-cJ-4zW"/>
     </inferredMetricsTieBreakers>
 </document>

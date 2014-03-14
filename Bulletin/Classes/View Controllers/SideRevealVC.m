@@ -98,7 +98,7 @@
 {
     if( !_titleArray )
     {
-        _titleArray = @[ @"Home", @"Catagories", @"My Events", @"Settings" ];
+        _titleArray = @[ @"Home", @"Categories", @"My Events", @"Settings" ];
     }
     return _titleArray;
 }

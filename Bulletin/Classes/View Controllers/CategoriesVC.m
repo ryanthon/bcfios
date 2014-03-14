@@ -78,7 +78,6 @@ static NSString *categoryID = @"CategoryCell";
             cell.textLabel.text = self.catagories[indexPath.row];
             break;
     }
-    // Configure the cell...
     
     return cell;
 }
