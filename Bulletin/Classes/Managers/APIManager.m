@@ -149,7 +149,7 @@ static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
 
 - (void) getEventsByCatagory:(NSString *)category response:(void (^)(NSError *, id))callback
 {
-    [self POST:@"getEventsByCat" parameters:@{@"cat": @"FREE FOOD"} success:^(NSURLSessionDataTask *task, id responseObject)
+    [self POST:@"getEventsByCat" parameters:@{@"cat": category} success:^(NSURLSessionDataTask *task, id responseObject)
      {
          NSLog(@"%@", responseObject);
          callback( nil, responseObject );

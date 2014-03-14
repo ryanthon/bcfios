@@ -7,8 +7,11 @@
 //
 
 #import "EventsByCategoryVC.h"
+#import "BulletinCell.h"
 
 @interface EventsByCategoryVC ()
+@property (strong, nonatomic) NSArray *events;
+
 @end
 
 @implementation EventsByCategoryVC
@@ -18,30 +21,75 @@
     [super viewDidLoad];
 
     self.title = self.category;
+    UINib *myEventNib = [UINib nibWithNibName:@"BulletinCell" bundle:nil];
+    [self.tableView registerNib:myEventNib forCellReuseIdentifier:@"eventCell"];
+    
+    
+    [[APIManager sharedManager] getEventsByCatagory:self.category response:^(NSError *error, id response )
+     {
+         //[self.loadingHUD hide:YES];
+         
+         if( error != nil )
+         {
+             NSLog(@"%@", error);
+         }
+         
+         else
+         {
+             self.events = [response objectForKey:@"events"];
+             [self.tableView reloadData];
+         }
+     }];
+
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return self.events.count;;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 90;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    BulletinCell *cell = [tableView dequeueReusableCellWithIdentifier:@"eventCell"];
     
-    // Configure the cell...
+    cell.eventNameLabel.text = self.events[indexPath.row][@"eventName"];
+    cell.eventDateLabel.text = self.events[indexPath.row][@"start"];
+    cell.eventPlaceLabel.text = self.events[indexPath.row][@"location"];
+    
+    NSString *imageFile = [[self.events objectAtIndex:indexPath.row] objectForKey:@"path"];
+    NSString *imageURL  = [NSString stringWithFormat:@"%@evtImg/%@", [APIManager serverURL], imageFile];
+    
+    __weak BulletinCell *weakCell = cell;
+    
+    if( [imageFile isEqualToString:@"none"] )
+    {
+        cell.eventImageView.image = [UIImage imageNamed:@"pin.jpg"];
+    }
+    
+    else
+    {
+        [[APIManager sharedManager] authorizeImageGETRequest:imageURL response:^(NSError *error, id response)
+         {
+             if( !error )
+             {
+                 weakCell.eventImageView.image = (UIImage *)response;
+                 [weakCell setNeedsLayout];
+             }
+         }];
+    }
     
     return cell;
+
 }
 
 @end
