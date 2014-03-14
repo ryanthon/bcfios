@@ -8,6 +8,7 @@
 
 #import "SWRevealViewController.h"
 #import "MyEventsVC.h"
+#import "BulletinCell.h"
 
 @interface MyEventsVC ()
 
@@ -21,8 +22,8 @@
 {
     [super viewDidLoad];
     
-	UINib *myEventNib = [UINib nibWithNibName:@"EventCell" bundle:nil];
-    [self.tableView registerNib:myEventNib forCellReuseIdentifier:@"MyEventCell"];
+	UINib *myEventNib = [UINib nibWithNibName:@"BulletinCell" bundle:nil];
+    [self.tableView registerNib:myEventNib forCellReuseIdentifier:@"eventCell"];
     
     self.navigationItem.title = @"My Events";
     
@@ -50,7 +51,7 @@
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return self.events.count;
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
@@ -58,9 +59,19 @@
     return 1;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 90;
+}
+
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EventCell"];
+    BulletinCell *cell = [tableView dequeueReusableCellWithIdentifier:@"eventCell"];
+    
+    cell.eventNameLabel = self.events[indexPath.row][@"eventName"];
+    cell.eventDateLabel = self.events[indexPath.row][@"start"];
+    cell.eventPlaceLabel = self.events[indexPath.row][@"location"];
+    NSLog(@"%@", cell.eventNameLabel);
     
     return cell;
 }
