@@ -27,4 +27,6 @@
                       response:(void(^)(NSError *error, id response)) callback;
 - (void)getMyEventsWithResponse:(void(^)(NSError *error, id response)) callback;
 
+- (void)getEventsByCatagory: (NSString *catagory) WithResponse:(void(^)(NSError *error, id response)) callback;
+
 @end

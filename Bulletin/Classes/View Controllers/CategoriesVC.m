@@ -6,16 +6,16 @@
 //  Copyright (c) 2014 Burlington Code Factory. All rights reserved.
 //
 
-#import "CatagoriesVC.h"
+#import "CategoriesVC.h"
 #import "SWRevealViewController.h"
 
-static NSString *catagoryID = @"CatagoryCell";
+static NSString *categoryID = @"CatagoryCell";
 
-@interface CatagoriesVC ()
-@property (strong, nonatomic) NSArray *catagories;
+@interface CategoriesVC ()
+@property (strong, nonatomic) NSArray *categories;
 @end
 
-@implementation CatagoriesVC
+@implementation CategoriesVC
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -66,7 +66,7 @@ static NSString *catagoryID = @"CatagoryCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *CellIdentifier = catagoryID;
+    NSString *CellIdentifier = categoryID;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     switch (indexPath.row) {
@@ -95,10 +95,10 @@ static NSString *catagoryID = @"CatagoryCell";
 
 - (NSArray *) catagories
 {
-    if( !_catagories)
+    if( !_categories)
     {
-        _catagories = @[@"Fundraiser", @"Free Food", @"Party", @"Tech Talk"];
+        _categories = @[@"Fundraiser", @"Free Food", @"Party", @"Tech Talk"];
     }
-    return _catagories;
+    return _categories;
 }
 @end

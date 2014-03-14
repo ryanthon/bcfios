@@ -55,7 +55,6 @@
          {
              NSLog(@"%@", error);
          }
-         
          else
          {
              self.events = [response objectForKey:@"events"];
@@ -83,14 +82,31 @@
 {
     BulletinCell *cell = [tableView dequeueReusableCellWithIdentifier:@"eventCell"];
     
-    //cell.eventNameLabel = [ self.events[indexPath.row] objectForKey:@"eventName"];
-    
     cell.eventNameLabel.text = self.events[indexPath.row][@"eventName"];
     cell.eventDateLabel.text = self.events[indexPath.row][@"start"];
     cell.eventPlaceLabel.text = self.events[indexPath.row][@"location"];
     
+    NSString *imageFile = [[self.events objectAtIndex:indexPath.row] objectForKey:@"path"];
+    NSString *imageURL  = [NSString stringWithFormat:@"%@evtImg/%@", [APIManager serverURL], imageFile];
+
+    __weak BulletinCell *weakCell = cell;
     
-    NSLog(@"%@", cell.eventNameLabel);
+    if( [imageFile isEqualToString:@"none"] )
+    {
+        cell.eventImageView.image = [UIImage imageNamed:@"pin.jpg"];
+    }
+    
+    else
+    {
+        [[APIManager sharedManager] authorizeImageGETRequest:imageURL response:^(NSError *error, id response)
+         {
+             if( !error )
+             {
+                 weakCell.eventImageView.image = (UIImage *)response;
+                 [weakCell setNeedsLayout];
+             }
+         }];
+    }
     
     return cell;
 }

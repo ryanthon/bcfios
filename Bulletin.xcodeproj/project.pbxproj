@@ -74,8 +74,8 @@
 		94FFD13118C7CA1A0037FE33 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FFD13018C7CA1A0037FE33 /* LocationManager.m */; };
 		DE402F0418CC9BE500F1304F /* SideRevealVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DE402F0318CC9BE500F1304F /* SideRevealVC.m */; };
 		DE402F0718CDAC2C00F1304F /* MyEventsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DE402F0618CDAC2C00F1304F /* MyEventsVC.m */; };
-		DE402F0D18CFAD6C00F1304F /* CatagoriesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DE402F0C18CFAD6C00F1304F /* CatagoriesVC.m */; };
-		DE402F1318D0056D00F1304F /* EventsByCatagoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DE402F1218D0056D00F1304F /* EventsByCatagoryVC.m */; };
+		DE402F0D18CFAD6C00F1304F /* CategoriesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DE402F0C18CFAD6C00F1304F /* CategoriesVC.m */; };
+		DE402F1318D0056D00F1304F /* EventsByCategoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DE402F1218D0056D00F1304F /* EventsByCategoryVC.m */; };
 		DECB7E9618CAC52E002ED358 /* AddEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DECB7E9518CAC52E002ED358 /* AddEventVC.m */; };
 		DECB7E9B18CAD30F002ED358 /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DECB7E9A18CAD30F002ED358 /* TextFieldCell.m */; };
 		DEE593B318D2AACB00F964D9 /* pin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DEE593B218D2AACB00F964D9 /* pin.jpg */; };
@@ -216,10 +216,10 @@
 		DE402F0318CC9BE500F1304F /* SideRevealVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideRevealVC.m; sourceTree = "<group>"; };
 		DE402F0518CDAC2C00F1304F /* MyEventsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEventsVC.h; sourceTree = "<group>"; };
 		DE402F0618CDAC2C00F1304F /* MyEventsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEventsVC.m; sourceTree = "<group>"; };
-		DE402F0B18CFAD6C00F1304F /* CatagoriesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatagoriesVC.h; sourceTree = "<group>"; };
-		DE402F0C18CFAD6C00F1304F /* CatagoriesVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatagoriesVC.m; sourceTree = "<group>"; };
-		DE402F1118D0056D00F1304F /* EventsByCatagoryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsByCatagoryVC.h; sourceTree = "<group>"; };
-		DE402F1218D0056D00F1304F /* EventsByCatagoryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsByCatagoryVC.m; sourceTree = "<group>"; };
+		DE402F0B18CFAD6C00F1304F /* CategoriesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesVC.h; sourceTree = "<group>"; };
+		DE402F0C18CFAD6C00F1304F /* CategoriesVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesVC.m; sourceTree = "<group>"; };
+		DE402F1118D0056D00F1304F /* EventsByCategoryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsByCategoryVC.h; sourceTree = "<group>"; };
+		DE402F1218D0056D00F1304F /* EventsByCategoryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsByCategoryVC.m; sourceTree = "<group>"; };
 		DECB7E9418CAC52E002ED358 /* AddEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventVC.h; sourceTree = "<group>"; };
 		DECB7E9518CAC52E002ED358 /* AddEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventVC.m; sourceTree = "<group>"; usesTabs = 0; };
 		DECB7E9918CAD30F002ED358 /* TextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
@@ -432,10 +432,10 @@
 				94991A1618CD612300EBDDC7 /* EventDetailVC.m */,
 				DE402F0518CDAC2C00F1304F /* MyEventsVC.h */,
 				DE402F0618CDAC2C00F1304F /* MyEventsVC.m */,
-				DE402F0B18CFAD6C00F1304F /* CatagoriesVC.h */,
-				DE402F0C18CFAD6C00F1304F /* CatagoriesVC.m */,
-				DE402F1118D0056D00F1304F /* EventsByCatagoryVC.h */,
-				DE402F1218D0056D00F1304F /* EventsByCatagoryVC.m */,
+				DE402F0B18CFAD6C00F1304F /* CategoriesVC.h */,
+				DE402F0C18CFAD6C00F1304F /* CategoriesVC.m */,
+				DE402F1118D0056D00F1304F /* EventsByCategoryVC.h */,
+				DE402F1218D0056D00F1304F /* EventsByCategoryVC.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -633,7 +633,7 @@
 				94CBCF8F18C521EE009C3DB1 /* UIButton+AFNetworking.m in Sources */,
 				94CBCF9118C521EE009C3DB1 /* UIProgressView+AFNetworking.m in Sources */,
 				DE402F0418CC9BE500F1304F /* SideRevealVC.m in Sources */,
-				DE402F1318D0056D00F1304F /* EventsByCatagoryVC.m in Sources */,
+				DE402F1318D0056D00F1304F /* EventsByCategoryVC.m in Sources */,
 				DE402F0718CDAC2C00F1304F /* MyEventsVC.m in Sources */,
 				949919CC18CC7D5700EBDDC7 /* MBProgressHUD.m in Sources */,
 				94CBCF8318C521EE009C3DB1 /* AFHTTPRequestOperation.m in Sources */,
@@ -665,7 +665,7 @@
 				94CBCF8618C521EE009C3DB1 /* AFNetworkReachabilityManager.m in Sources */,
 				949919DE18CD355000EBDDC7 /* LocationVC.m in Sources */,
 				94CBCF8A18C521EE009C3DB1 /* AFURLResponseSerialization.m in Sources */,
-				DE402F0D18CFAD6C00F1304F /* CatagoriesVC.m in Sources */,
+				DE402F0D18CFAD6C00F1304F /* CategoriesVC.m in Sources */,
 				943B135618A5ECDD0055D5BA /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

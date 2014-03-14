@@ -100,16 +100,16 @@
             </objects>
             <point key="canvasLocation" x="-1251" y="-1267"/>
         </scene>
-        <!--CatagoriesVC-->
+        <!--CategoriesVC-->
         <scene sceneID="rX3-ND-6Rv">
             <objects>
-                <tableViewController id="spS-nB-XJk" customClass="CatagoriesVC" sceneMemberID="viewController">
+                <tableViewController id="spS-nB-XJk" customClass="CategoriesVC" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="19S-aI-yQN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CatagoryCell" textLabel="Bii-Ne-lV2" style="IBUITableViewCellStyleDefault" id="SXY-r2-5AO">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CategoryCell" textLabel="Bii-Ne-lV2" style="IBUITableViewCellStyleDefault" id="SXY-r2-5AO">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SXY-r2-5AO" id="YjX-3c-az9">
@@ -140,10 +140,10 @@
             </objects>
             <point key="canvasLocation" x="-709" y="-1267"/>
         </scene>
-        <!--Events By CatagoryVC-->
+        <!--Events By CategoryVC-->
         <scene sceneID="JhI-vg-yO2">
             <objects>
-                <tableViewController id="2A9-wW-Q3Q" customClass="EventsByCatagoryVC" sceneMemberID="viewController">
+                <tableViewController id="2A9-wW-Q3Q" customClass="EventsByCategoryVC" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="rYk-U3-BSx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
