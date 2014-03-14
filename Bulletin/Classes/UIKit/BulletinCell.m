@@ -21,11 +21,6 @@
 
 - (void)layoutSubviews
 {
-    [self.cardView.layer setShadowColor:[UIColor darkGrayColor].CGColor];
-    [self.cardView.layer setShadowOpacity:0.8];
-    [self.cardView.layer setShadowRadius:2.0];
-    [self.cardView.layer setShadowOffset:CGSizeMake(1.0, 1.0)];
-    
     self.eventImageView.layer.cornerRadius = 10;
     self.eventImageView.layer.masksToBounds = YES;
 }

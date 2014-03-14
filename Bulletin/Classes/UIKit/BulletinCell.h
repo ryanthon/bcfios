@@ -10,11 +10,9 @@
 
 @interface BulletinCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIView         *cardView;
 @property (weak, nonatomic) IBOutlet UIImageView    *eventImageView;
 @property (weak, nonatomic) IBOutlet UILabel        *eventNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel        *eventDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel        *eventPlaceLabel;
-@property (weak, nonatomic) IBOutlet UILabel        *eventDistanceLabel;
 
 @end

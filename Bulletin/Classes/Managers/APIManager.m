@@ -54,7 +54,15 @@ static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
     success:^(NSURLSessionDataTask *task, id responseObject)
     {
         NSString *eid = [[[responseObject objectForKey:@"success"] objectAtIndex:0] objectForKey:@"success"];
-        [self postImage:image forEvent:eid response:callback];
+        
+        if( image )
+        {
+            [self postImage:image forEvent:eid response:callback];
+        }
+        else
+        {
+            callback( nil, responseObject );
+        }
     }
     failure:^(NSURLSessionDataTask *task, NSError *error )
     {

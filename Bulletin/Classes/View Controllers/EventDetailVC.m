@@ -9,9 +9,10 @@
 #import "EventDetailVC.h"
 #import <GoogleMaps/GoogleMaps.h>
 
-@interface EventDetailVC ()
+@interface EventDetailVC () <GMSMapViewDelegate>
 
-//@property (strong, nonatomic) UIView *titleView;
+@property (strong, nonatomic) GMSMapView *mapView;
+@property (strong, nonatomic) UIView     *detailView;
 
 @end
 
@@ -21,6 +22,11 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.imageView.clipsToBounds = YES;
+
+    [self.scrollView addSubview:self.mapView];
     
     self.imageView.alpha = 0;
     
@@ -53,6 +59,33 @@
     [titleView addSubview:titleLabel];
     
     return titleView;
+}
+
+- (UIView *)detailView
+{
+    if( !_detailView )
+    {
+        _detailView = [[UIView alloc] initWithFrame:CGRectMake(10, 200, 300, 500)];
+    }
+    
+    return _detailView;
+}
+
+- (GMSMapView *)mapView
+{
+    if( !_mapView )
+    {
+        GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:self.event.latitude
+                                                                longitude:self.event.longitude
+                                                                     zoom:15];
+        
+        CGRect mapRect = CGRectMake(10, 200, 300, 160);
+        _mapView = [GMSMapView mapWithFrame:mapRect camera:camera];
+        _mapView.myLocationEnabled = YES;
+        _mapView.delegate = self;
+    }
+    
+    return _mapView;
 }
 
 @end
