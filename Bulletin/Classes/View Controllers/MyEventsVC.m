@@ -71,7 +71,6 @@
     cell.eventNameLabel = self.events[indexPath.row][@"eventName"];
     cell.eventDateLabel = self.events[indexPath.row][@"start"];
     cell.eventPlaceLabel = self.events[indexPath.row][@"location"];
-    NSLog(@"%@", cell.eventNameLabel);
     
     return cell;
 }

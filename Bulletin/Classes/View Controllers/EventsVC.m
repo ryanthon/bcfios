@@ -19,6 +19,7 @@
 @property (strong, nonatomic) NSArray *events;
 @property (strong, nonatomic) MBProgressHUD *loadingHUD;
 @property (strong, nonatomic) UIImage *chosenEventImage;
+@property (strong, nonatomic) UIGestureRecognizer *panGesture;
 
 @end
 
@@ -52,9 +53,7 @@
     self.navigationItem.leftBarButtonItem = sidebarButton;
     
     self.revealViewController.rearViewRevealWidth = 230;
-        
-    [self.view.window addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-        
+    
     self.loadingHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     self.loadingHUD.mode = MBProgressHUDModeIndeterminate;
     
@@ -79,6 +78,12 @@
 {
     NSIndexPath *tableSelection = [self.tableView indexPathForSelectedRow];
     [self.tableView deselectRowAtIndexPath:tableSelection animated:NO];
+    [self.navigationController.view addGestureRecognizer:self.panGesture];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.navigationController.view removeGestureRecognizer:self.panGesture];
 }
 
 - (void) addEvent
@@ -191,6 +196,16 @@
 
         [self.refreshControl endRefreshing];
     }];
+}
+
+- (UIGestureRecognizer *)panGesture
+{
+    if( !_panGesture )
+    {
+        _panGesture = self.revealViewController.panGestureRecognizer;
+    }
+    
+    return _panGesture;
 }
 
 @end

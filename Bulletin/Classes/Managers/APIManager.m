@@ -116,7 +116,7 @@ static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
     }];
 }
 
-- (void)getMyEventsWithResponse:(void (^)(NSError *, id))callback
+- (void)getMyEventsWithResponse:(void (^)(NSError *error, id response))callback
 {
     [self POST:@"myEvents" parameters:@{@"uid": @"4"} success:^(NSURLSessionDataTask *task, id responseObject)
      {

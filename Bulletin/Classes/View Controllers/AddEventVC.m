@@ -394,6 +394,7 @@ static NSString *kSubmitCellID  = @"submitCell";
     self.eventImage.image = chosenImage;
     self.event.image = chosenImage;
     [self.chooseLabel removeFromSuperview];
+    [self.cameraImage removeFromSuperview];
     
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
@@ -510,6 +511,8 @@ static NSString *kSubmitCellID  = @"submitCell";
     if( !_eventImage )
     {
         _eventImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 140)];
+        _eventImage.contentMode = UIViewContentModeScaleAspectFill;
+        _eventImage.clipsToBounds = YES;
     }
     
     return _eventImage;
