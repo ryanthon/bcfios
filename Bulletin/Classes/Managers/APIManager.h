@@ -15,18 +15,6 @@
 
 + (NSString *)serverURL;
 
-- (void)authorizeGETrequest:(NSString *)urlPath
-        additionalParamters:(NSDictionary *)params
-                   response:(void(^)(NSError *error, id response)) callback;
-
-- (void)authorizePOSTrequest:(NSString *)urlPath
-         additionalParamters:(NSDictionary *)params
-                    response:(void(^)(NSError *error, id response)) callback;
-
-- (void)authorizePOSTrequest:(NSString *)urlPath
-                    forImage:(UIImage *)image
-                    response:(void(^)(NSError *error, id response)) callback;
-
 - (void)authorizeImageGETRequest:(NSString *)urlPath
                         response:(void(^)(NSError *error, id response)) callback;
 
@@ -34,5 +22,8 @@
 
 - (void)postEventWithParams:(NSDictionary *)params withImage:(UIImage *)image
                    response:(void(^)(NSError *error, id response)) callback;
+
+- (void)getEventInfoForEventID:(NSString *)eventID
+                      response:(void(^)(NSError *error, id response)) callback;
 
 @end

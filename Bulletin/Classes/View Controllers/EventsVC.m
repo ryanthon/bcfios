@@ -52,7 +52,7 @@
     self.navigationItem.leftBarButtonItem = sidebarButton;
     
     self.revealViewController.rearViewRevealWidth = 230;
-    
+        
     [self.view.window addGestureRecognizer:self.revealViewController.panGestureRecognizer];
         
     self.loadingHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -117,9 +117,9 @@
     
     NSString *imageFile = [[self.events objectAtIndex:indexPath.row] objectForKey:@"path"];
     
-    UIView *selectionView = [[UIView alloc] initWithFrame:cell.cardView.frame];
-    selectionView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
-    cell.selectedBackgroundView = selectionView;
+    //UIView *selectionView = [[UIView alloc] initWithFrame:cell.cardView.frame];
+    //selectionView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+    //cell.selectedBackgroundView = selectionView;
     
     NSString *imageURL  = [NSString stringWithFormat:@"%@evtImg/%@", [APIManager serverURL], imageFile];
     
