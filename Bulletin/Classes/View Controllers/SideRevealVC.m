@@ -35,7 +35,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -60,7 +60,6 @@
         case 0: [self performSegueWithIdentifier:@"home_segue" sender:nil]; break;
         case 1: [self performSegueWithIdentifier:@"categories_segue" sender:nil]; break;
         case 2: [self performSegueWithIdentifier:@"my_events_segue" sender:nil]; break;
-        case 3: break;
     }
 }
 
