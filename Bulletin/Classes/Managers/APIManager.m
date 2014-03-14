@@ -102,7 +102,7 @@ static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
     }];
 }
 
-- (void)getEventInfoForEventID:(NSString *)eventID response:(void (^)(NSError *, id))callback
+- (void)getEventInfoForEventID:(NSString *)eventID response:(void (^)(NSError *, id response))callback
 {
     NSLog(@"%@", eventID);
     [self POST:@"moarDetails" parameters:@{ @"eid" : eventID } success:^(NSURLSessionDataTask *task, id responseObject)
@@ -118,7 +118,7 @@ static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
 
 - (void)getMyEventsWithResponse:(void (^)(NSError *, id))callback
 {
-    [self GET:@"myEvents" parameters:@{@"uid": @"1"} success: ^(NSURLSessionDataTask *task, id responseObject)
+    [self POST:@"myEvents" parameters:@{@"uid": @"4"} success:^(NSURLSessionDataTask *task, id responseObject)
      {
          NSLog(@"%@", responseObject);
          callback( nil, responseObject );
@@ -129,7 +129,7 @@ static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
      }];
 }
 
-- (void)authorizeImageGETRequest:(NSString *)urlPath response:(void (^)(NSError *, id))callback
+- (void)authorizeImageGETRequest:(NSString *)urlPath response:(void (^)(NSError *error, id))callback
 {
     NSURLRequest *url = [NSURLRequest requestWithURL:[NSURL URLWithString:urlPath]];
     AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:url];
