@@ -20,6 +20,8 @@
 @property (strong, nonatomic) UILabel    *endDateLabel;
 @property (strong, nonatomic) UILabel    *descriptionLabel;
 
+@property (strong, nonatomic) UIBarButtonItem *likeButton;
+
 @end
 
 @implementation EventDetailVC
@@ -30,7 +32,8 @@
 	// Do any additional setup after loading the view.
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"EEE MMM d, hh:mm";
+    dateFormatter.dateFormat = @"EEE MMM d, hh:mma";
+    [dateFormatter setLenient:YES];
     
     self.startDateLabel.text = [dateFormatter stringFromDate:self.event.startDate];
     self.endDateLabel.text   = [dateFormatter stringFromDate:self.event.endDate];
@@ -46,7 +49,21 @@
     self.imageView.clipsToBounds = YES;
     self.imageView.alpha = 0;
     [self.imageView addSubview:[self titleViewWithName:self.event.name]];
-    self.imageView.image = self.event.image;
+    
+    UIImage *likeImage = [UIImage imageNamed:@"like"];
+    self.likeButton = [[UIBarButtonItem alloc] initWithImage:likeImage style:UIBarButtonItemStylePlain target:self action:@selector(likeEvent)];
+    self.likeButton.tintColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem = self.likeButton;
+    
+    if( self.event.image )
+    {
+        self.imageView.image = self.event.image;
+    }
+    
+    else
+    {
+        self.imageView.image = [UIImage imageNamed:@"noimage"];
+    }
     
     UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 800)];
     [containerView addSubview:self.imageView];
@@ -83,6 +100,11 @@
     label.frame = newFrame;
 }
 
+- (void)likeEvent
+{
+    
+}
+
 - (UIView *)titleViewWithName:(NSString *)name
 {
     UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 150, 320, 40)];
@@ -92,6 +114,7 @@
     titleLabel.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:24.0];
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.text = name;
+    titleLabel.adjustsFontSizeToFitWidth = YES;
     [titleView addSubview:titleLabel];
     
     return titleView;

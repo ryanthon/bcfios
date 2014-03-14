@@ -116,9 +116,9 @@ static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
     }];
 }
 
-- (void) getMyEventsWithResponse:(NSString *)userID response:(void (^)(NSError *error, id response))callback
+- (void)getMyEventsWithResponse:(NSString *)userID response:(void (^)(NSError *error, id response))callback
 {
-    [self POST:@"myEvents" parameters:@{@"uid": @"4"} success:^(NSURLSessionDataTask *task, id responseObject)
+    [self POST:@"myEvents" parameters:@{ @"uid" : @"4" } success:^(NSURLSessionDataTask *task, id responseObject)
      {
          NSLog(@"%@", responseObject);
          callback( nil, responseObject );
@@ -147,17 +147,57 @@ static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
     [requestOperation start];
 }
 
-- (void) getEventsByCatagory:(NSString *)category response:(void (^)(NSError *, id))callback
+- (void)getEventsByCatagory:(NSString *)category response:(void (^)(NSError *, id))callback
 {
-    [self POST:@"getEventsByCat" parameters:@{@"cat": category} success:^(NSURLSessionDataTask *task, id responseObject)
-     {
-         NSLog(@"%@", responseObject);
-         callback( nil, responseObject );
-     }
-       failure:^(NSURLSessionDataTask *task, NSError *error)
-     {
-         callback( error, nil );
-     }];
+    [self POST:@"getEventsByCat" parameters:@{ @"cat" : category }
+    success:^(NSURLSessionDataTask *task, id responseObject)
+    {
+        NSLog(@"%@", responseObject);
+        callback( nil, responseObject );
+    }
+    failure:^(NSURLSessionDataTask *task, NSError *error)
+    {
+        callback( error, nil );
+    }];
+}
+
+- (void)removeEventWithEventID:(NSString *)eventID response:(void (^)(NSError *, id))callback
+{
+    [self POST:@"removeEvent" parameters:@{ @"eid" : eventID }
+    success:^(NSURLSessionDataTask *task, id responseObject)
+    {
+        NSLog(@"%@", responseObject);
+        callback( nil, responseObject );
+    }
+    failure:^(NSURLSessionDataTask *task, NSError *error)
+    {
+        callback( error, nil );
+    }];
+}
+
+- (void)editEventWithParams:(NSDictionary *)params withImage:(UIImage *)image response:(void (^)(NSError *, id))callback
+{
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:params];
+    [parameters setObject:@"4" forKey:@"uid"];
+    
+    [self POST:@"editEvent" parameters:parameters
+    success:^(NSURLSessionDataTask *task, id responseObject)
+    {
+        NSString *eid = [parameters objectForKey:@"eid"];
+         
+        if( image )
+        {
+            [self postImage:image forEvent:eid response:callback];
+        }
+        else
+        {
+            callback( nil, responseObject );
+        }
+    }
+    failure:^(NSURLSessionDataTask *task, NSError *error )
+    {
+        callback( error, nil);
+    }];
 }
 
 @end

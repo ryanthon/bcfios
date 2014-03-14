@@ -13,25 +13,18 @@
 static NSString *categoryID = @"CategoryCell";
 
 @interface CategoriesVC ()
-@property  (strong, nonatomic) NSArray *categories;
+
+@property (strong, nonatomic) NSArray  *categories;
 @property (strong, nonatomic) NSString *categoryName;
+@property (strong, nonatomic) UIPanGestureRecognizer *panGesture;
+
 @end
 
 @implementation CategoriesVC
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title = @"Categories";
     
     UIImage *sidebarIconImage = [UIImage imageNamed:@"sidebar"];
     UIBarButtonItem *sidebarButton = [[UIBarButtonItem alloc] initWithImage:sidebarIconImage style:UIBarButtonItemStylePlain target:self.revealViewController action:@selector(revealToggle:)];
@@ -39,10 +32,16 @@ static NSString *categoryID = @"CategoryCell";
     self.navigationItem.leftBarButtonItem = sidebarButton;
 }
 
-- (void)didReceiveMemoryWarning
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    NSIndexPath *tableSelection = [self.tableView indexPathForSelectedRow];
+    [self.tableView deselectRowAtIndexPath:tableSelection animated:YES];
+    [self.navigationController.view addGestureRecognizer:self.panGesture];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.navigationController.view removeGestureRecognizer:self.panGesture];
 }
 
 #pragma mark - Table view data source
@@ -56,7 +55,7 @@ static NSString *categoryID = @"CategoryCell";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.catagories count];
+    return [self.categories count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -66,16 +65,16 @@ static NSString *categoryID = @"CategoryCell";
     
     switch (indexPath.row) {
         case 0:
-            cell.textLabel.text = self.catagories[indexPath.row];
+            cell.textLabel.text = self.categories[indexPath.row];
             break;
         case 1:
-            cell.textLabel.text = self.catagories[indexPath.row];
+            cell.textLabel.text = self.categories[indexPath.row];
             break;
         case 2:
-            cell.textLabel.text = self.catagories[indexPath.row];
+            cell.textLabel.text = self.categories[indexPath.row];
             break;
         case 3:
-            cell.textLabel.text = self.catagories[indexPath.row];
+            cell.textLabel.text = self.categories[indexPath.row];
             break;
     }
     
@@ -98,7 +97,8 @@ static NSString *categoryID = @"CategoryCell";
             self.categoryName = @"Tech Talk";
             break;
     }
-    [ self performSegueWithIdentifier:@"EventsByCategory" sender:nil];
+    
+    [self performSegueWithIdentifier:@"EventsByCategory" sender:nil];
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -107,12 +107,24 @@ static NSString *categoryID = @"CategoryCell";
     controller.category = self.categoryName;
 }
 
-- (NSArray *) catagories
+- (NSArray *)categories
 {
     if( !_categories)
     {
         _categories = @[@"Fundraiser", @"Free Food", @"Party", @"Tech Talk"];
     }
+    
     return _categories;
 }
+
+- (UIGestureRecognizer *)panGesture
+{
+    if( !_panGesture )
+    {
+        _panGesture = self.revealViewController.panGestureRecognizer;
+    }
+    
+    return _panGesture;
+}
+
 @end

@@ -12,5 +12,6 @@
 @interface AddEventVC : UITableViewController
 
 @property (strong, nonatomic) Event *event;
+@property (nonatomic) BOOL editMode;
 
 @end

@@ -16,10 +16,13 @@
 
 @interface EventsVC ()
 
-@property (strong, nonatomic) NSArray *events;
-@property (strong, nonatomic) MBProgressHUD *loadingHUD;
-@property (strong, nonatomic) UIImage *chosenEventImage;
-@property (strong, nonatomic) UIGestureRecognizer *panGesture;
+@property (strong, nonatomic) NSArray               *events;
+@property (strong, nonatomic) MBProgressHUD         *loadingHUD;
+@property (strong, nonatomic) UIImage               *chosenEventImage;
+@property (strong, nonatomic) UIGestureRecognizer   *panGesture;
+@property (strong, nonatomic) NSMutableDictionary   *eventImageInfo;
+@property (strong, nonatomic) NSDateFormatter       *stringToDateFormatter;
+@property (strong, nonatomic) NSDateFormatter       *dateToStringFormatter;
 
 @end
 
@@ -77,8 +80,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     NSIndexPath *tableSelection = [self.tableView indexPathForSelectedRow];
-    [self.tableView deselectRowAtIndexPath:tableSelection animated:NO];
+    [self.tableView deselectRowAtIndexPath:tableSelection animated:YES];
     [self.navigationController.view addGestureRecognizer:self.panGesture];
+    
+    if( [[APIManager sharedManager] eventsNeedUpdate] )
+    {
+        [self updateEvents];
+        [[APIManager sharedManager] setEventsNeedUpdate:NO];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -113,7 +122,10 @@
     
     cell.eventNameLabel.text  = [[self.events objectAtIndex:indexPath.row] objectForKey:@"eventName"];
     cell.eventPlaceLabel.text = [[self.events objectAtIndex:indexPath.row] objectForKey:@"location"];
-    cell.eventDateLabel.text  = [[self.events objectAtIndex:indexPath.row] objectForKey:@"start"];
+    
+    NSDate *dateFromString = [self.stringToDateFormatter dateFromString:[[self.events objectAtIndex:indexPath.row] objectForKey:@"start"]];
+    
+    cell.eventDateLabel.text  = [self.dateToStringFormatter stringFromDate:dateFromString];
     
     NSString *imageFile = [[self.events objectAtIndex:indexPath.row] objectForKey:@"path"];
     
@@ -124,6 +136,7 @@
     if( [imageFile isEqualToString:@"none"] )
     {
         cell.eventImageView.image = [UIImage imageNamed:@"placeholder"];
+        [self.eventImageInfo setObject:@"noImage" forKey:@(indexPath.row)];
     }
     
     else
@@ -152,6 +165,11 @@
     
     Event *chosenEvent = [Event eventFromDictionary:self.events[indexPath.row]];
     chosenEvent.image  = chosenCell.eventImageView.image;
+    
+    if( [self.eventImageInfo objectForKey:@(indexPath.row)] )
+    {
+        chosenEvent.image = nil;
+    }
     
     [[APIManager sharedManager] getEventInfoForEventID:chosenEvent.eventID response:^(NSError *error, id response)
     {
@@ -198,6 +216,16 @@
     }];
 }
 
+- (NSMutableDictionary *)eventImageInfo
+{
+    if( !_eventImageInfo )
+    {
+        _eventImageInfo = [[NSMutableDictionary alloc] init];
+    }
+    
+    return _eventImageInfo;
+}
+
 - (UIGestureRecognizer *)panGesture
 {
     if( !_panGesture )
@@ -206,6 +234,29 @@
     }
     
     return _panGesture;
+}
+
+- (NSDateFormatter *)stringToDateFormatter
+{
+    if( !_stringToDateFormatter )
+    {
+        _stringToDateFormatter = [[NSDateFormatter alloc] init];
+        _stringToDateFormatter.dateFormat = @"yyyy-MM-dd hh:mm:ss";
+        [_stringToDateFormatter setLenient:YES];
+    }
+    
+    return _stringToDateFormatter;
+}
+
+- (NSDateFormatter *)dateToStringFormatter
+{
+    if( !_dateToStringFormatter )
+    {
+        _dateToStringFormatter = [[NSDateFormatter alloc] init];
+        _dateToStringFormatter.dateFormat = @"EEE MMM d, h:mma";
+    }
+    
+    return _dateToStringFormatter;
 }
 
 @end

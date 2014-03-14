@@ -43,6 +43,11 @@ static NSString *kSubmitCellID  = @"submitCell";
     
     UINib *textCellNib = [UINib nibWithNibName:@"TextFieldCell" bundle:nil];
     [self.tableView registerNib:textCellNib forCellReuseIdentifier:kTextCellID];
+    
+    if( self.event.image )
+    {
+        self.eventImage.image = self.event.image;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -91,7 +96,7 @@ static NSString *kSubmitCellID  = @"submitCell";
     {
         cell.textLabel.text = self.titleArray[row];
         
-        if( row == 2 )
+        if( row == 1 )
         {
             cell.detailTextLabel.text = [self.dateFormatter stringFromDate:self.event.startDate];
             
@@ -117,6 +122,7 @@ static NSString *kSubmitCellID  = @"submitCell";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         TextFieldCell *textCell = (TextFieldCell *)cell;
         textCell.textField.placeholder = @"Enter Event Name";
+        textCell.textField.text = self.event.name;
         textCell.delegate = self;
     }
     
@@ -188,7 +194,15 @@ static NSString *kSubmitCellID  = @"submitCell";
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return self.headerView;
+    UIView *header = self.headerView;
+    
+    if( self.event.image )
+    {
+        [self.chooseLabel removeFromSuperview];
+        [self.cameraImage removeFromSuperview];
+    }
+    
+    return header;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -257,7 +271,7 @@ static NSString *kSubmitCellID  = @"submitCell";
     return hasDate;
 }
 
-/*- (void)updateDatePicker
+- (void)updateDatePicker
 {
     if (self.datePickerIndexPath != nil)
     {
@@ -267,12 +281,18 @@ static NSString *kSubmitCellID  = @"submitCell";
         
         if (targetedDatePicker != nil)
         {
-            // we found a UIDatePicker in this cell, so update it's date value
-            //NSDictionary *itemData = self.dataArray[self.datePickerIndexPath.row - 1];
-            [targetedDatePicker setDate:self.event.startDate];
+            if( self.datePickerIndexPath.row == 2 && self.event.startDate )
+            {
+                [targetedDatePicker setDate:self.event.startDate animated:NO];
+            }
+            
+            else if( self.datePickerIndexPath.row == 3 && self.event.endDate )
+            {
+                [targetedDatePicker setDate:self.event.endDate animated:NO];
+            }
         }
     }
-}*/
+}
 
 - (void)toggleDatePickerForSelectedIndexPath:(NSIndexPath *)indexPath
 {
@@ -331,6 +351,8 @@ static NSString *kSubmitCellID  = @"submitCell";
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     [self.tableView endUpdates];
+    
+    [self updateDatePicker];
 }
 
 - (void)dateAction:(id)sender
@@ -341,7 +363,7 @@ static NSString *kSubmitCellID  = @"submitCell";
     UIDatePicker *targetedDatePicker = sender;
     
     // update our data model
-    if( targetedCellIndexPath.row == 2 )
+    if( targetedCellIndexPath.row == 1 )
     {
         self.event.startDate = targetedDatePicker.date;
         cell.detailTextLabel.text = [self.dateFormatter stringFromDate:targetedDatePicker.date];
@@ -435,21 +457,48 @@ static NSString *kSubmitCellID  = @"submitCell";
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    [[APIManager sharedManager] postEventWithParams:[self.event getEventAsDictionary] withImage:self.event.image
-                                           response:^(NSError *error, id response)
-     {
-         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-         
-         if( error )
+    if( self.editMode )
+    {
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:[self.event getEventAsDictionary]];
+        [params setObject:self.event.eventID forKey:@"eid"];
+        
+        [[APIManager sharedManager] editEventWithParams:params withImage:self.event.image
+                                               response:^(NSError *error, id response)
          {
-             NSLog(@"ERROR");
-         }
-         else
+             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+             
+             if( error )
+             {
+                 NSLog(@"ERROR");
+             }
+             else
+             {
+                 NSLog(@"%@", response);
+                 [[APIManager sharedManager] setEventsNeedUpdate:YES];
+                 [self dismissViewControllerAnimated:YES completion:nil];
+             }
+         }];
+    }
+    
+    else
+    {
+        [[APIManager sharedManager] postEventWithParams:[self.event getEventAsDictionary] withImage:self.event.image
+                                               response:^(NSError *error, id response)
          {
-             NSLog(@"%@", response);
-             [self dismissViewControllerAnimated:YES completion:nil];
-         }
-     }];
+             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+             
+             if( error )
+             {
+                 NSLog(@"ERROR");
+             }
+             else
+             {
+                 NSLog(@"%@", response);
+                 [[APIManager sharedManager] setEventsNeedUpdate:YES];
+                 [self dismissViewControllerAnimated:YES completion:nil];
+             }
+         }];
+    }
 }
 
 - (NSArray *) titleArray
@@ -467,7 +516,7 @@ static NSString *kSubmitCellID  = @"submitCell";
     if( !_dateFormatter )
     {
         _dateFormatter = [[NSDateFormatter alloc] init];
-        _dateFormatter.dateFormat = @"M/d/yy hh:mm a";
+        _dateFormatter.dateFormat = @"M/d/yy hh:mma";
     }
     
     return _dateFormatter;

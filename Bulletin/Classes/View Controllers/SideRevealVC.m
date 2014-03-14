@@ -69,8 +69,9 @@
     if ( [segue isKindOfClass: [SWRevealViewControllerSegue class]] )
     {
         UINavigationController *frontView = (UINavigationController *)self.revealViewController.frontViewController;
+        UINavigationController *destView  = (UINavigationController *)segue.destinationViewController;
         
-        if( [frontView.viewControllers[0] isKindOfClass:[segue.destinationViewController class]] )
+        if( [frontView.viewControllers[0] isKindOfClass:[destView.viewControllers[0] class]] )
         {
             [self.revealViewController revealToggle:self.revealViewController.frontViewController];
         }
@@ -86,8 +87,8 @@
             
             rvcs.performBlock = ^(SWRevealViewControllerSegue* rvc_segue, UIViewController* svc, UIViewController* dvc)
             {
-                UINavigationController* nc = [[UINavigationController alloc] initWithRootViewController:dvc];
-                [rvc setFrontViewController:nc animated:YES];
+                //UINavigationController* nc = [[UINavigationController alloc] initWithRootViewController:dvc];
+                [rvc setFrontViewController:dvc animated:YES];
             };
         }
     }

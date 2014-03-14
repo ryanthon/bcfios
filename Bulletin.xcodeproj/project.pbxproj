@@ -57,6 +57,9 @@
 		94CBCF9218C521EE009C3DB1 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CBCF8218C521EE009C3DB1 /* UIWebView+AFNetworking.m */; };
 		94D9E1C518C9D9D100D58255 /* sidebar.png in Resources */ = {isa = PBXBuildFile; fileRef = 94D9E1C318C9D9D100D58255 /* sidebar.png */; };
 		94D9E1C618C9D9D100D58255 /* sidebar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94D9E1C418C9D9D100D58255 /* sidebar@2x.png */; };
+		94E8397A18D358F30067B147 /* noimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E8397918D358F30067B147 /* noimage.png */; };
+		94E8397C18D3599A0067B147 /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E8397B18D3599A0067B147 /* like.png */; };
+		94E8397E18D363570067B147 /* like@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E8397D18D363570067B147 /* like@2x.png */; };
 		94FFD0A718C7C5AD0037FE33 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94FFD0A618C7C5AD0037FE33 /* Security.framework */; };
 		94FFD0A918C7C5B40037FE33 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94FFD0A818C7C5B40037FE33 /* SystemConfiguration.framework */; };
 		94FFD0C718C7C6A90037FE33 /* libGTLTouchStaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94FFD0C618C7C6A90037FE33 /* libGTLTouchStaticLib.a */; };
@@ -168,6 +171,9 @@
 		94CBCF8218C521EE009C3DB1 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		94D9E1C318C9D9D100D58255 /* sidebar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sidebar.png; sourceTree = "<group>"; };
 		94D9E1C418C9D9D100D58255 /* sidebar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sidebar@2x.png"; sourceTree = "<group>"; };
+		94E8397918D358F30067B147 /* noimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noimage.png; sourceTree = "<group>"; };
+		94E8397B18D3599A0067B147 /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
+		94E8397D18D363570067B147 /* like@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "like@2x.png"; sourceTree = "<group>"; };
 		94FFD0A618C7C5AD0037FE33 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		94FFD0A818C7C5B40037FE33 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		94FFD0AB18C7C6A90037FE33 /* GTLBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLBase64.h; sourceTree = "<group>"; };
@@ -289,6 +295,9 @@
 		9429055218A973BD0099BCC2 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				94E8397D18D363570067B147 /* like@2x.png */,
+				94E8397B18D3599A0067B147 /* like.png */,
+				94E8397918D358F30067B147 /* noimage.png */,
 				9435AB7018D28302000C93FC /* placeholder.png */,
 				9435AB6E18D1BF13000C93FC /* camera.png */,
 				94D9E1C318C9D9D100D58255 /* sidebar.png */,
@@ -610,13 +619,16 @@
 				94D9E1C518C9D9D100D58255 /* sidebar.png in Resources */,
 				949919E518CD3CF800EBDDC7 /* GoogleMaps.bundle in Resources */,
 				949919D718CC877200EBDDC7 /* Icon-40@2x.png in Resources */,
+				94E8397C18D3599A0067B147 /* like.png in Resources */,
 				9429055418A973D00099BCC2 /* ninjaturtle.png in Resources */,
+				94E8397E18D363570067B147 /* like@2x.png in Resources */,
 				9435AB6F18D1BF13000C93FC /* camera.png in Resources */,
 				943B133318A5B15F0055D5BA /* Images.xcassets in Resources */,
 				94D9E1C618C9D9D100D58255 /* sidebar@2x.png in Resources */,
 				943B132518A5B15F0055D5BA /* InfoPlist.strings in Resources */,
 				94991A2218CDA80400EBDDC7 /* BulletinCell.xib in Resources */,
 				9435AB7118D28302000C93FC /* placeholder.png in Resources */,
+				94E8397A18D358F30067B147 /* noimage.png in Resources */,
 				943B132E18A5B15F0055D5BA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

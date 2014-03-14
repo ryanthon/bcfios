@@ -14,5 +14,6 @@
 @property (strong, nonatomic) Event *event;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) UIImageView *imageView;
+@property (nonatomic) BOOL noImage;
 
 @end

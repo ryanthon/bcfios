@@ -11,6 +11,8 @@
 
 @interface APIManager : AFHTTPSessionManager
 
+@property (nonatomic) BOOL eventsNeedUpdate;
+
 + (APIManager *)sharedManager;
 
 + (NSString *)serverURL;
@@ -26,8 +28,12 @@
 - (void)getEventInfoForEventID:(NSString *)eventID
                       response:(void(^)(NSError *error, id response)) callback;
 
-- (void)getMyEventsWithResponse: (NSString *)userID response:(void(^)(NSError *error, id response)) callback;
+- (void)getMyEventsWithResponse:(NSString *)userID response:(void(^)(NSError *error, id response)) callback;
 
-- (void)getEventsByCatagory: (NSString *)category response:(void(^)(NSError *error, id response)) callback;
+- (void)getEventsByCatagory:(NSString *)category response:(void(^)(NSError *error, id response)) callback;
 
+- (void)removeEventWithEventID:(NSString *)eventID response:(void(^)(NSError *error, id response)) callback;
+
+- (void)editEventWithParams:(NSDictionary *)params withImage:(UIImage *)image
+                   response:(void(^)(NSError *error, id response)) callback;
 @end

@@ -25,6 +25,7 @@
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyy-MM-dd hh:mm:ss";
+    [dateFormatter setLenient:YES];
     
     event.startDate = [dateFormatter dateFromString:[dictionary objectForKey:@"start"]];
     event.endDate   = [dateFormatter dateFromString:[dictionary objectForKey:@"end"]];
@@ -68,6 +69,7 @@
     {
         _dateFormatter = [[NSDateFormatter alloc] init];
         _dateFormatter.dateFormat = @"yyyy-MM-dd hh:mm:ss";
+        [_dateFormatter setLenient:YES];
     }
     
     return _dateFormatter;
@@ -78,8 +80,14 @@
     NSString *latString  = [NSString stringWithFormat:@"%f", self.latitude];
     NSString *longString = [NSString stringWithFormat:@"%f", self.longitude];
     
-    NSString *category1  = self.categories[0] ? self.categories[0] : @"";
-    NSString *category2  = self.categories[1] ? self.categories[1] : @"";
+    NSString *category1  = self.categories[0];
+    NSString *category2  = @"";
+
+    if( self.categories.count > 1 )
+    {
+        category2  = self.categories[1];
+    }
+
     
     return @{ @"eventName" : self.name,            @"location" : self.locationDetails,
               @"desc"      : self.description,     @"start"    : [self.dateFormatter stringFromDate:self.startDate],
