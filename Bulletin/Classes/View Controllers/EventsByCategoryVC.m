@@ -6,32 +6,18 @@
 //  Copyright (c) 2014 Burlington Code Factory. All rights reserved.
 //
 
-#import "EventsByCatagoryVC.h"
+#import "EventsByCategoryVC.h"
 
-@interface EventsByCatagoryVC ()
-
+@interface EventsByCategoryVC ()
 @end
 
-@implementation EventsByCatagoryVC
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@implementation EventsByCategoryVC
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.title = self.category;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

@@ -6,16 +6,18 @@
 //  Copyright (c) 2014 Burlington Code Factory. All rights reserved.
 //
 
-#import "CatagoriesVC.h"
+#import "CategoriesVC.h"
 #import "SWRevealViewController.h"
+#import "EventsByCategoryVC.h"
 
-static NSString *catagoryID = @"CatagoryCell";
+static NSString *categoryID = @"CategoryCell";
 
-@interface CatagoriesVC ()
-@property (strong, nonatomic) NSArray *catagories;
+@interface CategoriesVC ()
+@property  (strong, nonatomic) NSArray *categories;
+@property (strong, nonatomic) NSString *categoryName;
 @end
 
-@implementation CatagoriesVC
+@implementation CategoriesVC
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -29,13 +31,6 @@ static NSString *catagoryID = @"CatagoryCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
     self.navigationItem.title = @"Categories";
     
     UIImage *sidebarIconImage = [UIImage imageNamed:@"sidebar"];
@@ -66,7 +61,7 @@ static NSString *catagoryID = @"CatagoryCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *CellIdentifier = catagoryID;
+    NSString *CellIdentifier = categoryID;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     switch (indexPath.row) {
@@ -90,15 +85,35 @@ static NSString *catagoryID = @"CatagoryCell";
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    switch (indexPath.row) {
+        case 0:
+            self.categoryName = @"Fundraiser";
+            break;
+        case 1:
+            self.categoryName = @"Free Food";
+            break;
+        case 2:
+            self.categoryName = @"Party";
+            break;
+        case 3:
+            self.categoryName = @"Tech Talk";
+            break;
+    }
+    [ self performSegueWithIdentifier:@"EventsByCategory" sender:nil];
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    EventsByCategoryVC *controller = (EventsByCategoryVC *)segue.destinationViewController;
+    controller.category = self.categoryName;
 }
 
 - (NSArray *) catagories
 {
-    if( !_catagories)
+    if( !_categories)
     {
-        _catagories = @[@"Fundraiser", @"Free Food", @"Party", @"Tech Talk"];
+        _categories = @[@"Fundraiser", @"Free Food", @"Party", @"Tech Talk"];
     }
-    return _catagories;
+    return _categories;
 }
 @end

@@ -1,5 +1,5 @@
 //
-//  CatagoriesVC.h
+//  EventsByCatagoryVC.h
 //  Bulletin
 //
 //  Created by Wesley Yao on 3/11/14.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CatagoriesVC : UITableViewController
+@interface EventsByCategoryVC : UITableViewController
+
+@property (strong, nonatomic) NSString *category;
 
 @end

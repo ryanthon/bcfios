@@ -26,6 +26,8 @@
 - (void)getEventInfoForEventID:(NSString *)eventID
                       response:(void(^)(NSError *error, id response)) callback;
 
-- (void)getMyEventsWithResponse:(void(^)(NSError *error, id response)) callback;
+- (void)getMyEventsWithResponse: (NSString *)userID response:(void(^)(NSError *error, id response)) callback;
+
+- (void)getEventsByCatagory: (NSString *)category response:(void(^)(NSError *error, id response)) callback;
 
 @end

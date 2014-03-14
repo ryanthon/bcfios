@@ -13,6 +13,7 @@
 @interface MyEventsVC ()
 
 @property (strong, nonatomic) NSArray *events;
+@property (strong, nonatomic) NSArray *pics;
 
 @end
 
@@ -32,7 +33,7 @@
     sidebarButton.tintColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = sidebarButton;
     
-    [[APIManager sharedManager] getMyEventsWithResponse:^(NSError *error, id response )
+    [[APIManager sharedManager] getMyEventsWithResponse:@"4" response:^(NSError *error, id response )
      {
          //[self.loadingHUD hide:YES];
          
@@ -41,6 +42,19 @@
              NSLog(@"%@", error);
          }
          
+         else
+         {
+             self.events = [response objectForKey:@"events"];
+             [self.tableView reloadData];
+         }
+     }];
+    
+    [[APIManager sharedManager] authorizeImageGETRequest:@"/evtImg/" response:^(NSError *error, id response)
+     {
+         if( error != nil )
+         {
+             NSLog(@"%@", error);
+         }
          else
          {
              self.events = [response objectForKey:@"events"];
@@ -68,9 +82,31 @@
 {
     BulletinCell *cell = [tableView dequeueReusableCellWithIdentifier:@"eventCell"];
     
-    cell.eventNameLabel = self.events[indexPath.row][@"eventName"];
-    cell.eventDateLabel = self.events[indexPath.row][@"start"];
-    cell.eventPlaceLabel = self.events[indexPath.row][@"location"];
+    cell.eventNameLabel.text = self.events[indexPath.row][@"eventName"];
+    cell.eventDateLabel.text = self.events[indexPath.row][@"start"];
+    cell.eventPlaceLabel.text = self.events[indexPath.row][@"location"];
+    
+    NSString *imageFile = [[self.events objectAtIndex:indexPath.row] objectForKey:@"path"];
+    NSString *imageURL  = [NSString stringWithFormat:@"%@evtImg/%@", [APIManager serverURL], imageFile];
+
+    __weak BulletinCell *weakCell = cell;
+    
+    if( [imageFile isEqualToString:@"none"] )
+    {
+        cell.eventImageView.image = [UIImage imageNamed:@"pin.jpg"];
+    }
+    
+    else
+    {
+        [[APIManager sharedManager] authorizeImageGETRequest:imageURL response:^(NSError *error, id response)
+         {
+             if( !error )
+             {
+                 weakCell.eventImageView.image = (UIImage *)response;
+                 [weakCell setNeedsLayout];
+             }
+         }];
+    }
     
     return cell;
 }
