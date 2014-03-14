@@ -33,7 +33,7 @@
     sidebarButton.tintColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = sidebarButton;
     
-    [[APIManager sharedManager] getMyEventsWithResponse:^(NSError *error, id response )
+    [[APIManager sharedManager] getMyEventsWithResponse:@"4" response:^(NSError *error, id response )
      {
          //[self.loadingHUD hide:YES];
          

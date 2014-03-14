@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Burlington Code Factory. All rights reserved.
 //
 
-#import "EventsByCatagoryVC.h"
+#import "EventsByCategoryVC.h"
 
-@interface EventsByCatagoryVC ()
+@interface EventsByCategoryVC ()
 
 @end
 

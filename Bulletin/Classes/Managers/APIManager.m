@@ -115,7 +115,7 @@ static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
     }];
 }
 
-- (void) getMyEventsWithResponse:(void (^)(NSError *error, id response))callback
+- (void) getMyEventsWithResponse:(NSString *)userID response:(void (^)(NSError *error, id response))callback
 {
     [self POST:@"myEvents" parameters:@{@"uid": @"4"} success:^(NSURLSessionDataTask *task, id responseObject)
      {
@@ -144,6 +144,19 @@ static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
         callback(error, nil);
     }];
     [requestOperation start];
+}
+
+- (void) getEventsByCatagory:(NSString *)category response:(void (^)(NSError *, id))callback
+{
+    [self POST:@"getEventsByCat" parameters:@{@"cat": @"FREE FOOD"} success:^(NSURLSessionDataTask *task, id responseObject)
+     {
+         NSLog(@"%@", responseObject);
+         callback( nil, responseObject );
+     }
+       failure:^(NSURLSessionDataTask *task, NSError *error)
+     {
+         callback( error, nil );
+     }];
 }
 
 @end
