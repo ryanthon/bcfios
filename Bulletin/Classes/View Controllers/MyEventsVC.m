@@ -13,6 +13,7 @@
 @interface MyEventsVC ()
 
 @property (strong, nonatomic) NSArray *events;
+@property (strong, nonatomic) NSArray *pics;
 
 @end
 
@@ -47,6 +48,20 @@
              [self.tableView reloadData];
          }
      }];
+    
+    [[APIManager sharedManager] authorizeImageGETRequest:@"/evtImg/" response:^(NSError *error, id response)
+     {
+         if( error != nil )
+         {
+             NSLog(@"%@", error);
+         }
+         
+         else
+         {
+             self.events = [response objectForKey:@"events"];
+             [self.tableView reloadData];
+         }
+     }];
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -68,9 +83,13 @@
 {
     BulletinCell *cell = [tableView dequeueReusableCellWithIdentifier:@"eventCell"];
     
-    cell.eventNameLabel = self.events[indexPath.row][@"eventName"];
-    cell.eventDateLabel = self.events[indexPath.row][@"start"];
-    cell.eventPlaceLabel = self.events[indexPath.row][@"location"];
+    //cell.eventNameLabel = [ self.events[indexPath.row] objectForKey:@"eventName"];
+    
+    cell.eventNameLabel.text = self.events[indexPath.row][@"eventName"];
+    cell.eventDateLabel.text = self.events[indexPath.row][@"start"];
+    cell.eventPlaceLabel.text = self.events[indexPath.row][@"location"];
+    
+    
     NSLog(@"%@", cell.eventNameLabel);
     
     return cell;
