@@ -8,11 +8,13 @@
 
 #import "CategoriesVC.h"
 #import "SWRevealViewController.h"
+#import "EventsByCategoryVC.h"
 
 static NSString *categoryID = @"CategoryCell";
 
 @interface CategoriesVC ()
-@property (strong, nonatomic) NSArray *categories;
+@property  (strong, nonatomic) NSArray *categories;
+@property (strong, nonatomic) NSString *categoryName;
 @end
 
 @implementation CategoriesVC
@@ -83,7 +85,27 @@ static NSString *categoryID = @"CategoryCell";
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    switch (indexPath.row) {
+        case 0:
+            self.categoryName = @"Fundraiser";
+            break;
+        case 1:
+            self.categoryName = @"Free Food";
+            break;
+        case 2:
+            self.categoryName = @"Party";
+            break;
+        case 3:
+            self.categoryName = @"Tech Talk";
+            break;
+    }
+    [ self performSegueWithIdentifier:@"EventsByCategory" sender:nil];
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    EventsByCategoryVC *controller = (EventsByCategoryVC *)segue.destinationViewController;
+    controller.category = self.categoryName;
 }
 
 - (NSArray *) catagories

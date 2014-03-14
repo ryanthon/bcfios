@@ -10,4 +10,6 @@
 
 @interface EventsByCategoryVC : UITableViewController
 
+@property (strong, nonatomic) NSString *category;
+
 @end
