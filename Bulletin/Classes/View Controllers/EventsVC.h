@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GooglePlus/GooglePlus.h>
 
 @interface EventsVC : UITableViewController
 

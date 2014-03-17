@@ -39,4 +39,8 @@
 
 - (void)likeEventWithEventID:(NSString *)eventID response:(void(^)(NSError *error, id response)) callback;
 
+- (void)addNewUserWithEmail:(NSString *)email response:(void(^)(NSError *error, id response)) callback;
+
+- (void)getUIDForEmail:(NSString *)email response:(void(^)(NSError *error, id response)) callback;
+
 @end

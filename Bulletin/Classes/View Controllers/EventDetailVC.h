@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Event.h"
+#import "GAITrackedViewController.h"
 
-@interface EventDetailVC : UIViewController
+@interface EventDetailVC : GAITrackedViewController
 
 @property (strong, nonatomic) Event *event;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;

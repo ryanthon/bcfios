@@ -48,21 +48,26 @@
     compose.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = compose;
     
-    [[APIManager sharedManager] getMyEventsWithResponse:@"4" response:^(NSError *error, id response )
-     {
-         [self.loadingHUD hide:YES];
-         
-         if( error != nil )
+    NSString *uid = [[NSUserDefaults standardUserDefaults] valueForKey:@"uid"];
+    
+    if( uid )
+    {
+        [[APIManager sharedManager] getMyEventsWithResponse:uid response:^(NSError *error, id response )
          {
-             NSLog(@"%@", error);
-         }
-         
-         else
-         {
-             self.events = [response objectForKey:@"events"];
-             [self.tableView reloadData];
-         }
-     }];
+             [self.loadingHUD hide:YES];
+             
+             if( error != nil )
+             {
+                 NSLog(@"%@", error);
+             }
+             
+             else
+             {
+                 self.events = [response objectForKey:@"events"];
+                 [self.tableView reloadData];
+             }
+         }];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -86,7 +91,15 @@
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.events.count;
+    if( self.events )
+    {
+        return self.events.count;
+    }
+    
+    else
+    {
+        return 0;
+    }
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
@@ -182,7 +195,10 @@
 
 - (void)addEvent
 {
-    [self performSegueWithIdentifier:@"add_my_event" sender:nil];
+    if( [[NSUserDefaults standardUserDefaults] valueForKey:@"uid"] )
+    {
+        [self performSegueWithIdentifier:@"add_my_event" sender:nil];
+    }
 }
 
 - (UIGestureRecognizer *)panGesture
@@ -264,21 +280,25 @@
 
 - (void)reloadEvents
 {
-    [[APIManager sharedManager] getMyEventsWithResponse:@"4" response:^(NSError *error, id response )
-     {
-         [self.loadingHUD hide:YES];
-         
-         if( error != nil )
+    NSString *uid = [[NSUserDefaults standardUserDefaults] valueForKey:@"uid"];
+    if( uid )
+    {
+        [[APIManager sharedManager] getMyEventsWithResponse:uid response:^(NSError *error, id response )
          {
-             NSLog(@"%@", error);
-         }
-         
-         else
-         {
-             self.events = [response objectForKey:@"events"];
-             [self.tableView reloadData];
-         }
-     }];
+             [self.loadingHUD hide:YES];
+             
+             if( error != nil )
+             {
+                 NSLog(@"%@", error);
+             }
+             
+             else
+             {
+                 self.events = [response objectForKey:@"events"];
+                 [self.tableView reloadData];
+             }
+         }];
+    }
 }
 
 @end

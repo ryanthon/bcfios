@@ -48,7 +48,7 @@ static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
                    response:(void(^)(NSError *error, id response))callback
 {
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:params];
-    [parameters setObject:@"4" forKey:@"uid"];
+    [parameters setObject:[[NSUserDefaults standardUserDefaults] valueForKey:@"uid"] forKey:@"uid"];
     
     [self POST:@"addEvent" parameters:parameters
     success:^(NSURLSessionDataTask *task, id responseObject)
@@ -118,7 +118,7 @@ static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
 
 - (void)getMyEventsWithResponse:(NSString *)userID response:(void (^)(NSError *error, id response))callback
 {
-    [self POST:@"myEvents" parameters:@{ @"uid" : @"4" } success:^(NSURLSessionDataTask *task, id responseObject)
+    [self POST:@"myEvents" parameters:@{ @"uid" : userID } success:^(NSURLSessionDataTask *task, id responseObject)
      {
          NSLog(@"%@", responseObject);
          callback( nil, responseObject );
@@ -178,7 +178,7 @@ static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
 - (void)editEventWithParams:(NSDictionary *)params withImage:(UIImage *)image response:(void (^)(NSError *, id))callback
 {
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:params];
-    [parameters setObject:@"4" forKey:@"uid"];
+    [parameters setObject:[[NSUserDefaults standardUserDefaults] valueForKey:@"uid"] forKey:@"uid"];
     
     [self POST:@"editEvent" parameters:parameters
     success:^(NSURLSessionDataTask *task, id responseObject)
@@ -212,6 +212,34 @@ static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
     {
         callback( error, nil );
     }];
+}
+
+- (void)addNewUserWithEmail:(NSString *)email response:(void (^)(NSError *, id))callback
+{
+    [self POST:@"newUser" parameters:@{ @"email" : email }
+    success:^(NSURLSessionDataTask *task, id responseObject)
+    {
+        NSLog(@"%@", responseObject);
+        callback( nil, responseObject );
+    }
+    failure:^(NSURLSessionDataTask *task, NSError *error)
+    {
+        callback( error, nil );
+    }];
+}
+
+- (void)getUIDForEmail:(NSString *)email response:(void (^)(NSError *, id))callback
+{
+    [self POST:@"getUID" parameters:@{ @"email" : email }
+       success:^(NSURLSessionDataTask *task, id responseObject)
+     {
+         NSLog(@"%@", responseObject);
+         callback( nil, responseObject );
+     }
+       failure:^(NSURLSessionDataTask *task, NSError *error)
+     {
+         callback( error, nil );
+     }];
 }
 
 @end

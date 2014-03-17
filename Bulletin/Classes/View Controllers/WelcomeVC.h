@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GooglePlus/GooglePlus.h>
 
-@interface WelcomeVC : UIViewController
+@interface WelcomeVC : UIViewController <GPPSignInDelegate>
+
+@property (weak, nonatomic) IBOutlet UIButton *guestButton;
 
 @end

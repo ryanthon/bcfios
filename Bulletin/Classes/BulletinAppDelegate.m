@@ -9,6 +9,8 @@
 #import "BulletinAppDelegate.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import "AFNetworkActivityIndicatorManager.h"
+#import <GooglePlus/GooglePlus.h>
+#import "GAI.h"
 
 @implementation BulletinAppDelegate
 
@@ -34,6 +36,18 @@
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
     [GMSServices provideAPIKey:@"AIzaSyCItKjiDfeoN71Hn7anlBaUhK2k8RzJtXU"];
+    
+    // Optional: automatically send uncaught exceptions to Google Analytics.
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    
+    // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
+    [GAI sharedInstance].dispatchInterval = 20;
+    
+    // Optional: set Logger to VERBOSE for debug information.
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+    
+    // Initialize tracker.
+    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-48800626-1"];
     
     return YES;
 }
@@ -63,6 +77,15 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application: (UIApplication *)application
+            openURL: (NSURL *)url
+  sourceApplication: (NSString *)sourceApplication
+         annotation: (id)annotation {
+    return [GPPURLHandler handleURL:url
+                  sourceApplication:sourceApplication
+                         annotation:annotation];
 }
 
 @end

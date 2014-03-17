@@ -505,10 +505,10 @@
             </objects>
             <point key="canvasLocation" x="-163" y="-3407"/>
         </scene>
-        <!--View Controller - Welcome-->
+        <!--WelcomeVC - Welcome-->
         <scene sceneID="6tn-Z3-1NT">
             <objects>
-                <viewController id="k06-1G-kJ1" sceneMemberID="viewController">
+                <viewController id="k06-1G-kJ1" customClass="WelcomeVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="D0B-Tu-Fe1"/>
                         <viewControllerLayoutGuide type="bottom" id="b8Z-4x-pWY"/>
@@ -517,23 +517,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Login with Google" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8tH-l6-Nc3">
-                                <rect key="frame" x="90" y="177" width="140" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OM4-sF-GdD">
-                                <rect key="frame" x="116" y="239" width="89" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Google Logo">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iDJ-lL-7Rl">
-                                <rect key="frame" x="96" y="352" width="128" height="30"/>
+                                <rect key="frame" x="81" y="372" width="158" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.82352941180000006" green="0.69411764710000001" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Continue as Guest">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -541,6 +530,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Welcome" id="7tT-rf-hnW"/>
+                    <connections>
+                        <outlet property="guestButton" destination="iDJ-lL-7Rl" id="63j-vT-feS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Tz-Mc-gzD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -553,8 +545,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="irh-pt-FKt"/>
         <segue reference="gou-VU-k8S"/>
         <segue reference="l29-qD-91m"/>
+        <segue reference="irh-pt-FKt"/>
     </inferredMetricsTieBreakers>
 </document>

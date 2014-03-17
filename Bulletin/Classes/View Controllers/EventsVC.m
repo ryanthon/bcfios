@@ -35,8 +35,6 @@
     if ( ![[NSUserDefaults standardUserDefaults] valueForKey:@"First Launch"] )
     {
         [self performSelector:@selector(presentWelcomeView) withObject:nil afterDelay:0.1];
-        [[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:@"First Launch"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
     UINib *pickerCellNib = [UINib nibWithNibName:@"BulletinCell" bundle:nil];
@@ -97,7 +95,10 @@
 
 - (void) addEvent
 {
-    [self performSegueWithIdentifier:@"add_event" sender:nil];
+    if( [[NSUserDefaults standardUserDefaults] valueForKey:@"uid"] )
+    {
+        [self performSegueWithIdentifier:@"add_event" sender:nil];
+    }
 }
 
 - (void)presentWelcomeView
