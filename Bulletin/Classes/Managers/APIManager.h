@@ -36,4 +36,7 @@
 
 - (void)editEventWithParams:(NSDictionary *)params withImage:(UIImage *)image
                    response:(void(^)(NSError *error, id response)) callback;
+
+- (void)likeEventWithEventID:(NSString *)eventID response:(void(^)(NSError *error, id response)) callback;
+
 @end

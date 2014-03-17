@@ -200,4 +200,18 @@ static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
     }];
 }
 
+- (void)likeEventWithEventID:(NSString *)eventID response:(void (^)(NSError *, id))callback
+{
+    [self POST:@"upvote" parameters:@{ @"eid" : eventID }
+    success:^(NSURLSessionDataTask *task, id responseObject)
+    {
+        NSLog(@"%@", responseObject);
+        callback( nil, responseObject );
+    }
+    failure:^(NSURLSessionDataTask *task, NSError *error)
+    {
+        callback( error, nil );
+    }];
+}
+
 @end

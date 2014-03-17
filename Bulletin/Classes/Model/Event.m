@@ -33,7 +33,7 @@
     event.locationDetails = [dictionary objectForKey:@"location"];
     event.imageFile = [dictionary objectForKey:@"path"];
     
-    event.eventID = [dictionary objectForKey:@"eid"];
+    event.eventID = [[dictionary objectForKey:@"eid"] stringValue];
     
     return event;
 }

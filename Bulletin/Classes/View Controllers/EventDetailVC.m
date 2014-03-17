@@ -55,6 +55,11 @@
     self.likeButton.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = self.likeButton;
     
+    if( [[NSUserDefaults standardUserDefaults] objectForKey:self.event.eventID] )
+    {
+        self.likeButton.tintColor = [UIColor blueColor];
+    }
+    
     if( self.event.image )
     {
         self.imageView.image = self.event.image;
@@ -102,7 +107,17 @@
 
 - (void)likeEvent
 {
-    
+    if( ![[NSUserDefaults standardUserDefaults] valueForKey:self.event.eventID] )
+    {
+        self.likeButton.tintColor = [UIColor blueColor];
+        [[APIManager sharedManager] likeEventWithEventID:self.event.eventID
+        response:^(NSError *error, id response)
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:self.event.eventID];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            NSLog(@"%@", response);
+        }];
+    }
 }
 
 - (UIView *)titleViewWithName:(NSString *)name
