@@ -11,7 +11,7 @@
 
 @implementation APIManager
 
-static NSString *const baseAPIURL = @"http://54.186.50.209/api/";
+static NSString *const baseAPIURL = @"http://54.186.222.17/api/";
 
 + (APIManager *)sharedManager
 {
